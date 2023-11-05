@@ -1,4 +1,16 @@
+import React, {useState} from "react";
+
+
 const RegisterPage = () => {
+
+    const [selectedOption, setSelectedOption] = useState("lbs");
+    const handleOptionChange = (e) => {
+      setSelectedOption(e.target.value)
+    };
+
+
+
+
   return (
     <form>
       <label
@@ -35,6 +47,32 @@ const RegisterPage = () => {
         <option value="endurance">Endurance Training</option>
       </select>
       <br />
+
+      <label htmlFor="cur-weight">Current Weight: </label>
+      <input type="number" id="cur-weight" />
+        <label>
+        <input
+        type="radio"
+        onChange={handleOptionChange}
+        checked={selectedOption === "lbs"}
+        name="weight-measure"
+        value="lbs"
+        className="" 
+        />
+        lbs
+        </label>
+        <label>
+        <input
+        type="radio"
+        onChange={handleOptionChange}
+        checked={selectedOption === "kgs"}
+        name="weight-measure"
+        value="kgs"
+        className="weight-system-input" 
+        />
+        kgs
+        </label>
+        <br/><br/>
       <button
         type="submit"
         name="submit"
