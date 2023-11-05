@@ -7,7 +7,7 @@ const RegisterPage = () => {
       >
         Name:{" "}
       </label>
-      <input type="text" id="name" value="name" />
+      <input type="text" id="name" autoComplete="name"/>
       <br />
 
       <label
@@ -16,7 +16,7 @@ const RegisterPage = () => {
       >
         Email:{" "}
       </label>
-      <input type="email" id="email" value="email" />
+      <input type="email" id="email" autoComplete="email" />
       <br />
 
       <label
