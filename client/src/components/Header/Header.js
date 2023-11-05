@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import NavBtn from "../NavBtn/NavBtn";
 
 const Header = () => {
