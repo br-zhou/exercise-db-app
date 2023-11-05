@@ -1,4 +1,5 @@
 import { useState, setState } from "react";
+import {Link} from "react-router-dom";
 const LoginPage = () => {
   const handleSubmit = (event) => {};
   const [loginData, setLoginData] = useState({
@@ -8,7 +9,9 @@ const LoginPage = () => {
     curWeight: 0,
   });
 
-  const handleRegister = (event) => {};
+  const handleRegister = (event) => {
+    window.location.href='/register';
+  };
 
   return (
     <div>
@@ -33,21 +36,23 @@ const LoginPage = () => {
         />
 
         <button
-          type="submit"
+          type="button"
           id="submit"
           class="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 bg-blue-700 focus:ring-inset  sm:max-w-xs sm:text-sm sm:leading-6 hover:bg-blue-900"
+          onClick={handleSubmit()}
         >
           Log in
         </button>
         <p>Don't have an account? Register Here.</p>
-        <button
-          type="submit"
+        <Link
+          className="btn btn-primary"
           name="register"
           id="register"
           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset  sm:max-w-xs sm:text-sm sm:leading-6 hover:bg-gray-400"
+          to="/register"
         >
           Register
-        </button>
+        </Link>
       </form>
     </div>
   );
