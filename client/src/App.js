@@ -4,6 +4,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import RootLayout from "./pages/RootLayout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TrainerPage from "./pages/TrainerPage/TrainerPage";
+import RegisterPage from "./pages/LoginPage/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage />},
       { path: "trainer-dashboard", element: <TrainerPage /> },
     ],
     errorElement: <ErrorPage />,
