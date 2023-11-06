@@ -3,9 +3,16 @@ import React, {useState} from "react";
 
 const RegisterPage = () => {
 
-    const [selectedOption, setSelectedOption] = useState("lbs");
-    const handleOptionChange = (e) => {
-      setSelectedOption(e.target.value)
+    const [metricOption, setMetricOption] = useState("lbs");
+    const [paidStatus, setPaidStatus] = useState("paid-no");
+    const handleMetricChange = (e) => {
+      setMetricOption(e.target.value)
+    };
+    const handlePaidChange = (e) => {
+      setPaidStatus(e.target.value)
+      if (paidStatus === "paid-yes") {
+
+      }
     };
 
 
@@ -47,32 +54,48 @@ const RegisterPage = () => {
         <option value="endurance">Endurance Training</option>
       </select>
       <br />
-
-      <label htmlFor="cur-weight">Current Weight: </label>
-      <input type="number" id="cur-weight" />
-        <label>
-        <input
-        type="radio"
-        onChange={handleOptionChange}
-        checked={selectedOption === "lbs"}
-        name="weight-measure"
-        value="lbs"
-        className="" 
-        />
-        lbs
-        </label>
-        <label>
-        <input
-        type="radio"
-        onChange={handleOptionChange}
-        checked={selectedOption === "kgs"}
-        name="weight-measure"
-        value="kgs"
-        className="weight-system-input" 
-        />
-        kgs
-        </label>
-        <br/><br/>
+      <div className="relative mt-2 rounded-md shadow-sm">
+        <label htmlFor="cur-weight" className="block text-sm font-medium leading-6 text-gray-900">Current Weight: </label>
+        <input type="number" id="cur-weight" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+          <label>
+          <input
+          type="radio"
+          onChange={handleMetricChange}
+          checked={metricOption === "lbs"}
+          name="weight-measure"
+          value="lbs"
+          className="" 
+          />
+          lbs
+          </label>
+          <label>
+          <input
+          type="radio"
+          onChange={handleMetricChange}
+          checked={metricOption === "kgs"}
+          name="weight-measure"
+          value="kgs"
+          className="weight-system-input" 
+          />
+          kgs
+          </label>
+          <br/><br/>
+      </div>
+      <div>
+        <p>Are you interested in subscribing?</p>
+        <label><input type="radio"
+          onChange={handlePaidChange}
+          checked={paidStatus === "paid-yes"}
+          name="paid-status"
+          value="paid-yes"
+          className="" />Yes</label>
+        <label><input type="radio"
+          onChange={handlePaidChange}
+          checked={paidStatus === "paid-no"}
+          name="paid-status"
+          value="paid-no"
+          className="" />No</label>
+      </div>
       <button
         type="submit"
         name="submit"
