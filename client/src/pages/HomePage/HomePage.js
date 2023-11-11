@@ -1,75 +1,92 @@
 import React, { useState } from "react";
 import GoalCard from "../../components/GoalCard/GoalCard";
-import FormGoalButton from "../../FormGoalButton/FormGoalButton";
+import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
 
 const HomePage = () => {
-  const DATA = [{
-    gid: 1,
-    category: "w",
-    weight: "23",
-    date: "112312"
-  },{
-    gid: 2,
-    category: "p",
-    weight: "45",
-    date: "12434"
-  },
-  {
-    gid: 3,
-    category: "w",
-    weight: "64",
-    date: "24324"
-  }]
+  const [goals, setGoals] = useState([
+    {
+      gid: 1,
+      category: "w",
+      weight: "23",
+      date: "112312"
+    },
+    {
+      gid: 2,
+      category: "p",
+      weight: "45",
+      date: "12434"
+    },
+    {
+      gid: 3,
+      category: "w",
+      weight: "64",
+      date: "24324"
+    },
+    {
+      gid: 4,
+      category: "k",
+      weight: "435",
+      date: "24"
+    },
+    {
+      gid: 5,
+      category: "fdn",
+      weight: "342345",
+      date: "242043"
+    }
+  ]);
 
-  const foo = (data) => {
-    return <GoalCard />
-  }
+  const addGoal = (newGoal) => {
+    // Check if the newGoal is already in the goals array
+    if (!goals.some((goal) => goal.gid === newGoal.gid)) {
+    //  setGoals([...goals, newGoal]);
+    }
+  };
+  const closeForm = () => {
+    // Define your logic for closing the form here
+    console.log("Closing form");
+  };
 
   return (
-    <>
-     
-      <div className="mt-8 text-3xl font-bold underline text-center">HOME PAGE</div>
+    <div>
+      <div className="mt-8 text-3xl font-bold underline text-center">
+        HOME PAGE
+      </div>
       {/* FormGoalButton component with inline styles */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          zIndex: 50
-        }}
-      >
-        <FormGoalButton />
+      <div>
+        <FormGoalButton onSubmit={addGoal}  closeFormGoalButton={closeForm} setGoals={setGoals}/>
       </div>
 
-      {/* GoalCard components with inline styles */}
-      <div style={{ marginTop: "20px", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-        {DATA.map(item => (
-          <GoalCard
+      <div className="mt-8 text-3xl font-bold underline text-center">
+        Your current goals!
+      </div>
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          flexWrap: "wrap", // Allows cards to wrap to the next row
+          justifyContent: "center",
+          width: "100%"
+        }}
+      >
+        {goals.map((item) => (
+          <div
             key={item.gid}
-            {...item}
-            style={{ margin: "10px", maxWidth: "300px", width: "100%" }}
-          />
+            style={{
+              margin: "10px", // Adjust the margin between the cards
+              width: "calc(33.33% - 20px)", // Set the width to fit 3 cards in a row with margins
+              maxWidth: "300px" // Set a maximum width for each card if needed
+            }}
+          >
+            <GoalCard {...item} />
+          </div>
         ))}
       </div>
-     
-  
-      <input type="checkbox" data-role="checkbox" data-caption="Indeterminate" data-indeterminate="true" />
-  
-      <input type="checkbox" data-role="checkbox" data-caption="Indeterminate" data-indeterminate="true" data-style="2" />
-      
-     
-      
-    </>
+    </div>
   );
-  
 };
 
 export default HomePage;
+
 
 
