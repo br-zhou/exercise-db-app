@@ -1,11 +1,11 @@
 {
-  "name": "node_demo_project",
+  "name": "fitness-tracker",
   "version": "1.0.0",
-  "description": "The sample Node.js project for CPSC304.",
+  "description": "The Node.js project for CPSC304.",
   "main": "server.js",
   "keywords": [],
   "author": {
-    "name": "Zoe Yuan"
+    "name": "Muneeba Ashiq, Mohsen Bakhit, Brian Zhou"
   },
   "license": "ISC",
   "dependencies": {
