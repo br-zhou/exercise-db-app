@@ -1,36 +1,4 @@
-const oracledb = require('oracledb');
-const loadEnvFile = require('./utils/envUtil');
-
-const envVariables = loadEnvFile('./.env');
-
-// Database configuration setup. Ensure your .env file has the required database credentials.
-const dbConfig = {
-    user: envVariables.ORACLE_USER,
-    password: envVariables.ORACLE_PASS,
-    connectString: `${envVariables.ORACLE_HOST}:${envVariables.ORACLE_PORT}/${envVariables.ORACLE_DBNAME}`
-};
-
-// ----------------------------------------------------------
-// Wrapper to manage OracleDB actions, simplifying connection handling.
-async function withOracleDB(action) {
-    let connection;
-    try {
-        connection = await oracledb.getConnection(dbConfig);
-        return await action(connection);
-    } catch (err) {
-        console.error(err);
-        throw err;
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    }
-}
-
+const {withOracleDB} = require('./utils/envUtil');
 
 // ----------------------------------------------------------
 // Core functions for database operations
@@ -109,11 +77,43 @@ async function countDemotable() {
     });
 }
 
+async function countDemotable() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT Count(*) FROM DEMOTABLE');
+        return result.rows[0][0];
+    }).catch(() => {
+        return -1;
+    });
+}
+
+async function initalizeAllTables() {
+    return false;
+    return await withOracleDB(async (connection) => {
+        try {
+            await connection.execute(`DROP TABLE DEMOTABLE`);
+        } catch(err) {
+            console.log('Table might not exist, proceeding to create...');
+        }
+
+        const result = await connection.execute(`
+            CREATE TABLE DEMOTABLE (
+                id NUMBER PRIMARY KEY,
+                name VARCHAR2(20)
+            )
+        `);
+        return true;
+    }).catch(() => {
+        return false;
+    });
+}
+
+
 module.exports = {
     testOracleConnection,
     fetchDemotableFromDb,
     initiateDemotable, 
     insertDemotable, 
     updateNameDemotable, 
-    countDemotable
+    countDemotable,
+    initalizeAllTables
 };

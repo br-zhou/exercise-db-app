@@ -64,6 +64,15 @@ router.get("/count-demotable", async (req, res) => {
   }
 });
 
+router.post("/initalize-tables", async (req, res) => {
+  const initiateResult = await appService.initalizeAllTables();
+  if (initiateResult) {
+    res.json({ success: true });
+  } else {
+    res.status(500).json({ success: false });
+  }
+});
+
 router.get("/example", async (req, res) => {
   const data = [
     {
