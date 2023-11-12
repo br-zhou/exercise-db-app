@@ -1,7 +1,11 @@
 const express = require("express");
 const appService = require("./appService");
+const createTrainerRoutes = require("./routes/TrainerPage");
 
 const router = express.Router();
+
+// !! CUSTOM ROUTES
+createTrainerRoutes(router);
 
 // ----------------------------------------------------------
 // API endpoints
@@ -64,6 +68,17 @@ router.get("/count-demotable", async (req, res) => {
   }
 });
 
+// ### CUSTOM API ROUTES
+
+router.post("/initalize-tables", async (req, res) => {
+  const initiateResult = await appService.initalizeAllTables();
+  if (initiateResult) {
+    res.json({ success: true });
+  } else {
+    res.status(500).json({ success: false });
+  }
+});
+
 router.get("/example", async (req, res) => {
   const data = [
     {
@@ -73,8 +88,6 @@ router.get("/example", async (req, res) => {
       price: 549,
     },
   ];
-
-  // await sql query
 
   res.send(data);
 });

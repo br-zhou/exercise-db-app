@@ -154,6 +154,22 @@ async function countDemotable() {
     }
 }
 
+// This function resets or initializes the demotable.
+async function insertDefaultData() {
+    const response = await fetch("/initalize-tables", {
+        method: 'POST'
+    });
+    const responseData = await response.json();
+
+    if (responseData.success) {
+        const messageElement = document.getElementById('initResultMsg');
+        messageElement.textContent = "created tables successfully!";
+        fetchTableData();
+    } else {
+        alert("Error initiating tables!");
+    }
+}
+
 
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
@@ -165,6 +181,7 @@ window.onload = function() {
     document.getElementById("insertDemotable").addEventListener("submit", insertDemotable);
     document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     document.getElementById("countDemotable").addEventListener("click", countDemotable);
+    document.getElementById("initalizeData").addEventListener("click", insertDefaultData);
 };
 
 // General function to refresh the displayed table data. 
