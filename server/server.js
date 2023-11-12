@@ -4,7 +4,7 @@ const cors = require('cors')
 
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
-const loadEnvFile = require('./utils/envUtil');
+const {loadEnvFile} = require('./utils/envUtil');
 const envVariables = loadEnvFile('./.env');
 
 const app = express();

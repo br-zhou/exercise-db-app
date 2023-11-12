@@ -1,36 +1,5 @@
-const oracledb = require('oracledb');
-const loadEnvFile = require('./utils/envUtil');
-
-const envVariables = loadEnvFile('./.env');
-
-// Database configuration setup. Ensure your .env file has the required database credentials.
-const dbConfig = {
-    user: envVariables.ORACLE_USER,
-    password: envVariables.ORACLE_PASS,
-    connectString: `${envVariables.ORACLE_HOST}:${envVariables.ORACLE_PORT}/${envVariables.ORACLE_DBNAME}`
-};
-
-// ----------------------------------------------------------
-// Wrapper to manage OracleDB actions, simplifying connection handling.
-async function withOracleDB(action) {
-    let connection;
-    try {
-        connection = await oracledb.getConnection(dbConfig);
-        return await action(connection);
-    } catch (err) {
-        console.error(err);
-        throw err;
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    }
-}
-
+const {intializeTable: intializeFUserTable} = require("./tables/UsersTable");
+const {withOracleDB} = require('./utils/envUtil');
 
 // ----------------------------------------------------------
 // Core functions for database operations
@@ -45,7 +14,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM DEMOTABLE');
+        const result = await connection.execute('SELECT * FROM FUser');
         return result.rows;
     }).catch(() => {
         return [];
@@ -55,13 +24,13 @@ async function fetchDemotableFromDb() {
 async function initiateDemotable() {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE DEMOTABLE`);
+            await connection.execute(`DROP TABLE FUser`);
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
 
         const result = await connection.execute(`
-            CREATE TABLE DEMOTABLE (
+            CREATE TABLE FUser (
                 id NUMBER PRIMARY KEY,
                 name VARCHAR2(20)
             )
@@ -75,7 +44,7 @@ async function initiateDemotable() {
 async function insertDemotable(id, name) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO DEMOTABLE (id, name) VALUES (:id, :name)`,
+            `INSERT INTO FUser (id, name) VALUES (:id, :name)`,
             [id, name],
             { autoCommit: true }
         );
@@ -89,7 +58,7 @@ async function insertDemotable(id, name) {
 async function updateNameDemotable(oldName, newName) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `UPDATE DEMOTABLE SET name=:newName where name=:oldName`,
+            `UPDATE FUser SET name=:newName where name=:oldName`,
             [newName, oldName],
             { autoCommit: true }
         );
@@ -102,12 +71,26 @@ async function updateNameDemotable(oldName, newName) {
 
 async function countDemotable() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM DEMOTABLE');
+        const result = await connection.execute('SELECT Count(*) FROM FUser');
         return result.rows[0][0];
     }).catch(() => {
         return -1;
     });
 }
+
+async function countDemotable() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT Count(*) FROM FUser');
+        return result.rows[0][0];
+    }).catch(() => {
+        return -1;
+    });
+}
+
+async function initalizeAllTables() {
+    return await intializeFUserTable();
+}
+
 
 module.exports = {
     testOracleConnection,
@@ -115,5 +98,6 @@ module.exports = {
     initiateDemotable, 
     insertDemotable, 
     updateNameDemotable, 
-    countDemotable
+    countDemotable,
+    initalizeAllTables
 };
