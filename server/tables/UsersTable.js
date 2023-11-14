@@ -64,7 +64,17 @@ async function insert(name, email) {
     });
 }
 
+async function fetch() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute('SELECT * FROM FUser');
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
   intializeTable,
-  loadDummyData
+  loadDummyData,
+  fetch
 }
