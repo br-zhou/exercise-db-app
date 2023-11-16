@@ -1,9 +1,9 @@
 const {withOracleDB} = require('./../utils/envUtil');
 
-const intializeTable = async () => {
+const initializeTable = async () => {
   return await withOracleDB(async (connection) => {
     try {
-        await connection.execute(`DROP TABLE FUser`);
+        await connection.execute(`DROP TABLE Exercise`);
     } catch(err) {
         console.log('Table might not exist, proceeding to create...');
     }
@@ -60,7 +60,7 @@ async function fetch() {
 }
 
 module.exports = {
-  intializeTable,
+  initializeTable,
   loadDummyData,
   fetch
 }

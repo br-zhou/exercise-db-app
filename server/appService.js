@@ -1,4 +1,5 @@
-const {intializeTable: intializeFUserTable} = require("./tables/UsersTable");
+const {initializeTable: initializeFUserTable} = require("./tables/UsersTable");
+const {initializeTable: initializeExerciseTable} = require("./tables/ExerciseTable");
 const {withOracleDB} = require('./utils/envUtil');
 
 // ----------------------------------------------------------
@@ -88,7 +89,8 @@ async function countDemotable() {
 }
 
 async function initalizeAllTables() {
-    return await intializeFUserTable();
+    return await initializeFUserTable();
+    return await initializeExerciseTable();
 }
 
 

@@ -1,6 +1,6 @@
 const {withOracleDB} = require('./../utils/envUtil');
 
-const intializeTable = async () => {
+const initializeTable = async () => {
   return await withOracleDB(async (connection) => {
     try {
         await connection.execute(`DROP TABLE FUser`);
@@ -74,7 +74,7 @@ async function fetch() {
 }
 
 module.exports = {
-  intializeTable,
+  initializeTable,
   loadDummyData,
   fetch
 }

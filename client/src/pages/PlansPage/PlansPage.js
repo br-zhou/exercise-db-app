@@ -3,7 +3,6 @@ import NutritionPlan from "../../components/Plans/NutritionPlan";
 import ExercisePlan from "../../components/Plans/ExercisePlan";
 const PlansPage = () => {
     const [nutriPlan, setNutriPlan] = useState ();
-    const [exerPlan, setExerPlan] = useState();
     return (
         <div>
             <h1>Here are your plans</h1>

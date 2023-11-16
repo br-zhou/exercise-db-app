@@ -1,19 +1,26 @@
-import React, { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { serverFetch } from "../../utils/api";
+import ExerciseCard from "./Exercise";
 const ExercisePlan = () => {
-    const [exerPlan, setExerPlan] = useState(
-        {
-            epid: 1,
-            type: "bodybuilding",
-            tid: 1,
-            userid: 1
-        }
-    )
+    const onLoad = async () => {
+        const dummyData = await serverFetch("GET", "exercise-table");
+        setData(dummyData);
+        console.log(dummyData)
+        // todo: get client data
+      };
+    
+      useEffect(() => {
+        onLoad();
+      }, []);
+
+      const [data, setData] = useState([]);
 
     return (
         <div>
-            
-        </div>
+        {data.map(row => {
+            return <ExerciseCard key={row[0]} name={row[1]} type={row[2]} />
+          })}
+          </div>
     )
 }
 
