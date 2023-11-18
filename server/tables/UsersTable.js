@@ -18,7 +18,7 @@ const dropTable = async () => {
   });
 };
 
-const initializeTable = async () => {
+const intializeTable = async () => {
   return await withOracleDB(async (connection) => {
     await dropTable();
 
@@ -84,7 +84,6 @@ const loadDummyData = async () => {
 };
 
 async function insert(name, email) {
-  const id = Date.now();
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
       `INSERT INTO FUser (name, email) VALUES (:name, :email)`,
@@ -117,7 +116,7 @@ async function fetchKeys() {
 }
 
 module.exports = {
-  initializeTable,
+  intializeTable,
   loadDummyData,
   fetch,
   fetchKeys,

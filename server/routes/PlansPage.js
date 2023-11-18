@@ -1,8 +1,8 @@
-const ExerciseTable = require("./../tables/ExerciseTable");
+const exerciseTable = require("./../tables/ExerciseTable");
 
 const createRoutes = (router) => {
   router.get("/exercise-table", async (req, res) => {
-    const tableContent = await ExerciseTable.fetch();
+    const tableContent = await exerciseTable.fetch();
     res.json(tableContent);
   });
 }

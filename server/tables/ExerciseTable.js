@@ -1,21 +1,57 @@
 const {withOracleDB} = require('./../utils/envUtil');
 
-const initializeTable = async () => {
+const dropTable = async () => {
+    return await withOracleDB(async (connection) => {
+      try{
+        await connection.execute(`DROP SEQUENCE eid_sequence`);
+      } catch (e) {}
+      try {
+        await connection.execute(`DROP TRIGGER exercise_insert_trigger`);
+      } catch (e) {}
+      try {
+        await connection.execute(`DROP TABLE Exercise`);
+      } catch (e) {}
+      
+      return true;
+    }).catch(() => {
+      return false;
+    });
+  };
+
+const intializeTable = async () => {
   return await withOracleDB(async (connection) => {
     try {
         await connection.execute(`DROP TABLE Exercise`);
-    } catch(err) {
+    } 
+    catch(err) {
         console.log('Table might not exist, proceeding to create...');
     }
 
     const result = await connection.execute(`
-    CREATE SEQUENCE ExerciseSeq START WITH 1 INCREMENT BY 1;
         CREATE TABLE Exercise(
             eid INTEGER,
             name VARCHAR(50),
             type VARCHAR(50),
             PRIMARY KEY (eid),
         );
+    `);
+
+    
+    const sequence = await connection.execute(`
+        CREATE SEQUENCE eid_sequence
+            START WITH 1
+            INCREMENT BY 1
+    `);
+
+    const trigger = await connection.execute(`
+        CREATE OR REPLACE TRIGGER exercise_insert_trigger
+        BEFORE INSERT
+        ON Exercise
+        REFERENCING NEW AS NEW
+        FOR EACH ROW
+        BEGIN
+        SELECT eid_sequence.nextval INTO :NEW.eid FROM dual;
+        END;
     `);
 
     await loadDummyData();
@@ -36,10 +72,9 @@ const loadDummyData = async () => {
 }
 
 async function insert(name, type) {
-    const eid = Date.now();
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO Exercise (eid, name, type) VALUES (ExerciseSeq.NEXTVAL, :name, :type)`,
+            `INSERT INTO Exercise (name, type) VALUES (:name, :type)`,
             [name, type],
             { autoCommit: true }
         );
@@ -60,7 +95,7 @@ async function fetch() {
 }
 
 module.exports = {
-  initializeTable,
+    intializeTable,
   loadDummyData,
   fetch
 }
