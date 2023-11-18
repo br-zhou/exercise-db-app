@@ -15,7 +15,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM FUser');
+        var result = await connection.execute('SELECT * FROM Exercise');
         return result.rows;
     }).catch(() => {
         return [];
@@ -25,16 +25,19 @@ async function fetchDemotableFromDb() {
 async function initiateDemotable() {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE FUser`);
+            await connection.execute(`DROP TABLE Exercise`);
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
 
         const result = await connection.execute(`
-            CREATE TABLE FUser (
-                id NUMBER PRIMARY KEY,
-                name VARCHAR2(20)
-            )
+        CREATE SEQUENCE ExerciseSeq START WITH 1 INCREMENT BY 1;
+        CREATE TABLE Exercise(
+            eid INTEGER,
+            name VARCHAR(50),
+            type VARCHAR(50),
+            PRIMARY KEY (eid),
+        );
         `);
         return true;
     }).catch(() => {
@@ -45,8 +48,8 @@ async function initiateDemotable() {
 async function insertDemotable(id, name) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO FUser (id, name) VALUES (:id, :name)`,
-            [id, name],
+            `INSERT INTO Exercise (eid, name, type) VALUES (ExerciseSeq.NEXTVAL, :name, :type)`,
+            [name, type],
             { autoCommit: true }
         );
 
@@ -59,7 +62,7 @@ async function insertDemotable(id, name) {
 async function updateNameDemotable(oldName, newName) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `UPDATE FUser SET name=:newName where name=:oldName`,
+            `UPDATE Exercise SET name=:newName where name=:oldName`,
             [newName, oldName],
             { autoCommit: true }
         );
@@ -72,7 +75,7 @@ async function updateNameDemotable(oldName, newName) {
 
 async function countDemotable() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM FUser');
+        const result = await connection.execute('SELECT Count(*) FROM Exercise');
         return result.rows[0][0];
     }).catch(() => {
         return -1;
@@ -81,7 +84,7 @@ async function countDemotable() {
 
 async function countDemotable() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM FUser');
+        const result = await connection.execute('SELECT Count(*) FROM Exercise');
         return result.rows[0][0];
     }).catch(() => {
         return -1;
@@ -89,7 +92,7 @@ async function countDemotable() {
 }
 
 async function initalizeAllTables() {
-    return await initializeFUserTable();
+    // return await initializeFUserTable();
     return await initializeExerciseTable();
 }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { serverFetch } from "../../utils/api";
-import ExerciseCard from "./Exercise";
+import ExerciseCard from "./ExerciseCard";
 const ExercisePlan = () => {
     const onLoad = async () => {
         const dummyData = await serverFetch("GET", "exercise-table");
