@@ -1,21 +1,20 @@
-const {initializeTable: initializeFUserTable} = require("./tables/UsersTable");
-const {initializeTable: initializeExerciseTable} = require("./tables/ExerciseTable");
+const {intializeTable: intializeFUserTable} = require("./tables/UsersTable");
 const {withOracleDB} = require('./utils/envUtil');
 
 // ----------------------------------------------------------
 // Core functions for database operations
 // Modify these functions, especially the SQL queries, based on your project's requirements and design.
 async function testOracleConnection() {
-    return await withOracleDB(async (connection) => {
-        return true;
-    }).catch(() => {
-        return false;
-    });
+  return await withOracleDB(async (connection) => {
+    return true;
+  }).catch(() => {
+    return false;
+  });
 }
 
 async function fetchDemotableFromDb() {
     return await withOracleDB(async (connection) => {
-        var result = await connection.execute('SELECT * FROM Exercise');
+        const result = await connection.execute('SELECT * FROM FUser');
         return result.rows;
     }).catch(() => {
         return [];
@@ -25,19 +24,16 @@ async function fetchDemotableFromDb() {
 async function initiateDemotable() {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE Exercise`);
+            await connection.execute(`DROP TABLE FUser`);
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
 
         const result = await connection.execute(`
-        CREATE SEQUENCE ExerciseSeq START WITH 1 INCREMENT BY 1;
-        CREATE TABLE Exercise(
-            eid INTEGER,
-            name VARCHAR(50),
-            type VARCHAR(50),
-            PRIMARY KEY (eid),
-        );
+            CREATE TABLE FUser (
+                id NUMBER PRIMARY KEY,
+                name VARCHAR2(20)
+            )
         `);
         return true;
     }).catch(() => {
@@ -48,8 +44,8 @@ async function initiateDemotable() {
 async function insertDemotable(id, name) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO Exercise (eid, name, type) VALUES (ExerciseSeq.NEXTVAL, :name, :type)`,
-            [name, type],
+            `INSERT INTO FUser (id, name) VALUES (:id, :name)`,
+            [id, name],
             { autoCommit: true }
         );
 
@@ -62,7 +58,7 @@ async function insertDemotable(id, name) {
 async function updateNameDemotable(oldName, newName) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `UPDATE Exercise SET name=:newName where name=:oldName`,
+            `UPDATE FUser SET name=:newName where name=:oldName`,
             [newName, oldName],
             { autoCommit: true }
         );
@@ -75,7 +71,7 @@ async function updateNameDemotable(oldName, newName) {
 
 async function countDemotable() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM Exercise');
+        const result = await connection.execute('SELECT Count(*) FROM FUser');
         return result.rows[0][0];
     }).catch(() => {
         return -1;
@@ -84,7 +80,7 @@ async function countDemotable() {
 
 async function countDemotable() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM Exercise');
+        const result = await connection.execute('SELECT Count(*) FROM FUser');
         return result.rows[0][0];
     }).catch(() => {
         return -1;
@@ -92,17 +88,14 @@ async function countDemotable() {
 }
 
 async function initalizeAllTables() {
-    // return await initializeFUserTable();
-    return await initializeExerciseTable();
+    return await intializeFUserTable();
 }
 
 
 module.exports = {
-    testOracleConnection,
-    fetchDemotableFromDb,
-    initiateDemotable, 
-    insertDemotable, 
-    updateNameDemotable, 
-    countDemotable,
-    initalizeAllTables
+  testOracleConnection,
+  fetchDemotableFromDb,
+  countDemotable,
+  initalizeAllTables,
+  dropAllTables,
 };

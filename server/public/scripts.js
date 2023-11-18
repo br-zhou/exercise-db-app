@@ -170,6 +170,20 @@ async function insertDefaultData() {
     }
 }
 
+async function dropAllTables() {
+    const response = await fetch("/drop-all-tables", {
+        method: 'POST'
+    });
+    const responseData = await response.json();
+
+    if (responseData.success) {
+        const messageElement = document.getElementById('dropResultMsg');
+        messageElement.textContent = "deleted tables successfully!";
+        fetchTableData();
+    } else {
+        alert("Error initiating tables!");
+    }
+}
 
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
@@ -182,6 +196,7 @@ window.onload = function() {
     document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
     document.getElementById("countDemotable").addEventListener("click", countDemotable);
     document.getElementById("initalizeData").addEventListener("click", insertDefaultData);
+    document.getElementById("dropTables").addEventListener("click", dropAllTables);
 };
 
 // General function to refresh the displayed table data. 

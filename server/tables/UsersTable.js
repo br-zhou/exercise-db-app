@@ -1,12 +1,26 @@
-const {withOracleDB} = require('./../utils/envUtil');
+const { withOracleDB } = require("./../utils/envUtil");
+
+const dropTable = async () => {
+  return await withOracleDB(async (connection) => {
+    try{
+      await connection.execute(`DROP SEQUENCE uid_sequence`);
+    } catch (e) {}
+    try {
+      await connection.execute(`DROP TRIGGER fuser_insert_trigger`);
+    } catch (e) {}
+    try {
+      await connection.execute(`DROP TABLE FUser`);
+    } catch (e) {}
+    
+    return true;
+  }).catch(() => {
+    return false;
+  });
+};
 
 const initializeTable = async () => {
   return await withOracleDB(async (connection) => {
-    try {
-        await connection.execute(`DROP TABLE FUser`);
-    } catch(err) {
-        console.log('Table might not exist, proceeding to create...');
-    }
+    await dropTable();
 
     const result = await connection.execute(`
         CREATE TABLE FUser(
@@ -18,15 +32,30 @@ const initializeTable = async () => {
         )
     `);
 
-    await loadDummyData();
+    const sequence = await connection.execute(`
+        CREATE SEQUENCE uid_sequence
+            START WITH 1
+            INCREMENT BY 1
+    `);
 
+    const trigger = await connection.execute(`
+        CREATE OR REPLACE TRIGGER fuser_insert_trigger
+        BEFORE INSERT
+        ON FUser
+        REFERENCING NEW AS NEW
+        FOR EACH ROW
+        BEGIN
+        SELECT uid_sequence.nextval INTO :NEW.userid FROM dual;
+        END;
+    `);
     return true;
-}).catch(() => {
+  }).catch(() => {
     return false;
-});
-}
+  });
+};
 
 const loadDummyData = async () => {
+  try {
     await insert("Ahmed Khan", "ahmed.khan@gmail.com");
     await insert("Maria Rodriguez", "maria.rodriguez@hotmail.com");
     await insert("Yuki Takahashi", "yuki.takahashi@gmail.com");
@@ -47,34 +76,50 @@ const loadDummyData = async () => {
     await insert("Javier Castillo", "javier.castillo@gmail.com");
     await insert("Naomi Okafor", "naomi.okafor@outlook.com");
     await insert("Elijah Thompson", "elijah.thompson@gmail.com");
-}
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
 
 async function insert(name, email) {
-    const id = Date.now();
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `INSERT INTO FUser (userid, name, email) VALUES (:id, :name, :email)`,
-            [id, name, email],
-            { autoCommit: true }
-        );
+  const id = Date.now();
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `INSERT INTO FUser (name, email) VALUES (:name, :email)`,
+      [name, email],
+      { autoCommit: true }
+    );
 
-        return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
-        return false;
-    });
+    return result.rowsAffected && result.rowsAffected > 0;
+  }).catch(() => {
+    return false;
+  });
 }
 
 async function fetch() {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM FUser');
-        return result.rows;
-    }).catch(() => {
-        return [];
-    });
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute("SELECT * FROM FUser");
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
+async function fetchKeys() {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute("SELECT (userid) FROM FUser");
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
 }
 
 module.exports = {
   initializeTable,
   loadDummyData,
-  fetch
-}
+  fetch,
+  fetchKeys,
+  dropTable,
+};
