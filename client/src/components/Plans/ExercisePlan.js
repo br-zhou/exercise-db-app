@@ -6,7 +6,6 @@ const ExercisePlan = () => {
         const dummyData = await serverFetch("GET", "exercise-table");
         setData(dummyData);
         console.log(dummyData)
-        // todo: get client data
       };
     
       useEffect(() => {

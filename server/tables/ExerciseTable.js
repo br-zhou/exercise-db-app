@@ -24,7 +24,7 @@ const intializeTable = async () => {
         await connection.execute(`DROP TABLE Exercise`);
     } 
     catch(err) {
-        console.log('Table might not exist, proceeding to create...');
+        console.log('Table Exercise might not exist, proceeding to create...');
     }
 
     const result = await connection.execute(`
@@ -94,8 +94,20 @@ async function fetch() {
     });
 }
 
+async function fetchKeys() {
+    return await withOracleDB(async (connection) => {
+      const result = await connection.execute("SELECT (eid) FROM Exercise");
+      return result.rows;
+    }).catch(() => {
+      return [];
+    });
+  }
+
 module.exports = {
-    intializeTable,
+  intializeTable,
+  dropTable,
+  fetch,
+  fetchKeys,
   loadDummyData,
   fetch
 }
