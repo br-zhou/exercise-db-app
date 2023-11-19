@@ -3,13 +3,13 @@ const {withOracleDB} = require('./../utils/envUtil');
 const dropTable = async () => {
     return await withOracleDB(async (connection) => {
       try{
-        await connection.execute(`DROP SEQUENCE eid_sequence`);
+        await connection.execute(`DROP SEQUENCE nid_sequence`);
       } catch (e) {console.log('DB reset')}
       try {
-        await connection.execute(`DROP TRIGGER exercise_insert_trigger`);
+        await connection.execute(`DROP TRIGGER nutrition_insert_trigger`);
       } catch (e) {}
       try {
-        await connection.execute(`DROP TABLE Exercise`);
+        await connection.execute(`DROP TABLE Nutrition`);
       } catch (e) {}
       
       return true;
@@ -24,11 +24,12 @@ const intializeTable = async () => {
 
     try {
         const result = await connection.execute(`
-        CREATE TABLE Exercise(
-            eid INTEGER,
-            name VARCHAR(50),
-            etype VARCHAR(50),
-            PRIMARY KEY (eid)
+        CREATE TABLE Nutrition(
+            nid INTEGER,
+            carbs INTEGER,
+            fats INTEGER,
+            protein INTEGER,
+            PRIMARY KEY (nid)
         )
     `);
     } catch (e) {
@@ -38,7 +39,7 @@ const intializeTable = async () => {
     
     try {
         const sequence = await connection.execute(`
-        CREATE SEQUENCE eid_sequence
+        CREATE SEQUENCE nid_sequence
             START WITH 1
             INCREMENT BY 1
     `);
@@ -48,13 +49,13 @@ const intializeTable = async () => {
 
     try {
         const trigger = await connection.execute(`
-        CREATE OR REPLACE TRIGGER exercise_insert_trigger
+        CREATE OR REPLACE TRIGGER nutrition_insert_trigger
         BEFORE INSERT
-        ON Exercise
+        ON Nutrition
         REFERENCING NEW AS NEW
         FOR EACH ROW
         BEGIN
-        SELECT eid_sequence.nextval INTO :NEW.eid FROM dual;
+        SELECT nid_sequence.nextval INTO :NEW.nid FROM dual;
         END;
     `);
     } catch (e) {
@@ -77,11 +78,11 @@ const loadDummyData = async () => {
     await insert("Suicides", "Cardio");
 }
 
-async function insert(name, etype) {
+async function insert(name, carbs, fats, protein) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO Exercise (name, etype) VALUES (:name, :etype)`,
-            [name, etype],
+            `INSERT INTO Nutrition (name, carbs, fats, protein) VALUES (:name, :carbs, :fats, :protein)`,
+            [name, carbs, fats, protein],
             { autoCommit: true }
         );
 
@@ -93,7 +94,7 @@ async function insert(name, etype) {
 
 async function fetch() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM Exercise');
+        const result = await connection.execute('SELECT * FROM Nutrition');
         return result.rows;
     }).catch(() => {
         return [];
@@ -102,7 +103,7 @@ async function fetch() {
 
 async function fetchKeys() {
     return await withOracleDB(async (connection) => {
-      const result = await connection.execute("SELECT (eid) FROM Exercise");
+      const result = await connection.execute("SELECT (nid) FROM Nutrition");
       return result.rows;
     }).catch(() => {
       return [];

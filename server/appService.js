@@ -62,6 +62,7 @@ async function dropAllTables() {
     await FUserTable.dropTable();
     return true;
   } catch (e) {
+    console.log("Couldnt drop tables");
     return false;
   }
 }
