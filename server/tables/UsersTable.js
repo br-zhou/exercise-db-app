@@ -84,7 +84,6 @@ const loadDummyData = async () => {
 };
 
 async function insert(name, email) {
-  const id = Date.now();
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
       `INSERT INTO FUser (name, email) VALUES (:name, :email)`,
