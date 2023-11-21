@@ -2,15 +2,9 @@ const {withOracleDB} = require('./../utils/envUtil');
 
 const dropTable = async () => {
     return await withOracleDB(async (connection) => {
-      try{
         await connection.execute(`DROP SEQUENCE eid_sequence`);
-      } catch (e) {console.log('DB reset')}
-      try {
         await connection.execute(`DROP TRIGGER exercise_insert_trigger`);
-      } catch (e) {}
-      try {
         await connection.execute(`DROP TABLE Exercise`);
-      } catch (e) {}
       
       return true;
     }).catch(() => {
@@ -22,44 +16,32 @@ const intializeTable = async () => {
   return await withOracleDB(async (connection) => {
     await dropTable();
 
-    try {
-        const result = await connection.execute(`
-        CREATE TABLE Exercise(
-            eid INTEGER,
-            name VARCHAR(50),
-            etype VARCHAR(50),
-            PRIMARY KEY (eid)
-        )
+    const result = await connection.execute(`
+      CREATE TABLE Exercise(
+          eid INTEGER,
+          name VARCHAR(50),
+          etype VARCHAR(50),
+          PRIMARY KEY (eid)
+      )
     `);
-    } catch (e) {
-        console.log('Couldnt create table');
-    }
 
     
-    try {
-        const sequence = await connection.execute(`
-        CREATE SEQUENCE eid_sequence
-            START WITH 1
-            INCREMENT BY 1
-    `);
-    } catch(e) {
-        console.log('Couldnt create sequence');
-    }
+      const sequence = await connection.execute(`
+      CREATE SEQUENCE eid_sequence
+          START WITH 1
+          INCREMENT BY 1
+  `);
 
-    try {
-        const trigger = await connection.execute(`
-        CREATE OR REPLACE TRIGGER exercise_insert_trigger
-        BEFORE INSERT
-        ON Exercise
-        REFERENCING NEW AS NEW
-        FOR EACH ROW
-        BEGIN
-        SELECT eid_sequence.nextval INTO :NEW.eid FROM dual;
-        END;
+    const trigger = await connection.execute(`
+    CREATE OR REPLACE TRIGGER exercise_insert_trigger
+    BEFORE INSERT
+    ON Exercise
+    REFERENCING NEW AS NEW
+    FOR EACH ROW
+    BEGIN
+    SELECT eid_sequence.nextval INTO :NEW.eid FROM dual;
+    END;
     `);
-    } catch (e) {
-        console.log("Couldnt create trigger");
-    }
 
 
     return true;

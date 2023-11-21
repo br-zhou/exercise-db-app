@@ -1,26 +1,25 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { serverFetch } from "../../utils/api";
+import NutritionCard from "./NutritionCard";
 const NutritionPlan = () => { 
-    const [nutriPlan, setNutriPlan] = useState(
-        {
-            nid: 1,
-            carbs: 250,
-            fats: 60,
-            protein: 120,
-            calories: 2020
-        }
-    );
-    return (
-        <div className="max-w-sm mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
-        <div className="card-body">
-          <h5 className="text-xl font-semibold mb-2">Calories: {nutriPlan.calories}</h5>
-          <p className="text-sm text-gray-700 mb-4">Carbohydrates: {nutriPlan.carbs}g</p>
-          <p className="text-sm text-gray-700 mb-4">Fats: {nutriPlan.fats}g</p>
-          <p className="text-sm text-gray-700 mb-4">Protein: {nutriPlan.protein}g</p>
-          
-        </div>
-      </div>
-    )
+  const onLoad = async () => {
+    const dummyData = await serverFetch("GET", "nutrition-table");
+    setData(dummyData);
+    console.log(dummyData)
+  };
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  const [data, setData] = useState([]);
+
+return (
+    <div>
+      {data.map(row => 
+        <NutritionCard key={row[0]} carbs={row[1]} fats={row[2]} protein={row[3]} calories={row[4]}/>)}
+    </div>
+)
 }
 
 export default NutritionPlan;

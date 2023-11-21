@@ -2,13 +2,13 @@ const express = require("express");
 const appService = require("./appService");
 const createTrainerRoutes = require("./routes/TrainerPage");
 const createPlansRoutes = require("./routes/PlansPage");
-
+const createNutritionRoutes = require("./routes/Nutrition");
 const router = express.Router();
 
 // !! CUSTOM ROUTES
 createTrainerRoutes(router);
 createPlansRoutes(router);
-
+createNutritionRoutes(router);
 // ----------------------------------------------------------
 // API endpoints
 // Modify or extend these routes based on your project's needs.

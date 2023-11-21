@@ -1,10 +1,11 @@
+const { autoCommit } = require('oracledb');
 const {withOracleDB} = require('./../utils/envUtil');
 
 const dropTable = async () => {
     return await withOracleDB(async (connection) => {
       try{
         await connection.execute(`DROP SEQUENCE nid_sequence`);
-      } catch (e) {console.log('DB reset')}
+      } catch (e) {console.log('Nid sequence error')}
       try {
         await connection.execute(`DROP TRIGGER nutrition_insert_trigger`);
       } catch (e) {}
@@ -29,6 +30,8 @@ const intializeTable = async () => {
             carbs INTEGER,
             fats INTEGER,
             protein INTEGER,
+            calories INTEGER,
+            userid INTEGER UNIQUE,
             PRIMARY KEY (nid)
         )
     `);
@@ -70,19 +73,19 @@ const intializeTable = async () => {
 }
 
 const loadDummyData = async () => {
-    await insert("Barbell Front Squat", "Resistance/Conditioning");
-    await insert("Barbell Back Squat", "Resistance/Conditioning");
-    await insert("Running", "Cardio");
-    await insert("Swimming", "Cardio");
-    await insert("Grappling", "Martial Arts");
-    await insert("Suicides", "Cardio");
+    await insert(100,100,100,2200 ,1);
+    await insert(150,100,80,2400, 2);
+    await insert(220,60,120,2300, 3);
+    await insert(280,50,90,2400, 4);
+    await insert(120,80,120,2800, 5);
+    await insert(180,100,100,3200, 6);
 }
 
-async function insert(name, carbs, fats, protein) {
+async function insert(carbs, fats, protein, calories, userid) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO Nutrition (name, carbs, fats, protein) VALUES (:name, :carbs, :fats, :protein)`,
-            [name, carbs, fats, protein],
+            `INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (:carbs, :fats, :protein, :calories, :userid)`,
+            [carbs, fats, protein, calories, userid],
             { autoCommit: true }
         );
 
@@ -101,6 +104,13 @@ async function fetch() {
     });
 }
 
+async function fetchUserNutrition(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute("SELECT * FROM Nutrition WHERE userid= 4")
+    return result.rows;
+  })
+}
+
 async function fetchKeys() {
     return await withOracleDB(async (connection) => {
       const result = await connection.execute("SELECT (nid) FROM Nutrition");
@@ -115,6 +125,7 @@ module.exports = {
   dropTable,
   fetch,
   fetchKeys,
+  fetchUserNutrition,
   loadDummyData,
   fetch
 }

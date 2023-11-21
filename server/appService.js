@@ -2,6 +2,7 @@ const FUserTable = require("./tables/UsersTable");
 const PaidUser1Table = require("./tables/PaidUser1Table");
 const PaidUser2Table = require("./tables/PaidUser2Table");
 const ExerciseTable = require("./tables/ExerciseTable");
+const NutritionTable = require("./tables/NutritionTable");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
@@ -41,6 +42,9 @@ async function initalizeAllTables() {
     await ExerciseTable.intializeTable();
     await ExerciseTable.loadDummyData();
 
+    await NutritionTable.intializeTable();
+    await NutritionTable.loadDummyData();
+
     await PaidUser2Table.intializeTable();
     PaidUser2Table.loadDummyData();
 
@@ -60,6 +64,7 @@ async function dropAllTables() {
     await PaidUser2Table.dropTable();
     await ExerciseTable.dropTable();
     await FUserTable.dropTable();
+    await NutritionTable.dropTable();
     return true;
   } catch (e) {
     console.log("Couldnt drop tables");
