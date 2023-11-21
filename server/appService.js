@@ -2,6 +2,7 @@ const FUserTable = require("./tables/UsersTable");
 const PaidUser1Table = require("./tables/PaidUser1Table");
 const PaidUser2Table = require("./tables/PaidUser2Table");
 const ContentTable = require("./tables/ContentTable");
+const NotificationsTable = require("./tables/NotificationsTable");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
@@ -17,7 +18,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM Content");
+    const result = await connection.execute("SELECT * FROM Notifications");
     return result.rows;
   }).catch(() => {
     return [];
@@ -26,7 +27,7 @@ async function fetchDemotableFromDb() {
 
 async function countDemotable() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT Count(*) FROM Content");
+    const result = await connection.execute("SELECT Count(*) FROM Notifications");
     return result.rows[0][0];
   }).catch(() => {
     return -1;
@@ -39,10 +40,13 @@ async function initalizeAllTables() {
     await FUserTable.loadDummyData();
 
     await PaidUser2Table.intializeTable();
-    PaidUser2Table.loadDummyData();
+    await PaidUser2Table.loadDummyData();
 
     await ContentTable.intializeTable();
-    ContentTable.loadDummyData();
+    await ContentTable.loadDummyData();
+
+    await NotificationsTable.intializeTable();
+    await NotificationsTable.loadDummyData();
 
     await PaidUser1Table.intializeTable();
     const FUserKeys = await FUserTable.fetchKeys();
@@ -59,6 +63,7 @@ async function dropAllTables() {
     await PaidUser1Table.dropTable();
     await PaidUser2Table.dropTable();
     await ContentTable.dropTable();
+    await NotificationsTable.dropTable();
     
     await FUserTable.dropTable();
     return true;
