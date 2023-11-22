@@ -1,7 +1,7 @@
 const userTable = require("./../tables/ProgressTable");
 
 const createRoutes = (router) => {
-  router.get("/preogress-table", async (req, res) => {
+  router.get("/progress-table", async (req, res) => {
     const tableContent = await userTable.fetch();
     res.json(tableContent);
   });

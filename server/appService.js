@@ -5,6 +5,7 @@ const ExerciseTable = require("./tables/ExerciseTable");
 const NutritionTable = require("./tables/NutritionTable");
 const ContentTable = require("./tables/ContentTable");
 const NotificationsTable = require("./tables/NotificationsTable");
+const ProgressTable = require("./tables/ProgressTable");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
@@ -20,7 +21,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM PaidUser1");
+    const result = await connection.execute("SELECT * FROM ProgressReport");
     return result.rows;
   }).catch(() => {
     return [];
@@ -47,18 +48,21 @@ async function initalizeAllTables() {
     await NutritionTable.intializeTable();
     await NutritionTable.loadDummyData();
 
-    await PaidUser2Table.intializeTable();
-    await PaidUser2Table.loadDummyData();
+    // await PaidUser2Table.intializeTable();
+    // await PaidUser2Table.loadDummyData();
 
-    await ContentTable.intializeTable();
-    await ContentTable.loadDummyData();
+    // await ContentTable.intializeTable();
+    // await ContentTable.loadDummyData();
 
-    await NotificationsTable.intializeTable();
-    await NotificationsTable.loadDummyData();
+    // await NotificationsTable.intializeTable();
+    // await NotificationsTable.loadDummyData();
 
-    await PaidUser1Table.intializeTable();
-    const FUserKeys = await FUserTable.fetchKeys();
-    PaidUser1Table.loadDummyData(FUserKeys);
+    // await PaidUser1Table.intializeTable();
+    // const FUserKeys = await FUserTable.fetchKeys();
+    // PaidUser1Table.loadDummyData(FUserKeys);
+
+    await ProgressTable.intializeTable();
+    ProgressTable.loadDummyData();
     return true;
   } catch (e) {
     console.log(e);
@@ -70,9 +74,16 @@ async function dropAllTables() {
   try {
     await PaidUser1Table.dropTable();
     await PaidUser2Table.dropTable();
-    
+    await ProgressTable.dropTable();
+    await NotificationsTable.dropTable();
     await FUserTable.dropTable();
+
     await NutritionTable.dropTable();
+    await ExerciseTable.dropTable();
+    
+
+    // await ContentTable.dropTable();
+
     return true;
   } catch (e) {
     console.log("Couldnt drop tables");

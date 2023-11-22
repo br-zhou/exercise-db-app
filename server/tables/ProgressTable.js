@@ -8,10 +8,7 @@ const dropTable = async () => {
     try {
       await connection.execute(`DROP TRIGGER progress_insert_trigger`);
     } catch (e) {}
-    try {
       await connection.execute(`DROP TABLE ProgressReport`);
-    } catch (e) {}
-    
     return true;
   }).catch(() => {
     return false;
@@ -25,9 +22,11 @@ const intializeTable = async () => {
     const result = await connection.execute(`
         CREATE TABLE ProgressReport(
             pid INTEGER,
-            Satisfaction INTEGER,
-            reportDate DATE,
-            PRIMARY KEY (pid)
+            Satisfaction VARCHAR(20),
+            reportDate INTEGER,
+            userid INTEGER,
+            PRIMARY KEY (pid),
+            FOREIGN KEY (userid) REFERENCES FUser(userid)
         )
     `);
 
@@ -40,7 +39,7 @@ const intializeTable = async () => {
     const trigger = await connection.execute(`
         CREATE OR REPLACE TRIGGER progress_insert_trigger
         BEFORE INSERT
-        ON FUser
+        ON ProgressReport
         REFERENCING NEW AS NEW
         FOR EACH ROW
         BEGIN
@@ -55,6 +54,12 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   try {
+    await insert("Successful", 1);
+    await insert("Moderately Happy", 2);
+    await insert("Ok", 3);
+    await insert("Perfect", 4);
+    await insert("No Progress", 5);
+    await insert("Regression", 6);
 
     return true;
   } catch (e) {
@@ -63,11 +68,12 @@ const loadDummyData = async () => {
   }
 };
 
-async function insert(satisfaction, date) {
+async function insert(satisfaction, userid) {
+  const date = Date.now();
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
-      `INSERT INTO ProgressReport (satifaction, reportDate) VALUES (:satisfaction, :reportDate)`,
-      [satisfaction, date],
+      `INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES (:satisfaction, :reportDate, :userid)`,
+      [satisfaction, date, userid],
       { autoCommit: true }
     );
 

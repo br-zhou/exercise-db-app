@@ -2,22 +2,21 @@ const { autoCommit } = require('oracledb');
 const {withOracleDB} = require('./../utils/envUtil');
 
 const dropTable = async () => {
-    return await withOracleDB(async (connection) => {
-      try{
-        await connection.execute(`DROP SEQUENCE nid_sequence`);
-      } catch (e) {console.log('Nid sequence error')}
-      try {
-        await connection.execute(`DROP TRIGGER nutrition_insert_trigger`);
-      } catch (e) {}
-      try {
-        await connection.execute(`DROP TABLE Nutrition`);
-      } catch (e) {}
-      
-      return true;
-    }).catch(() => {
-      return false;
-    });
-  };
+  return await withOracleDB(async (connection) => {
+    try {
+      await connection.execute(`DROP SEQUENCE nid_sequence`);
+    } catch (e) {}
+    try {
+      await connection.execute(`DROP TRIGGER nutrition_insert_trigger`);
+   } catch (e) {}
+    try { 
+    await connection.execute(`DROP TABLE Nutrition`);
+   } catch (e) {}
+    return true;
+  }).catch(() => {
+    return false;
+  });
+};
 
 const intializeTable = async () => {
   return await withOracleDB(async (connection) => {
@@ -33,6 +32,7 @@ const intializeTable = async () => {
             calories INTEGER,
             userid INTEGER UNIQUE,
             PRIMARY KEY (nid)
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
         )
     `);
     } catch (e) {

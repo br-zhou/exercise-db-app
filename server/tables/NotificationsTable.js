@@ -28,7 +28,7 @@ const intializeTable = async () => {
             userid INTEGER,
             msg VARCHAR(150),
             PRIMARY KEY (rid, userid),
-            FOREIGN KEY (userid) REFERENCES FUser(userid)
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
         )
     `);
 
