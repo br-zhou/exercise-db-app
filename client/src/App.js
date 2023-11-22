@@ -5,6 +5,7 @@ import RootLayout from "./pages/RootLayout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TrainerPage from "./pages/TrainerPage/TrainerPage";
 import RegisterPage from "./pages/LoginPage/RegisterPage";
+import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage />},
+      { path: "notifications", element: <NotificationsPage />},
       { path: "trainer-dashboard", element: <TrainerPage /> },
     ],
     errorElement: <ErrorPage />,
