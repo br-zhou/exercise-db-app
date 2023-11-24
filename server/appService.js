@@ -5,6 +5,7 @@ const ExerciseTable = require("./tables/ExerciseTable");
 const NutritionTable = require("./tables/NutritionTable");
 const ContentTable = require("./tables/ContentTable");
 const NotificationsTable = require("./tables/NotificationsTable");
+const GoalsTable = require("./tables/GoalsTable");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
@@ -20,7 +21,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM PaidUser1");
+    const result = await connection.execute("SELECT * FROM Goals");
     return result.rows;
   }).catch(() => {
     return [];
@@ -29,7 +30,7 @@ async function fetchDemotableFromDb() {
 
 async function countDemotable() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT Count(*) FROM FUser");
+    const result = await connection.execute("SELECT Count(*) FROM Goals");
     return result.rows[0][0];
   }).catch(() => {
     return -1;
@@ -52,6 +53,9 @@ async function initalizeAllTables() {
 
     await ContentTable.intializeTable();
     await ContentTable.loadDummyData();
+
+    await GoalsTable.intializeTable();
+    await GoalsTable.loadDummyData();
 
     await NotificationsTable.intializeTable();
     await NotificationsTable.loadDummyData();
