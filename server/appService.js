@@ -9,6 +9,8 @@ const NotificationsTable = require("./tables/NotificationsTable");
 const ProgressTable = require("./tables/ProgressTable");
 const AdTable = require("./tables/AdTable");
 const GoalsTable = require("./tables/GoalsTable");
+const ExercisePlan = require("./tables/ExercisePlanTable");
+const PlanIncludes = require("./tables/PlanIncludes");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
