@@ -8,6 +8,7 @@ const ContentTable = require("./tables/ContentTable");
 const NotificationsTable = require("./tables/NotificationsTable");
 const ProgressTable = require("./tables/ProgressTable");
 const AdTable = require("./tables/AdTable");
+const GoalsTable = require("./tables/GoalsTable");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
@@ -23,7 +24,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute(`SELECT * FROM FUser`);
+    const result = await connection.execute("SELECT * FROM Goals");
     return result.rows;
   }).catch(() => {
     return [];
@@ -32,7 +33,7 @@ async function fetchDemotableFromDb() {
 
 async function countDemotable() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT Count(*) FROM FUser");
+    const result = await connection.execute("SELECT Count(*) FROM Goals");
     return result.rows[0][0];
   }).catch(() => {
     return -1;
@@ -41,14 +42,29 @@ async function countDemotable() {
 
 async function initalizeAllTables() {
   try {
-    await FUserTable.intializeTable();
-    await FUserTable.loadDummyData();
+     await FUserTable.intializeTable();
+     await FUserTable.loadDummyData();
 
     // await ExerciseTable.intializeTable();
     // await ExerciseTable.loadDummyData();
 
+    // await NutritionTable.intializeTable();
+    // await NutritionTable.loadDummyData();
+
     // await PaidUser2Table.intializeTable();
-    // PaidUser2Table.loadDummyData();
+    // await PaidUser2Table.loadDummyData();
+
+    // await ContentTable.intializeTable();
+    // await ContentTable.loadDummyData();
+
+    // await NotificationsTable.intializeTable();
+    // await NotificationsTable.loadDummyData();
+    
+    await GoalsTable.intializeTable();
+    await GoalsTable.loadDummyData();
+
+    // await NotificationsTable.intializeTable();
+    // await NotificationsTable.loadDummyData();
 
     // await PaidUser1Table.intializeTable();
     // const FUserKeys = await FUserTable.fetchKeys();
@@ -95,8 +111,9 @@ async function dropAllTables() {
     await ProgressTable.dropTable();
     await NotificationsTable.dropTable();
 
-    await NutritionTable.dropTable();
-    await ExerciseTable.dropTable();
+    // await NutritionTable.dropTable();
+    // await ExerciseTable.dropTable();
+    await GoalsTable.dropTable();
     
     await FUserTable.dropTable();
 
