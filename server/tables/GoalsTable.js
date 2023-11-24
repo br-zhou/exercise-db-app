@@ -125,6 +125,7 @@ async function insert(category, weight, date, userid) {
 }
 
 
+
 async function fetch() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT * FROM Goals");
