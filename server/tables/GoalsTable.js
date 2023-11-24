@@ -28,13 +28,15 @@ const intializeTable = async () => {
             gid INTEGER,
             category VARCHAR(50),
             weight INTEGER,
-            date VARCHAR(100),
+            din VARCHAR(100),
             userid INTEGER,
             PRIMARY KEY (gid),
             FOREIGN KEY (userid) REFERENCES FUser(userid)
+            
         )
     `);
 
+ 
     const sequence = await connection.execute(`
         CREATE SEQUENCE gid_sequence
             START WITH 1
@@ -56,6 +58,8 @@ const intializeTable = async () => {
     return false;
   });
 };
+
+
 
 const loadDummyData = async () => {
   try {
@@ -83,39 +87,12 @@ const loadDummyData = async () => {
   }
 };
 
-// async function insert(category, weight, date, userid) {
-//   const id = Date.now();
-//   return await withOracleDB(async (connection) => {
-//     const result = await connection.execute(
-//       `INSERT INTO Goals (category, weight, date, userid) VALUES (:category, :weight, :date, :userid)`,
-//       [category, weight, date, userid],
-//       { autoCommit: true }
-//     );
 
-//     return result.rowsAffected && result.rowsAffected > 0;
-//   }).catch(() => {
-//     return false;
-//   });
-// }
-
-async function insert(category, weight, date, userid) {
-  const id = Date.now();
+async function insert(category, weight, din, userid) {
   return await withOracleDB(async (connection) => {
-    // Check if the user exists in FUser table
-    const userExists = await connection.execute(
-      `SELECT COUNT(*) FROM FUser WHERE userid = :userid`,
-      [userid]
-    );
-
-    // User does not exist
-    if (userExists.rows[0][0] === 0) {
-      
-      throw new Error("User does not exist");
-    }
-
     const result = await connection.execute(
-      `INSERT INTO Goals (category, weight, date, userid) VALUES (:category, :weight, :date, :userid)`,
-      [category, weight, date, userid],
+      `INSERT INTO Goals (category, weight, din, userid) VALUES (:category, :weight, :din, :userid)`,
+      [category, weight, din, userid],
       { autoCommit: true }
     );
 
@@ -124,7 +101,6 @@ async function insert(category, weight, date, userid) {
     return false;
   });
 }
-
 
 async function fetch() {
   return await withOracleDB(async (connection) => {
@@ -151,3 +127,85 @@ module.exports = {
   fetchKeys,
   dropTable,
 };
+
+
+   // category VARCHAR(50),
+    // weight INTEGER,
+    // din VARCHAR(100),
+    // userid INTEGER,
+    // PRIMARY KEY (gid),
+    // FOREIGN KEY (userid) REFERENCES FUser(userid)
+
+
+
+// async function insert(category, weight, din, Goals.userid) {
+//   const id = Date.now();
+//   return await withOracleDB(async (connection) => {
+//     // Check if the user exists in FUser table
+//     const userExists = await connection.execute(
+//       `SELECT COUNT(*) FROM FUser WHERE Goals.userid = :Goals.userid`,
+//       [Goals.userid]
+//     );
+
+//     // User does not exist
+//     if (userExists.rows[0][0] === 0) {
+      
+//       throw new Error("User does not exist");
+//     }
+
+//     const result = await connection.execute(
+//       `INSERT INTO Goals (category, weight, din, Goals.userid) VALUES (:category, :weight, :din, :Goals.userid)`,
+//       [category, weight, din, Goals.userid],
+//       { autoCommit: true }
+//     );
+
+//     return result.rowsAffected && result.rowsAffected > 0;
+//   }).catch(() => {
+//     return false;
+//   });
+// }
+
+
+
+//last one
+// async function insert(category, weight, din, userid) {
+//   const id = Date.now();
+//   return await withOracleDB(async (connection) => {
+//     const result = await connection.execute(
+//       `INSERT INTO Goals (category, weight, din, userid) VALUES (:category, :weight, :din, :userid)`,
+//       [category, weight, din, userid],
+//       { autoCommit: true }
+//     );
+
+//     return result.rowsAffected && result.rowsAffected > 0;
+//   }).catch(() => {
+//     return false;
+//   });
+// }
+
+
+// const loadDummyData = async () => {
+//   try {
+//     await insert('Weight Loss', 100, '2023-dec-31', 1);
+//     await insert('Fitness', 45, '2023-1-21', 2);
+//     await insert('Weight Loss', 80, '2023-2-2', 3);
+//     await insert('Muscle Gain', 50, '2023-3-18', 4);
+//     await insert('Endurance', 66, '2023-4-3', 5);
+//     await insert('Maintain Weight', 60, '2023-5-28', 6);
+//     await insert('Toning', 65, '2023-6-20', 7);
+//     await insert('Agility', 49, '2023-1-11', 8);
+//     await insert('Bodybuilding', 70, '2023-2-21', 9);
+//     await insert('Posture Improvement', 58, '2023-3-30', 10);
+//     await insert('CrossFit', 78, '2023-4-12', 11);
+//     await insert('Balance Training', 67, '2023-5-25', 12);
+//     await insert('Rehabilitation', 85, '2023-6-13', 13);
+//     await insert('Speed Training', 56, '2023-1-3', 14);
+//     await insert('Functional Fitness', 63, '2023-2-15', 15);
+//     await insert('Powerlifting', 82, '2023-5-17', 16);
+//     await insert('Circuit Training', 68, '2023-4-21', 17);  
+//     return true;
+//   } catch (e) {
+//     console.log(e);
+//     return false;
+//   }
+// };

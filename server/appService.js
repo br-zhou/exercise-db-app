@@ -40,14 +40,14 @@ async function countDemotable() {
 
 async function initalizeAllTables() {
   try {
-    await FUserTable.intializeTable();
-    await FUserTable.loadDummyData();
+     await FUserTable.intializeTable();
+     await FUserTable.loadDummyData();
 
-    await ExerciseTable.intializeTable();
-    await ExerciseTable.loadDummyData();
+    // await ExerciseTable.intializeTable();
+    // await ExerciseTable.loadDummyData();
 
-    await NutritionTable.intializeTable();
-    await NutritionTable.loadDummyData();
+    // await NutritionTable.intializeTable();
+    // await NutritionTable.loadDummyData();
 
     // await PaidUser2Table.intializeTable();
     // await PaidUser2Table.loadDummyData();
@@ -57,11 +57,12 @@ async function initalizeAllTables() {
 
     // await NotificationsTable.intializeTable();
     // await NotificationsTable.loadDummyData();
+    
     await GoalsTable.intializeTable();
     await GoalsTable.loadDummyData();
 
-    await NotificationsTable.intializeTable();
-    await NotificationsTable.loadDummyData();
+    // await NotificationsTable.intializeTable();
+    // await NotificationsTable.loadDummyData();
 
     // await PaidUser1Table.intializeTable();
     // const FUserKeys = await FUserTable.fetchKeys();
@@ -78,14 +79,15 @@ async function initalizeAllTables() {
 
 async function dropAllTables() {
   try {
-    await PaidUser1Table.dropTable();
-    await PaidUser2Table.dropTable();
-    await ProgressTable.dropTable();
-    await NotificationsTable.dropTable();
-    await FUserTable.dropTable();
+    // await PaidUser1Table.dropTable();
+    // await PaidUser2Table.dropTable();
+     await ProgressTable.dropTable();
+    // await NotificationsTable.dropTable();
+     await FUserTable.dropTable();
 
-    await NutritionTable.dropTable();
-    await ExerciseTable.dropTable();
+    // await NutritionTable.dropTable();
+    // await ExerciseTable.dropTable();
+    await GoalsTable.dropTable();
     
 
     // await ContentTable.dropTable();
