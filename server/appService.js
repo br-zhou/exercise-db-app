@@ -45,40 +45,17 @@ async function initalizeAllTables() {
      await FUserTable.intializeTable();
      await FUserTable.loadDummyData();
 
-    // await ExerciseTable.intializeTable();
-    // await ExerciseTable.loadDummyData();
-
-    // await NutritionTable.intializeTable();
-    // await NutritionTable.loadDummyData();
-
-    // await PaidUser2Table.intializeTable();
-    // await PaidUser2Table.loadDummyData();
-
-    // await ContentTable.intializeTable();
-    // await ContentTable.loadDummyData();
-
-    // await NotificationsTable.intializeTable();
-    // await NotificationsTable.loadDummyData();
+    await ExerciseTable.intializeTable();
+    await ExerciseTable.loadDummyData();
     
     await GoalsTable.intializeTable();
     await GoalsTable.loadDummyData();
 
-    // await NotificationsTable.intializeTable();
-    // await NotificationsTable.loadDummyData();
+    await TrainerTable.intializeTable();
+    await TrainerTable.loadDummyData();
 
-    // await PaidUser1Table.intializeTable();
-    // const FUserKeys = await FUserTable.fetchKeys();
-    // PaidUser1Table.loadDummyData(FUserKeys);
-
-    // await TrainerTable.intializeTable();
-    // await TrainerTable.loadDummyData();
-
-    // await AdTable.intializeTable();
-    // await AdTable.loadDummyData();
-
-
-    // await NutritionTable.intializeTable();
-    // await NutritionTable.loadDummyData();
+    await AdTable.intializeTable();
+    await AdTable.loadDummyData();
 
     await PaidUser2Table.intializeTable();
     await PaidUser2Table.loadDummyData();
@@ -93,8 +70,8 @@ async function initalizeAllTables() {
     const FUserKeys = await FUserTable.fetchKeys();
     PaidUser1Table.loadDummyData(FUserKeys);
 
-    // await ProgressTable.intializeTable();
-    // await ProgressTable.loadDummyData();
+    await ProgressTable.intializeTable();
+    await ProgressTable.loadDummyData();
     
     return true;
   } catch (e) {
@@ -111,8 +88,8 @@ async function dropAllTables() {
     await ProgressTable.dropTable();
     await NotificationsTable.dropTable();
 
-    // await NutritionTable.dropTable();
-    // await ExerciseTable.dropTable();
+    await NutritionTable.dropTable();
+    await ExerciseTable.dropTable();
     await GoalsTable.dropTable();
     
     await FUserTable.dropTable();

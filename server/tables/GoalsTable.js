@@ -31,7 +31,7 @@ const intializeTable = async () => {
             din VARCHAR(100),
             userid INTEGER,
             PRIMARY KEY (gid),
-            FOREIGN KEY (userid) REFERENCES FUser(userid)
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
             
         )
     `);
