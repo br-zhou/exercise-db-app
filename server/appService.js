@@ -7,6 +7,7 @@ const NutritionTable = require("./tables/NutritionTable");
 const ContentTable = require("./tables/ContentTable");
 const NotificationsTable = require("./tables/NotificationsTable");
 const ProgressTable = require("./tables/ProgressTable");
+const AdTable = require("./tables/AdTable");
 const { withOracleDB } = require("./utils/envUtil");
 
 // ----------------------------------------------------------
@@ -22,7 +23,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute(`SELECT * FROM Trainer`);
+    const result = await connection.execute(`SELECT * FROM FUser`);
     return result.rows;
   }).catch(() => {
     return [];
@@ -53,11 +54,15 @@ async function initalizeAllTables() {
     // const FUserKeys = await FUserTable.fetchKeys();
     // PaidUser1Table.loadDummyData(FUserKeys);
 
-    await TrainerTable.intializeTable();
-    await TrainerTable.loadDummyData();
+    // await TrainerTable.intializeTable();
+    // await TrainerTable.loadDummyData();
 
-    await NutritionTable.intializeTable();
-    await NutritionTable.loadDummyData();
+    // await AdTable.intializeTable();
+    // await AdTable.loadDummyData();
+
+
+    // await NutritionTable.intializeTable();
+    // await NutritionTable.loadDummyData();
 
     // await PaidUser2Table.intializeTable();
     // await PaidUser2Table.loadDummyData();
@@ -72,8 +77,8 @@ async function initalizeAllTables() {
     // const FUserKeys = await FUserTable.fetchKeys();
     // PaidUser1Table.loadDummyData(FUserKeys);
 
-    await ProgressTable.intializeTable();
-    ProgressTable.loadDummyData();
+    // await ProgressTable.intializeTable();
+    // await ProgressTable.loadDummyData();
     
     return true;
   } catch (e) {
