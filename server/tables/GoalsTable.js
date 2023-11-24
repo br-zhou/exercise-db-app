@@ -107,8 +107,9 @@ async function insert(category, weight, date, userid) {
       [userid]
     );
 
+    // User does not exist
     if (userExists.rows[0][0] === 0) {
-      // User does not exist
+      
       throw new Error("User does not exist");
     }
 
@@ -123,7 +124,6 @@ async function insert(category, weight, date, userid) {
     return false;
   });
 }
-
 
 
 async function fetch() {
