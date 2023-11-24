@@ -2,16 +2,13 @@ const { withOracleDB } = require("./../utils/envUtil");
 
 const dropTable = async () => {
   return await withOracleDB(async (connection) => {
-    try{
+    try {
       await connection.execute(`DROP SEQUENCE uid_sequence`);
     } catch (e) {}
     try {
       await connection.execute(`DROP TRIGGER fuser_insert_trigger`);
-    } catch (e) {}
-    try {
-      await connection.execute(`DROP TABLE FUser`);
-    } catch (e) {}
-    
+   } catch (e) {} 
+    await connection.execute(`DROP TABLE FUser`);
     return true;
   }).catch(() => {
     return false;
