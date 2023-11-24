@@ -2,6 +2,7 @@ const FUserTable = require("./tables/UsersTable");
 const PaidUser1Table = require("./tables/PaidUser1Table");
 const PaidUser2Table = require("./tables/PaidUser2Table");
 const ExerciseTable = require("./tables/ExerciseTable");
+const TrainerTable = require("./tables/TrainerTable");
 const NutritionTable = require("./tables/NutritionTable");
 const ContentTable = require("./tables/ContentTable");
 const NotificationsTable = require("./tables/NotificationsTable");
@@ -21,7 +22,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM ProgressReport");
+    const result = await connection.execute(`SELECT * FROM Trainer`);
     return result.rows;
   }).catch(() => {
     return [];
@@ -42,8 +43,18 @@ async function initalizeAllTables() {
     await FUserTable.intializeTable();
     await FUserTable.loadDummyData();
 
-    await ExerciseTable.intializeTable();
-    await ExerciseTable.loadDummyData();
+    // await ExerciseTable.intializeTable();
+    // await ExerciseTable.loadDummyData();
+
+    // await PaidUser2Table.intializeTable();
+    // PaidUser2Table.loadDummyData();
+
+    // await PaidUser1Table.intializeTable();
+    // const FUserKeys = await FUserTable.fetchKeys();
+    // PaidUser1Table.loadDummyData(FUserKeys);
+
+    await TrainerTable.intializeTable();
+    await TrainerTable.loadDummyData();
 
     await NutritionTable.intializeTable();
     await NutritionTable.loadDummyData();
@@ -63,6 +74,7 @@ async function initalizeAllTables() {
 
     await ProgressTable.intializeTable();
     ProgressTable.loadDummyData();
+    
     return true;
   } catch (e) {
     console.log(e);
@@ -72,15 +84,16 @@ async function initalizeAllTables() {
 
 async function dropAllTables() {
   try {
+    await TrainerTable.dropTable();
     await PaidUser1Table.dropTable();
     await PaidUser2Table.dropTable();
     await ProgressTable.dropTable();
     await NotificationsTable.dropTable();
-    await FUserTable.dropTable();
 
     await NutritionTable.dropTable();
     await ExerciseTable.dropTable();
     
+    await FUserTable.dropTable();
 
     // await ContentTable.dropTable();
 
