@@ -103,6 +103,15 @@ async function fetch() {
   });
 }
 
+async function fetchUser(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`SELECT * FROM FUser WHERE email = '${userid}'`);
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
 async function fetchKeys() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT (userid) FROM FUser");
@@ -116,6 +125,7 @@ module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
+  fetchUser,
   fetchKeys,
   dropTable,
 };
