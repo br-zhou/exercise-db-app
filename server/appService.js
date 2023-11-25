@@ -27,7 +27,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM GoalReports");
+    const result = await connection.execute("SELECT * FROM ProgressReport");
     return result.rows;
   }).catch(() => {
     return [];
@@ -51,8 +51,8 @@ async function initalizeAllTables() {
     await ExerciseTable.intializeTable();
     await ExerciseTable.loadDummyData();
 
-    // await NutritionTable.intializeTable();
-    // await NutritionTable.loadDummyData();
+    await NutritionTable.intializeTable();
+    await NutritionTable.loadDummyData();
     
     await GoalsTable.intializeTable();
     await GoalsTable.loadDummyData();

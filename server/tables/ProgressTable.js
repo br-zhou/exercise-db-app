@@ -26,7 +26,7 @@ const intializeTable = async () => {
             reportDate INTEGER,
             userid INTEGER,
             PRIMARY KEY (pid),
-            FOREIGN KEY (userid) REFERENCES FUser(userid)
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
         )
     `);
 
@@ -92,6 +92,13 @@ async function fetch() {
   });
 }
 
+async function fetchUserProgress(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute("SELECT * FROM ProgressReport WHERE userid = 1");
+    return result.rows;
+  });
+}
+
 async function fetchKeys() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT (pid) FROM ProgressReport");
@@ -105,6 +112,7 @@ module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
+  fetchUserProgress,
   fetchKeys,
   dropTable,
 };

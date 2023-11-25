@@ -8,7 +8,7 @@ import RegisterPage from "./pages/LoginPage/RegisterPage";
 import ContentPage from "./pages/ContentPage/ContentPage";
 import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 import PlansPage from "./pages/PlansPage/PlansPage";
-
+import ProgressPage from "./pages/ProgressPage/ProgressPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
       { path: "notifications", element: <NotificationsPage />},
       { path: "trainer-dashboard", element: <TrainerPage /> },
       { path: "plans", element: <PlansPage/> },
+      { path: "progress", element: <ProgressPage />},
     ],
     errorElement: <ErrorPage />,
   },
