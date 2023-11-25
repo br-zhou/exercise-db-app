@@ -1,12 +1,18 @@
 const express = require("express");
 const appService = require("./appService");
 const createTrainerRoutes = require("./routes/TrainerPage");
-
+const createExerciseRoutes = require("./routes/Exercise");
+const createNutritionRoutes = require("./routes/Nutrition");
+const createProgressRoutes = require("./routes/ProgressPage");
+const createExercisePlanRoutes = require("./routes/ExercisePlan");
 const router = express.Router();
 
 // !! CUSTOM ROUTES
 createTrainerRoutes(router);
-
+createExerciseRoutes(router);
+createNutritionRoutes(router);
+createProgressRoutes(router);
+createExercisePlanRoutes(router);
 // ----------------------------------------------------------
 // API endpoints
 // Modify or extend these routes based on your project's needs.
@@ -22,35 +28,6 @@ router.get("/check-db-connection", async (req, res) => {
 router.get("/demotable", async (req, res) => {
   const tableContent = await appService.fetchDemotableFromDb();
   res.json({ data: tableContent });
-});
-
-router.post("/initiate-demotable", async (req, res) => {
-  const initiateResult = await appService.initiateDemotable();
-  if (initiateResult) {
-    res.json({ success: true });
-  } else {
-    res.status(500).json({ success: false });
-  }
-});
-
-router.post("/insert-demotable", async (req, res) => {
-  const { id, name } = req.body;
-  const insertResult = await appService.insertDemotable(id, name);
-  if (insertResult) {
-    res.json({ success: true });
-  } else {
-    res.status(500).json({ success: false });
-  }
-});
-
-router.post("/update-name-demotable", async (req, res) => {
-  const { oldName, newName } = req.body;
-  const updateResult = await appService.updateNameDemotable(oldName, newName);
-  if (updateResult) {
-    res.json({ abcd: true });
-  } else {
-    res.status(500).json({ success: false });
-  }
 });
 
 router.get("/count-demotable", async (req, res) => {
@@ -79,17 +56,13 @@ router.post("/initalize-tables", async (req, res) => {
   }
 });
 
-router.get("/example", async (req, res) => {
-  const data = [
-    {
-      id: 1,
-      title: "iPhone 9",
-      description: "An apple mobile which is nothing like apple",
-      price: 549,
-    },
-  ];
-
-  res.send(data);
+router.post("/drop-all-tables", async (req, res) => {
+  const initiateResult = await appService.dropAllTables();
+  if (initiateResult) {
+    res.json({ success: true });
+  } else {
+    res.status(500).json({ success: false });
+  }
 });
 
 module.exports = router;

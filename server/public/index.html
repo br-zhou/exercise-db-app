@@ -22,6 +22,15 @@
         <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
     </h1>
 
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>DROP ALL TABLES</h2>
+    <button id="dropTables"> CLICK </button> <br>
+    <!-- A placeholder to display messages related to the reset operation. -->
+    <div id="dropResultMsg"></div>
+
+
     <br><hr><br> <!-- ========================================================================= -->
 
     <h2>Insert Default Data</h2>
@@ -35,7 +44,7 @@
 
     <!-- Show 'Demotable'. 
         Data will be fetched and inserted here dynamically using JavaScript. -->
-    <h2>Show Demotable</h2>
+    <h2>Show Table</h2>
     <table id="demotable" border="1">
         <thead>
             <tr>
@@ -69,7 +78,7 @@
 
     <br><hr><br> <!-- ========================================================================= -->
 
-    <h2>Update Name in DemoTable</h2>
+    <h2>Update Name in Table</h2>
     <p>The values are case sensitive and if you enter in the wrong case, the update statement will not do anything.</p>
     <form id="updataNameDemotable">
         Old Name: <input type="text" id="updateOldName" placeholder="Enter Old Name" required> <br><br>

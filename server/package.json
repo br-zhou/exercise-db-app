@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "The Node.js project for CPSC304.",
   "main": "server.js",
-  "keywords": [],
+  "keywords": [
+    "OracleDB",
+    "React",
+    "TailwindCSS",
+    "Fitness",
+    "Nutrition"
+  ],
   "author": {
     "name": "Muneeba Ashiq, Mohsen Bakhit, Brian Zhou"
   },
@@ -11,6 +17,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "oracledb": "^5.2.0"
+    "oracledb": "^5.5.0"
   }
 }
