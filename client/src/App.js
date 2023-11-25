@@ -5,6 +5,7 @@ import RootLayout from "./pages/RootLayout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import TrainerPage from "./pages/TrainerPage/TrainerPage";
 import RegisterPage from "./pages/LoginPage/RegisterPage";
+import ContentPage from "./pages/ContentPage/ContentPage";
 import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 import PlansPage from "./pages/PlansPage/PlansPage";
 
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
+      { path: "content", element: <ContentPage /> },
       { path: "register", element: <RegisterPage />},
       { path: "notifications", element: <NotificationsPage />},
       { path: "trainer-dashboard", element: <TrainerPage /> },
