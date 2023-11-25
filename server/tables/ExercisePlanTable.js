@@ -3,15 +3,15 @@ const {withOracleDB} = require("./../utils/envUtil");
 const dropTable = async () => {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP SEQUENCE epid_sequence`);
-            } catch (e) {}
-            try {
-            await connection.execute(`DROP TRIGGER explan_insert_trigger`);
-            } catch (e) {}
-            try { 
-            await connection.execute(`DROP TABLE ExercisePlan`);
-            } catch (e) {}
-            return true; 
+        await connection.execute(`DROP SEQUENCE epid_sequence`);
+        } catch (e) {}
+        try {
+        await connection.execute(`DROP TRIGGER explan_insert_trigger`);
+        } catch (e) {}
+        try { 
+        await connection.execute(`DROP TABLE ExercisePlan`);
+        } catch (e) {}
+        return true; 
     }).catch(() => {return false;});
 };
 
@@ -25,10 +25,10 @@ const intializeTable = async () => {
             epid INTEGER,
             plantype VARCHAR(50),
             tid INTEGER,
-            uid INTEGER,
+            userid INTEGER,
             PRIMARY KEY (epid),
-            FOREIGN KEY (uid) REFERENCES FUser(uid) ON DELETE CASCADE,
-            FOREIGN KEY (tid) REFERENCES Trainer(tid) ON DELETE SET NULL
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE,
+            FOREIGN KEY (tid) REFERENCES Trainer(tid) ON DELETE CASCADE
         )
       `);
   
@@ -58,19 +58,19 @@ const intializeTable = async () => {
   }
   
   const loadDummyData = async () => {
-      await insert("Barbell Front Squat", "Resistance/Conditioning");
-      await insert("Barbell Back Squat", "Resistance/Conditioning");
-      await insert("Running", "Cardio");
-      await insert("Swimming", "Cardio");
-      await insert("Grappling", "Martial Arts");
-      await insert("Suicides", "Cardio");
+      await insert("Bodybuilding", 1, 1);
+      await insert("Bodybuilding", 2, 2);
+      await insert("Cardio", 3, 3);
+      await insert("Cardio", 4, 5);
+      await insert("Cardio", 5, 4);
+      await insert("MMA", 6, 6);
   }
   
-  async function insert(plantype, tid, uid) {
+  async function insert(plantype, tid, userid) {
       return await withOracleDB(async (connection) => {
           const result = await connection.execute(
-              `INSERT INTO Exercise (plantype, tid, uid) VALUES (:name, :plantype, :tid, :uid)`,
-              [plantype, tid, uid],
+              `INSERT INTO ExercisePlan (plantype, tid, userid) VALUES (:plantype, :tid, :userid)`,
+              [plantype, tid, userid],
               { autoCommit: true }
           );
   

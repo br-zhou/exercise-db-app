@@ -1,9 +1,9 @@
-const {withOracleDB} = require("./../utils/envUtil");
+const {withOracleDB} = require("../utils/envUtil");
 
 const dropTable = async () => {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE PlanIncludes`);
+            await connection.execute(`DROP TABLE GoalReports`);
             return true; 
         } catch(e) {}
     }).catch(() => {return false;});
@@ -15,12 +15,12 @@ const intializeTable = async () => {
       await dropTable();
   
       const result = await connection.execute(`
-        CREATE TABLE PlanIncludes(
-            epid INTEGER,
-            eid INTEGER,
-            PRIMARY KEY(epid, eid),
-            FOREIGN KEY(epid) REFERENCES ExercisePlan(epid) ON DELETE CASCADE,
-            FOREIGN KEY(eid) REFERENCES Exercise(eid) ON DELETE CASCADE
+        CREATE TABLE GoalReports(
+            gid INTEGER,
+            pid INTEGER,
+            PRIMARY KEY(gid, pid),
+            FOREIGN KEY(gid) REFERENCES Goals(gid) ON DELETE CASCADE,
+            FOREIGN KEY(pid) REFERENCES ProgressReport(pid) ON DELETE CASCADE
         )
       `);
       return true;
@@ -39,11 +39,11 @@ const intializeTable = async () => {
 
   }
   
-  async function insert(epid, eid) {
+  async function insert(gid, pid) {
       return await withOracleDB(async (connection) => {
           const result = await connection.execute(
-              `INSERT INTO PlanIncludes (epid, eid) VALUES (:epid, :eid)`,
-              [epid, eid, ],
+              `INSERT INTO GoalReports (gid, pid) VALUES (:gid, :pid)`,
+              [gid, pid],
               { autoCommit: true }
           );
   
@@ -55,7 +55,7 @@ const intializeTable = async () => {
   
   async function fetch() {
       return await withOracleDB(async (connection) => {
-          const result = await connection.execute('SELECT * FROM PlanIncludes');
+          const result = await connection.execute('SELECT * FROM GoalReports');
           return result.rows;
       }).catch(() => {
           return [];
@@ -64,7 +64,7 @@ const intializeTable = async () => {
   
   async function fetchKeys() {
       return await withOracleDB(async (connection) => {
-        const result = await connection.execute("SELECT (epid) FROM PlanIncludes");
+        const result = await connection.execute("SELECT (gid) FROM GoalReports");
         return result.rows;
       }).catch(() => {
         return [];

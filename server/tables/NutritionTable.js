@@ -31,7 +31,7 @@ const intializeTable = async () => {
             protein INTEGER,
             calories INTEGER,
             userid INTEGER UNIQUE,
-            PRIMARY KEY (nid)
+            PRIMARY KEY (nid),
             FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
         )
     `);
