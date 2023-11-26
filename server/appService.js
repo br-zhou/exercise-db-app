@@ -27,7 +27,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM GoalReports");
+    const result = await connection.execute("SELECT * FROM Notifications");
     return result.rows;
   }).catch(() => {
     return [];
@@ -36,7 +36,7 @@ async function fetchDemotableFromDb() {
 
 async function countDemotable() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT Count(*) FROM GoalReports");
+    const result = await connection.execute("SELECT Count(*) FROM Notifications");
     return result.rows[0][0];
   }).catch(() => {
     return -1;
@@ -54,11 +54,11 @@ async function initalizeAllTables() {
     // await NutritionTable.intializeTable();
     // await NutritionTable.loadDummyData();
     
-    await GoalsTable.intializeTable();
-    await GoalsTable.loadDummyData();
+    // await GoalsTable.intializeTable();
+    // await GoalsTable.loadDummyData();
 
-    await TrainerTable.intializeTable();
-    await TrainerTable.loadDummyData();
+    // await TrainerTable.intializeTable();
+    // await TrainerTable.loadDummyData();
 
     // await AdTable.intializeTable();
     // await AdTable.loadDummyData();
@@ -69,11 +69,11 @@ async function initalizeAllTables() {
     // await ContentTable.intializeTable();
     // await ContentTable.loadDummyData();
 
-    // await NotificationsTable.intializeTable();
-    // await NotificationsTable.loadDummyData();
+    await NotificationsTable.intializeTable();
+    await NotificationsTable.loadDummyData();
 
-    await ExercisePlan.intializeTable();
-    await ExercisePlan.loadDummyData();
+    // await ExercisePlan.intializeTable();
+    // await ExercisePlan.loadDummyData();
 
     // await PlanIncludes.intializeTable();
     // await PlanIncludes.loadDummyData();
@@ -82,11 +82,11 @@ async function initalizeAllTables() {
     // const FUserKeys = await FUserTable.fetchKeys();
     // PaidUser1Table.loadDummyData(FUserKeys);
 
-    await ProgressTable.intializeTable();
-    await ProgressTable.loadDummyData();
+    // await ProgressTable.intializeTable();
+    // await ProgressTable.loadDummyData();
 
-    await GoalReports.intializeTable();
-    await GoalReports.loadDummyData();
+    // await GoalReports.intializeTable();
+    // await GoalReports.loadDummyData();
     
     return true;
   } catch (e) {
