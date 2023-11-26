@@ -58,9 +58,6 @@ const FormGoalButton = ({ closeFormGoalButton, onSubmit,  setGoals }) => {
 
   return (
       <div className="max-w-sm mx-auto mt-8 p-4 bg-white rounded-lg shadow-lg">
-        <span className="close absolute top-2 right-2 text-gray-600 cursor-pointer" onClick={closeFormGoalButton}>
-          &times;
-        </span>
         <h2 className="text-2xl font-bold mb-4">Create a New Goal</h2>
         <form onSubmit={handleSubmit}>
           
