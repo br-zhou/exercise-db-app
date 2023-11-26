@@ -110,7 +110,7 @@ async function fetch() {
 
 async function fetchUser(email) {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute(`SELECT * FROM FUser WHERE email = '${email}'`);
+    const result = await connection.execute(`SELECT userid, name, email FROM FUser WHERE email = '${email}'`);
     return result.rows;
   }).catch(() => {
     return [];
