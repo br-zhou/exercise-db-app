@@ -1,6 +1,5 @@
-import { fetchPassword, insert } from "../tables/UsersTable";
+const { fetchPassword, insert } = require("../tables/UsersTable");
 const { compare} = require("bcryptjs");
-
 
 const isValidCredentials = async ({email, password}) => {
     const dbPassword = fetchPassword(email);
