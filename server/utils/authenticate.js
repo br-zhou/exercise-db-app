@@ -8,4 +8,8 @@ const isValidCredentials = async ({email, password}) => {
     return compare(dbPassword, password, () => {console.log("Password does not match!")});
 }
 
-module.exports = {isValidCredentials};
+const registerUser = async ({name, email, password}) => {
+    return insert(name, email, password);
+}
+
+module.exports = {isValidCredentials, registerUser};
