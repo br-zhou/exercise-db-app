@@ -1,5 +1,5 @@
 const { withOracleDB } = require("./../utils/envUtil");
-const { hash } = require("bcryptjs");
+// const { hash } = require("bcryptjs");
 
 const SALT_ROUNDS = 1;
 const dropTable = async () => {
@@ -84,12 +84,12 @@ const loadDummyData = async () => {
 };
 
 async function insert(name, email, password) {
-  const hashedPass = await hash(password, SALT_ROUNDS);
-  console.log(`Plain password ${password} hashes to: ${hashedPass}`);
+  // const hashedPass = await hash(password, SALT_ROUNDS);
+  // console.log(`Plain password ${password} hashes to: ${hashedPass}`);
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
       `INSERT INTO FUser (name, email, password) VALUES (:name, :email, :password)`,
-      [name, email, hashedPass],
+      [name, email, password],
       { autoCommit: true }
     );
 
@@ -121,7 +121,7 @@ async function fetchPassword(email) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(`SELECT password FROM FUser WHERE email = '${email}'`,);
     console.log(result);
-    return result.rows;
+    return result.rows[0];
   }).catch(() => {
     return [];
   })

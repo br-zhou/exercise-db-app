@@ -1,10 +1,11 @@
 const { fetchPassword, insert } = require("../tables/UsersTable");
-const { compare} = require("bcryptjs");
+// const { compare} = require("bcryptjs");
 
-const isValidCredentials = async ({email, password}) => {
-    const dbPassword = fetchPassword(email);
+const isValidCredentials = async (req) => {
+    console.log()
+    const dbPassword = fetchPassword(req.body.email);
     if (!dbPassword) { return false;}
-    return compare(dbPassword, password);
+    return compare(dbPassword, req.body.password);
 }
 
 const registerUser = async ({name, email, password}) => {
