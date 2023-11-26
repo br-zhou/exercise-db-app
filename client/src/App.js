@@ -17,18 +17,30 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "login", element: <LoginPage /> },
       { path: "content", element: <ContentPage /> },
-      { path: "register", element: <RegisterPage />},
-      { path: "notifications", element: <NotificationsPage />},
-      { path: "plans", element: <PlansPage/> },
+      { path: "notifications", element: <NotificationsPage /> },
+      { path: "plans", element: <PlansPage /> },
       { path: "progress", element: <ProgressPage />}
     ],
     errorElement: <ErrorPage />,
   },
-  { path: "trainer-dashboard", element: <TrainerPage /> },
-  { path: "trainer-dashboard/view/:clientId", element: <TrainerViewPage /> },
-  { path: "trainer-dashboard/view/:clientId/new-plan", element: <NewPlanPage /> },
+  { path: "login", element: <LoginPage />, errorElement: <ErrorPage /> },
+  { path: "register", element: <RegisterPage />, errorElement: <ErrorPage /> },
+  {
+    path: "trainer-dashboard",
+    element: <TrainerPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-dashboard/view/:clientId",
+    element: <TrainerViewPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-dashboard/view/:clientId/new-plan",
+    element: <NewPlanPage />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 function App() {
