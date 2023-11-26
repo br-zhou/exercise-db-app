@@ -1,5 +1,4 @@
 const { sign, verify } = require("jsonwebtoken");
-const envVariables = loadEnvFile('.env');
 
 const createToken = (email, id) => {
   return sign({ email, id }, envVariables.ACCESS_TOKEN_KEY);
