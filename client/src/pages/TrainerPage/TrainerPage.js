@@ -5,8 +5,10 @@ import ClientCard from "../../components/ClientCard/ClientCard";
 const TrainerPage = () => {
   const onLoad = async () => {
     const dummyData = await serverFetch("GET", "fuser-table");
-    setData(dummyData);
-    console.log(dummyData)
+    if (dummyData) {
+      setData(dummyData);
+      console.log(dummyData)
+    }
     // todo: get client data
   };
 

@@ -9,6 +9,7 @@ import ContentPage from "./pages/ContentPage/ContentPage";
 import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 import PlansPage from "./pages/PlansPage/PlansPage";
 import TrainerViewPage from "./pages/TrainerPage/View/ViewPage";
+import NewPlanPage from "./pages/TrainerPage/View/NewPlanPage/NewPlanPage";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
   },
   { path: "trainer-dashboard", element: <TrainerPage /> },
   { path: "trainer-dashboard/view/:clientId", element: <TrainerViewPage /> },
+  { path: "trainer-dashboard/view/:clientId/new-plan", element: <NewPlanPage /> },
 ]);
 
 function App() {
