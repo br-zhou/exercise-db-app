@@ -120,7 +120,6 @@ async function fetchUser(email) {
 async function fetchPassword(email) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(`SELECT password FROM FUser WHERE email = '${email}'`,);
-    console.log(result);
     return result.rows[0];
   }).catch(() => {
     return [];
