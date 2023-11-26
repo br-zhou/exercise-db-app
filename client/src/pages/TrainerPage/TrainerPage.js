@@ -20,7 +20,7 @@ const TrainerPage = () => {
     <div>
       <h1 className="mt-8 text-3xl font-bold text-center">Clients</h1>
       {data.map(row => {
-        return <ClientCard key={row[0]} name={row[1]} email={row[2]} location="location" to={null} />
+        return <ClientCard key={row[0]} name={row[1]} email={row[2]} location="location" to={`/trainer-dashboard/view/${row[0]}`} />
       })}
     </div>
   );

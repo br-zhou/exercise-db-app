@@ -8,6 +8,7 @@ import RegisterPage from "./pages/LoginPage/RegisterPage";
 import ContentPage from "./pages/ContentPage/ContentPage";
 import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 import PlansPage from "./pages/PlansPage/PlansPage";
+import TrainerViewPage from "./pages/TrainerPage/View/ViewPage";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,12 @@ const router = createBrowserRouter([
       { path: "content", element: <ContentPage /> },
       { path: "register", element: <RegisterPage />},
       { path: "notifications", element: <NotificationsPage />},
-      { path: "trainer-dashboard", element: <TrainerPage /> },
       { path: "plans", element: <PlansPage/> },
     ],
     errorElement: <ErrorPage />,
   },
+  { path: "trainer-dashboard", element: <TrainerPage /> },
+  { path: "trainer-dashboard/view/:clientId", element: <TrainerViewPage /> },
 ]);
 
 function App() {
