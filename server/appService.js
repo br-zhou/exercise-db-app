@@ -102,7 +102,6 @@ async function dropAllTables() {
     await PaidUser2Table.dropTable();
     await ProgressTable.dropTable();
     await NotificationsTable.dropTable();
-
     await NutritionTable.dropTable();
     await ExerciseTable.dropTable();
     await GoalsTable.dropTable();

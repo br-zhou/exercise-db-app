@@ -13,11 +13,7 @@ const isValidCredentials = async (req) => {
 
 const registerUser = async (req) => {
     const registered = await insert(req.body.name, req.body.email, req.body.password);
-    if (registered) {
-        return true;
-    } else {
-        return false;
-    }
+    return registered;
 }
 
 module.exports = {isValidCredentials, registerUser};
