@@ -11,8 +11,9 @@ const isValidCredentials = async (req) => {
     return [];
 }
 
-const registerUser = async ({name, email, password}) => {
-    return insert(name, email, password);
+const registerUser = async (req) => {
+    const registered = await insert(req.body.name, req.body.email, req.body.password);
+    return registered;
 }
 
 module.exports = {isValidCredentials, registerUser};

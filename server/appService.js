@@ -98,11 +98,11 @@ async function initalizeAllTables() {
 async function dropAllTables() {
   try {
     await TrainerTable.dropTable();
+    
     await PaidUser1Table.dropTable();
     await PaidUser2Table.dropTable();
     await ProgressTable.dropTable();
     await NotificationsTable.dropTable();
-
     await NutritionTable.dropTable();
     await ExerciseTable.dropTable();
     await GoalsTable.dropTable();
