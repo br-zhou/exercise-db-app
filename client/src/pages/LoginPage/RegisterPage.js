@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import PaidUserRegister from "../../components/Register/PaidUserRegister";
 import RegisterCard from "../../components/RegisterCard/RegisterCard";
-
+import { serverPost } from "../../utils/api";
 const RegisterPage = () => {
   
   
-  const handleSubmit = async (data) => {
-    console.log(data);
+  const handleSubmit = async (event) => {
+    const data = await serverPost('POST', 'register',event);
+    console.log(data.message);
   }
 
   return (

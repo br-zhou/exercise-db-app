@@ -26,7 +26,7 @@ const intializeTable = async () => {
             reportDate INTEGER,
             userid INTEGER,
             PRIMARY KEY (pid),
-            FOREIGN KEY (userid) REFERENCES FUser(userid)
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
         )
     `);
 

@@ -2,7 +2,7 @@ import React, { createRef } from "react";
 import { Link } from "react-router-dom";
 
 const RegisterCard = (props) => {
-  const usernameRef = createRef();
+  const emailRef = createRef();
   const passwordRef = createRef();
   const nameRef = createRef();
   const cityRef = createRef();
@@ -15,7 +15,7 @@ const RegisterCard = (props) => {
 
     props.handleSubmit({
       name: nameRef.current.value,
-      username: usernameRef.current.value,
+      email: emailRef.current.value,
       password: passwordRef.current.value,
       city: cityRef.current.value,
       country: countryRef.current.value,
@@ -37,8 +37,8 @@ const RegisterCard = (props) => {
           />
           <input
             type="text"
-            placeholder="username"
-            ref={usernameRef}
+            placeholder="email"
+            ref={emailRef}
             className="focus:outline-none bg-gray-200 w-full border-0 m-2 p-2 box-border text-sm"
           />
           <input

@@ -93,8 +93,8 @@ async function insert(name, email, password) {
       { autoCommit: true }
     );
 
-    return result.rowsAffected && result.rowsAffected > 0;
-  }).catch(() => {
+    return true;
+  }).catch((e) => {
     return false;
   });
 }
@@ -137,6 +137,7 @@ async function fetchKeys() {
 
 module.exports = {
   intializeTable,
+  insert,
   loadDummyData,
   fetch,
   fetchUser,
