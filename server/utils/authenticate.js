@@ -4,7 +4,7 @@ const { compare} = require("bcryptjs");
 const isValidCredentials = async ({email, password}) => {
     const dbPassword = fetchPassword(email);
     if (!dbPassword) { return false;}
-    return compare(dbPassword, password, () => {console.log("Password does not match!")});
+    return compare(dbPassword, password);
 }
 
 const registerUser = async ({name, email, password}) => {

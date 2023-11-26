@@ -1,7 +1,7 @@
 const { withOracleDB } = require("./../utils/envUtil");
 const { hash } = require("bcryptjs");
 
-const SALT_ROUNDS = 7;
+const SALT_ROUNDS = 1;
 const dropTable = async () => {
   return await withOracleDB(async (connection) => {
     try {
@@ -120,6 +120,7 @@ async function fetchUser(email) {
 async function fetchPassword(email) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(`SELECT password FROM FUser WHERE email = '${email}'`,);
+    console.log(result);
     return result.rows;
   }).catch(() => {
     return [];
