@@ -1,8 +1,9 @@
 import { useState, setState } from "react";
 import LoginCard from "../../components/LoginCard/LoginCard";
+import { serverPost } from "../../utils/api";
 const LoginPage = () => {
-  const handleSubmit = (event) => {
-    console.log(event);
+  const handleSubmit = async (event) => {
+    console.log(await serverPost('POST', 'login-auth',event));
   };
 
   return (
