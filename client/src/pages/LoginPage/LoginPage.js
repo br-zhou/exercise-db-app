@@ -1,8 +1,24 @@
-import { useState, setState } from "react";
+import { useState, setState, useEffect } from "react";
 import LoginCard from "../../components/LoginCard/LoginCard";
+import { serverPost } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
-  const handleSubmit = (event) => {
-    console.log(event);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("token", token);
+      navigate("/");
+    } 
+  }, []);
+
+  const handleSubmit = async (event) => {
+    const result = await serverPost('POST', 'login-auth',event);
+    console.log(result);
+    if (result) {
+      localStorage.setItem("token", result);
+      navigate("/");
+    }
   };
 
   return (
