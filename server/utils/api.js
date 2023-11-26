@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
 
   const isValid = await registerUser(inputData);
 
-  const resData = { token: isValid && createToken(inputData.email) };
+  const resData = { token: isValid && createToken(inputData.email, inputData.id) };
 
   res.status(isValid ? 200 : 403).send(resData);
 });
@@ -20,7 +20,7 @@ router.post("/login", async (req, res) => {
 
   const isValid = await isValidCredentials(inputData);
 
-  const resData = { token: isValid && createToken(inputData.email) };
+  const resData = { token: isValid && createToken(inputData.email, inputData.id) };
   res.status(isValid ? 200 : 403).send(resData);
 });
 
