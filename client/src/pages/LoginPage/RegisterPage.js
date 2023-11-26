@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import PaidUserRegister from "../../components/Register/PaidUserRegister";
+import React, { useState, useEffect } from "react";
 import RegisterCard from "../../components/RegisterCard/RegisterCard";
 import { serverPost } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 const RegisterPage = () => {
-  
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("token", token);
+      navigate("/");
+    } 
+  }, []);
   
   const handleSubmit = async (event) => {
-    const data = await serverPost('POST', 'register',event);
-    console.log(data.message);
+    const result = await serverPost('POST', 'register',event);
+    if (result.status) {
+      await serverPost('POST', 'login-auth', event);
+      localStorage.setItem("token", result);
+      navigate("/");
+    }
+    else {
+      console.log("An error occured.");
+    }
   }
 
   return (

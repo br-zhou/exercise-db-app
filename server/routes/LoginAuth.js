@@ -20,11 +20,11 @@ const createRoutes = (router) => {
         if (!req) return;
         const result = await registerUser(req);
         if (!result) {
-            res.json({message: "Email is empty or already exists!"});
+            res.json({status: false});
             return false;
         }
         else {
-            res.json({message: "User registered successfully!"});
+            res.json({status: true});
             return true;
         }
 
