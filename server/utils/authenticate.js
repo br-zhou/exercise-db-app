@@ -3,7 +3,7 @@ const { fetchUser, insert } = require("../tables/UsersTable");
 
 const isValidCredentials = async (req) => {
     // console.log(req)
-    const dbEmail = fetchUser(req.body.email);
+    const dbEmail = await fetchUser(req.body.email);
     return dbEmail;
 }
 
