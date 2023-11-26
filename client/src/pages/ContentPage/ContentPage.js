@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { serverFetch } from "../../utils/api";
 import ContentCard from "../../components/ContentCard/ContentCard";
 
 
@@ -36,39 +37,52 @@ const ContentPage = () => {
     }
   ]);
 
+  const onLoad = async () => {
+    const dummyData = await serverFetch("GET", "content-table");
+     setData(dummyData);
+    console.log(dummyData)
+    // todo: get client data
+  };
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  const [data, setData] = useState([]);
 
 return (
-    <div>
-      <div className="mt-8 text-3xl font-bold underline text-center">
-        CONTENT PAGE
-      </div>
+  <div>
+    <div className="mt-8 text-3xl font-bold underline text-center">
+      CONTENT PAGE
+    </div>
 
-
-      <div
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          flexWrap: "wrap", 
-          justifyContent: "center",
-          width: "100%"
-        }}
-      >
-
-      {content.map((item) => (
+    <div
+      style={{
+        marginTop: "20px",
+        display: "flex",
+        flexWrap: "wrap", 
+        justifyContent: "center",
+        width: "100%"
+      }}
+    >
+      {/* Check if data is not null before mapping over it */}
+      {data && data.map(row => (
         <div
-          key={item.cid} 
+          key={row[0]}
           style={{
-            margin: "10px", // Adjust the margin between the cards
-            width: "calc(33.33% - 20px)", // Set the width to fit 3 cards in a row with margins
-            maxWidth: "500px", // Set a maximum width for each card if needed
+            margin: "10px", // Adjusting the margin between the cards
+            width: "calc(33.33% - 20px)", // Setting the width to fit 3 cards in a row with margins
+            maxWidth: "500px", // Setting a maximum width for each card if needed
           }}
         >
-          <ContentCard {...item} />
+          {/* Assuming ContentCard should be used here as well */}
+          <ContentCard key={row[0]} author={row[1]} url={row[2]} to={null} />
         </div>
       ))}
-        </div>
-      </div>
-      );
+    </div>
+  </div>
+);
 };
+ export default ContentPage;
 
-export default ContentPage;
+
