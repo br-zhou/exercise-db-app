@@ -5,6 +5,8 @@ const createExerciseRoutes = require("./routes/Exercise");
 const createNutritionRoutes = require("./routes/Nutrition");
 const createProgressRoutes = require("./routes/ProgressPage");
 const createExercisePlanRoutes = require("./routes/ExercisePlan");
+const createContentRoutes = require("./routes/Content");
+const createloginAuthRoutes = require("./routes/LoginAuth");
 const createNotificationsRoutes = require("./routes/Notifications");
 const router = express.Router();
 
@@ -15,6 +17,11 @@ createNutritionRoutes(router);
 createProgressRoutes(router);
 createExercisePlanRoutes(router);
 createNotificationsRoutes(router);
+
+createContentRoutes(router);
+
+createloginAuthRoutes(router);
+
 // ----------------------------------------------------------
 // API endpoints
 // Modify or extend these routes based on your project's needs.
@@ -46,6 +53,7 @@ router.get("/count-demotable", async (req, res) => {
     });
   }
 });
+
 
 // ### CUSTOM API ROUTES
 

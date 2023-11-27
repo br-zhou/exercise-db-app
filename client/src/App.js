@@ -10,24 +10,49 @@ import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 import PlansPage from "./pages/PlansPage/PlansPage";
 import TrainerViewPage from "./pages/TrainerPage/View/ViewPage";
 import NewPlanPage from "./pages/TrainerPage/View/NewPlanPage/NewPlanPage";
-
+import ProgressPage from "./pages/ProgressPage/ProgressPage";
+import TrainerLoginPage from "./pages/TrainerLoginPage/TrainerLoginPage";
+import TrainerRegisterPage from "./pages/TrainerLoginPage/TrainerRegisterPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "login", element: <LoginPage /> },
       { path: "content", element: <ContentPage /> },
-      { path: "register", element: <RegisterPage />},
-      { path: "notifications", element: <NotificationsPage />},
-      { path: "plans", element: <PlansPage/> },
+      { path: "notifications", element: <NotificationsPage /> },
+      { path: "plans", element: <PlansPage /> },
+      { path: "progress", element: <ProgressPage />}
     ],
     errorElement: <ErrorPage />,
   },
-  { path: "trainer-dashboard", element: <TrainerPage /> },
-  { path: "trainer-dashboard/view/:clientId", element: <TrainerViewPage /> },
-  { path: "trainer-dashboard/view/:clientId/new-plan", element: <NewPlanPage /> },
+  { path: "login", element: <LoginPage />, errorElement: <ErrorPage /> },
+  { path: "register", element: <RegisterPage />, errorElement: <ErrorPage /> },
+  {
+    path: "trainer-dashboard",
+    element: <TrainerPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-login",
+    element: <TrainerLoginPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-register",
+    element: <TrainerRegisterPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-dashboard/view/:clientId",
+    element: <TrainerViewPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-dashboard/view/:clientId/new-plan",
+    element: <NewPlanPage />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 function App() {
