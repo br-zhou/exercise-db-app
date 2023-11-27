@@ -26,6 +26,7 @@ const LoginCard = (props) => {
           </button>
 
           Click <Link to={props.registerHref} className="text-green-500">Here</Link> To Register!
+          Click <Link to={props.trainerHref} className="text-green-500">Here</Link> To Login As {props.altHrefWord}!
 
         </form>
       </div>

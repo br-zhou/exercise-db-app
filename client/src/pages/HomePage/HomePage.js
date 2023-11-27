@@ -3,6 +3,10 @@ import GoalCard from "../../components/GoalCard/GoalCard";
 import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
 
 const HomePage = () => {
+  const token = JSON.parse(localStorage.getItem("token")) || {};
+
+  console.log(token);
+
   const [goals, setGoals] = useState([
     {
       gid: 1,
