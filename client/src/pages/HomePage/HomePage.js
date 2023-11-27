@@ -4,38 +4,44 @@ import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
 import { serverFetch } from "../../utils/api";
 
 const HomePage = () => {
+  const token = JSON.parse(localStorage.getItem("token")) || {};
 
-  const onLoad = async () => {
-    const dummyData = await serverFetch("GET", "goals-table");
-    if (dummyData){
-     setData(dummyData);
-    console.log(dummyData)
+  console.log(token);
+
+  const [goals, setGoals] = useState([
+    {
+      gid: 1,
+      category: "w",
+      weight: "23",
+      date: "112312"
+    },
+    {
+      gid: 2,
+      category: "p",
+      weight: "45",
+      date: "12434"
+    },
+    {
+      gid: 3,
+      category: "w",
+      weight: "64",
+      date: "24324"
+    },
+    {
+      gid: 4,
+      category: "k",
+      weight: "435",
+      date: "24"
+    },
+    {
+      gid: 5,
+      category: "fdn",
+      weight: "342345",
+      date: "242043"
     }
-  };
+  ]);
 
-
-
-  useEffect(() => {
-    onLoad();
-  }, []);
-
-  const [data, setData] = useState([]);
-
-
-
-  // const addGoal = (newGoal) => {
-  //   // Check if the newGoal is already in the goals array
-  //   if (!data.some((goal) => goal.gid === newGoal.gid)) {
-  //   //  setGoals([...goals, newGoal]);
-  //   }
-  // };
-  // const closeForm = () => {
-  //   // Define your logic for closing the form here
-  //   console.log("Closing form");
-  // };
-
-
-  const addGoal = async (newGoal) => {
+  const addGoal = (newGoal) => {
     // Check if the newGoal is already in the goals array
     if (!data.some((goal) => goal.gid === newGoal.gid)) {
       // Update the backend

@@ -18,6 +18,15 @@ const createRoutes = (router) => {
 
     router.post("/register", async (req, res) => {
         if (!req) return;
+        const result = await registerUser(req);
+        if (!result) {
+            res.json({status: false});
+            return false;
+        }
+        else {
+            res.json({status: true});
+            return true;
+        }
 
     });
 }

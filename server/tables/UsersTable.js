@@ -87,14 +87,15 @@ async function insert(name, email, password) {
   // const hashedPass = await hash(password, SALT_ROUNDS);
   // console.log(`Plain password ${password} hashes to: ${hashedPass}`);
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute(
-      `INSERT INTO FUser (name, email, password) VALUES (:name, :email, :password)`,
-      [name, email, password],
-      { autoCommit: true }
-    );
-
-    return result.rowsAffected && result.rowsAffected > 0;
-  }).catch(() => {
+      const result = await connection.execute(
+        `INSERT INTO FUser (name, email, password) VALUES (:name, :email, :password)`,
+        [name, email, password],
+        { autoCommit: true }
+      );
+      // console.log(true)
+      return true;
+  }).catch((e) => {
+    // console.log(false);
     return false;
   });
 }
@@ -137,6 +138,7 @@ async function fetchKeys() {
 
 module.exports = {
   intializeTable,
+  insert,
   loadDummyData,
   fetch,
   fetchUser,
