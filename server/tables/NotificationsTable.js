@@ -265,12 +265,13 @@ async function fetch() {
   });
 }
 
-async function fetchUserNotifications(userid) {
+async function fetchUserNotifications(id) {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM Nutrition WHERE userid= 1")
-    return result.rows;
-  })
+      const result = await connection.execute("SELECT * FROM Notifications WHERE userid = :1", [id]);
+      return result.rows;
+  });
 }
+
 
 async function fetchKeys() {
   return await withOracleDB(async (connection) => {
