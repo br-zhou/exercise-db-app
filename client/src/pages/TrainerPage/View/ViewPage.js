@@ -64,7 +64,7 @@ const TrainerViewPage = () => {
         </Link>
       </div>
       {planData.map(([epid, planType]) => (
-        <ExercisePlanCard key={epid} title={planType} />
+        <ExercisePlanCard key={epid} epid={epid} title={planType} />
       ))}
     </div>
   );
