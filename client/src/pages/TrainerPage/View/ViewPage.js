@@ -1,22 +1,30 @@
 import { Link, useParams } from "react-router-dom";
 import ClientDetails from "../../../components/ClientDetails/ClientDetails";
-import { serverFetch } from "../../../utils/api";
+import { serverPost } from "../../../utils/api";
 import { useEffect, useState } from "react";
 import ExercisePlanCard from "../../../components/ExercisePlanCard/ExercisePlanCard";
 
 const TrainerViewPage = () => {
   const params = useParams();
   const id = params.clientId;
-  const [data, setData] = useState([
-    [1, "exercise 1"],
-    [2, "exercise 2"],
-  ]);
+  const [planData, setPlanData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   const onLoad = async () => {
-    const dummyData = await serverFetch("POST", "view");
-    if (dummyData) {
-      setData(dummyData);
-      console.log(dummyData);
+    const newUserData = await serverPost("POST", "view-client-info", {
+      userid: id,
+    });
+    if (newUserData) {
+      setUserData(newUserData);
+      console.log(newUserData);
+    }
+
+    const newPlanData = await serverPost("POST", "view-client-plans", {
+      userid: id,
+    });
+    if (newPlanData) {
+      setPlanData(newPlanData);
+      console.log(newPlanData);
     }
   };
 
@@ -27,27 +35,35 @@ const TrainerViewPage = () => {
   return (
     <div>
       <Link to="/trainer-dashboard">
-        <button class="bg-blue-500 hover:bg-blue-600 ml-8 text-white font-bold py-2 mt-8 px-4 rounded inline-block text-center mx-auto">
+        <button className="bg-blue-500 hover:bg-blue-600 ml-8 text-white font-bold py-2 mt-8 px-4 rounded inline-block text-center mx-auto">
           Back
         </button>
       </Link>
+
+      {userData.length > 0 && (
+        <>
+          <h1 className="mt-8 text-3xl font-bold text-center">
+            Client Information:
+          </h1>
+          <ClientDetails
+            name={userData[0][1]}
+            email={userData[0][2]}
+            location={`Approx Location: ${userData[0][3]}, ${userData[0][4]}`}
+          />
+        </>
+      )}
+
       <h1 className="mt-8 text-3xl font-bold text-center">
-        Client Information:
+        Client Exercise Plans:
       </h1>
-      <ClientDetails
-        name="name"
-        email="email"
-        location="Postal, City, Country"
-      />
-      <h1 className="mt-8 text-3xl font-bold text-center">Client Exercises:</h1>
-      <div class="flex justify-center items-center">
+      <div className="flex justify-center items-center">
         <Link to="./new-plan">
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 mt-8 px-4 rounded inline-block text-center mx-auto">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 mt-8 px-4 rounded inline-block text-center mx-auto">
             NEW EXERCISE
           </button>
         </Link>
       </div>
-      {data.map(([epid, planType]) => (
+      {planData.map(([epid, planType]) => (
         <ExercisePlanCard key={epid} title={planType} />
       ))}
     </div>
