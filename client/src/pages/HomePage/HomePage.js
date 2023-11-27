@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import GoalCard from "../../components/GoalCard/GoalCard";
 import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
+import { serverFetch } from "../../utils/api";
 
 const HomePage = () => {
-  const token = JSON.parse(localStorage.getItem("token")) || {};
+  const token = JSON.parse(localStorage.getItem("token") || "{}");
 
   console.log(token);
 
@@ -40,9 +41,27 @@ const HomePage = () => {
     }
   ]);
 
+  const onLoad = async () => {
+    const dummyData = await serverFetch("GET", "goals-table");
+    if (dummyData){
+     setData(dummyData);
+    console.log(dummyData)
+    }
+  };
+
+
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  const [data, setData] = useState([]);
+
+
+
   const addGoal = (newGoal) => {
     // Check if the newGoal is already in the goals array
-    if (!goals.some((goal) => goal.gid === newGoal.gid)) {
+    if (!data.some((goal) => goal.gid === newGoal.gid)) {
     //  setGoals([...goals, newGoal]);
     }
   };
@@ -51,6 +70,20 @@ const HomePage = () => {
     console.log("Closing form");
   };
 
+
+  // const addGoal = async (newGoal) => {
+  //   // Check if the newGoal is already in the goals array
+  //   if (!data.some((goal) => goal.gid === newGoal.gid)) {
+  //     // Update the backend
+  //     const success = await insert(newGoal.category, newGoal.weight, newGoal.din, 1); // Assuming userid is 1 for now
+
+  //     // If the backend update is successful, update the frontend
+  //     if (success) {
+  //       setData((prevData) => [...prevData, newGoal]);
+  //     }
+  //   }
+  // };
+
   return (
     <div>
       <div className="mt-8 text-3xl font-bold underline text-center">
@@ -58,34 +91,37 @@ const HomePage = () => {
       </div>
       {/* FormGoalButton component with inline styles */}
       <div>
-        <FormGoalButton onSubmit={addGoal}  closeFormGoalButton={closeForm} setGoals={setGoals}/>
+        <FormGoalButton onSubmit={addGoal}  closeFormGoalButton={closeForm} setGoals={setData}/>
       </div>
 
       <div className="mt-8 text-3xl font-bold underline text-center">
         Your current goals!
       </div>
+      
       <div
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          flexWrap: "wrap", // Allows cards to wrap to the next row
-          justifyContent: "center",
-          width: "100%"
-        }}
-      >
-        {goals.map((item) => (
-          <div
-            key={item.gid}
-            style={{
-              margin: "10px", // Adjust the margin between the cards
-              width: "calc(33.33% - 20px)", // Set the width to fit 3 cards in a row with margins
-              maxWidth: "300px" // Set a maximum width for each card if needed
-            }}
-          >
-            <GoalCard {...item} />
-          </div>
-        ))}
-      </div>
+      style={{
+        marginTop: "20px",
+        display: "flex",
+        flexWrap: "wrap", 
+        justifyContent: "center",
+        width: "100%"
+      }}
+    >
+      {/* Check if data is not null before mapping over it */}
+      {data && data.map(row => (
+        <div
+          key={row[0]}
+          style={{
+            margin: "10px", // Adjusting the margin between the cards
+            width: "calc(33.33% - 20px)", // Setting the width to fit 3 cards in a row with margins
+            maxWidth: "500px", // Setting a maximum width for each card if needed
+          }}
+        >
+          {/* Assuming ContentCard should be used here as well */}
+          <GoalCard key={row[0]} category={row[1]} date={row[2]} weight={row[3]}to={null} />
+        </div>
+      ))}
+    </div>
     </div>
   );
 };
