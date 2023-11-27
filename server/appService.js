@@ -27,7 +27,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM ExercisePlan");
+    const result = await connection.execute("SELECT * FROM Exercise");
     return result.rows;
   }).catch(() => {
     return [];
