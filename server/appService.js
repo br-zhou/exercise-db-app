@@ -27,7 +27,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM Notifications");
+    const result = await connection.execute("SELECT * FROM Content");
     return result.rows;
   }).catch(() => {
     return [];
@@ -36,7 +36,7 @@ async function fetchDemotableFromDb() {
 
 async function countDemotable() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT Count(*) FROM Notifications");
+    const result = await connection.execute("SELECT Count(*) FROM Content");
     return result.rows[0][0];
   }).catch(() => {
     return -1;
@@ -66,8 +66,8 @@ async function initalizeAllTables() {
     // await PaidUser2Table.intializeTable();
     // await PaidUser2Table.loadDummyData();
 
-    // await ContentTable.intializeTable();
-    // await ContentTable.loadDummyData();
+    await ContentTable.intializeTable();
+    await ContentTable.loadDummyData();
 
     await NotificationsTable.intializeTable();
     await NotificationsTable.loadDummyData();
