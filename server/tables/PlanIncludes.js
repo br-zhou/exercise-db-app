@@ -4,6 +4,7 @@ const dropTable = async () => {
     return await withOracleDB(async (connection) => {
         try {
             await connection.execute(`DROP TABLE PlanIncludes`);
+            console.log('PlanIncludes Table dropped.')
             return true; 
         } catch(e) {}
     }).catch(() => {return false;});
@@ -61,6 +62,14 @@ const intializeTable = async () => {
           return [];
       });
   }
+
+  async function fetchExerciseForPlan(epid) {
+    return await withOracleDB(async (connection) => {
+        const temp = `SELECT PlanIncludes.epid, PlanIncludes.eid, Exercise.name FROM PlanIncludes FULL OUTER JOIN Exercise ON PlanIncludes.eid = Exercise.eid WHERE epid = ${epid}`;
+        const result = await connection.execute(temp);
+        return result.rows;
+    })
+  }
   
   async function fetchKeys() {
       return await withOracleDB(async (connection) => {
@@ -76,6 +85,7 @@ const intializeTable = async () => {
     dropTable,
     fetch,
     fetchKeys,
+    fetchExerciseForPlan,
     loadDummyData,
     fetch
   }

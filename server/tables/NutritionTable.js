@@ -10,7 +10,9 @@ const dropTable = async () => {
       await connection.execute(`DROP TRIGGER nutrition_insert_trigger`);
    } catch (e) {}
     try { 
+    await connection.execute(`ALTER TABLE Nutrition DROP CONSTRAINT userid`);
     await connection.execute(`DROP TABLE Nutrition`);
+    console.log('Nutrition Table dropped.')
    } catch (e) {}
     return true;
   }).catch(() => {
@@ -106,7 +108,7 @@ async function fetch() {
 
 async function fetchUserNutrition(userid) {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM Nutrition WHERE userid= 4")
+    const result = await connection.execute(`SELECT * FROM Nutrition WHERE userid= ${userid}`)
     return result.rows;
   })
 }

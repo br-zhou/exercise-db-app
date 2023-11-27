@@ -55,27 +55,26 @@ async function initalizeAllTables() {
     await FUserTable.loadDummyData();
     console.log("fuser Table added!");
 
-    await PaidUser2Table.intializeTable();
-    await PaidUser2Table.loadDummyData();
-    console.log("paiduser2 Table added!");
+    // await PaidUser2Table.intializeTable();
+    // await PaidUser2Table.loadDummyData();
+    // console.log("paiduser2 Table added!");
 
-    await PaidUser1Table.intializeTable();
-    const FUserKeys = await FUserTable.fetchKeys();
-    const Tids = await TrainerTable.fetchTids();
-    PaidUser1Table.loadDummyData(FUserKeys, Tids);
-    console.log("paiduser1 Table added!");
+    // await PaidUser1Table.intializeTable();
+    // const FUserKeys = await FUserTable.fetchKeys();
+    // const Tids = await TrainerTable.fetchTids();
+    // PaidUser1Table.loadDummyData(FUserKeys, Tids);
+    // console.log("paiduser1 Table added!");
 
     // await ExerciseTable.intializeTable();
     // await ExerciseTable.loadDummyData();
     // console.log("exercise Table added!");
 
-    // await NutritionTable.intializeTable();
-    // await NutritionTable.loadDummyData();
-    // console.log("nutrition Table added!");
+    await NutritionTable.intializeTable();
+    await NutritionTable.loadDummyData();
     
-    await GoalsTable.intializeTable();
-    await GoalsTable.loadDummyData();
-    console.log("goals Table added!");
+    // await GoalsTable.intializeTable();
+    // await GoalsTable.loadDummyData();
+    // console.log("goals Table added!");
 
     // await AdTable.intializeTable();
     // await AdTable.loadDummyData();
@@ -113,26 +112,83 @@ async function initalizeAllTables() {
   }
 }
 
+async function dropDatabase() {
+  await withOracleDB (async (connection)=> {
+    connection.execute(`
+    BEGIN
+       FOR cur_rec IN (SELECT object_name, object_type
+                       FROM user_objects
+                       WHERE object_type IN
+                                 ('TABLE',
+                                  'VIEW',
+                                  'MATERIALIZED VIEW',
+                                  'PACKAGE',
+                                  'PROCEDURE',
+                                  'FUNCTION',
+                                  'SEQUENCE',
+                                  'SYNONYM',
+                                  'PACKAGE BODY'
+                                 ))
+       LOOP
+          BEGIN
+             IF cur_rec.object_type = 'TABLE'
+             THEN
+                EXECUTE IMMEDIATE 'DROP '
+                                  || cur_rec.object_type
+                                  || ' "'
+                                  || cur_rec.object_name
+                                  || '" CASCADE CONSTRAINTS';
+             ELSE
+                EXECUTE IMMEDIATE 'DROP '
+                                  || cur_rec.object_type
+                                  || ' "'
+                                  || cur_rec.object_name
+                                  || '"';
+             END IF;
+          EXCEPTION
+             WHEN OTHERS
+             THEN
+                DBMS_OUTPUT.put_line ('FAILED: DROP '
+                                      || cur_rec.object_type
+                                      || ' "'
+                                      || cur_rec.object_name
+                                      || '"'
+                                     );
+          END;
+       END LOOP;
+       FOR cur_rec IN (SELECT * 
+                       FROM all_synonyms 
+                       WHERE table_owner IN (SELECT USER FROM dual))
+       LOOP
+          BEGIN
+             EXECUTE IMMEDIATE 'DROP PUBLIC SYNONYM ' || cur_rec.synonym_name;
+          END;
+       END LOOP;
+    END;
+    `);
+  })
+}
+
 async function dropAllTables() {
   try {
 
+    await dropDatabase();
+    // await PaidUser1Table.dropTable();
+    // await PaidUser2Table.dropTable();
 
-    await PaidUser1Table.dropTable();
-    await PaidUser2Table.dropTable();
-
-    await ProgressTable.dropTable();
-    await NotificationsTable.dropTable();
-    await NutritionTable.dropTable();
-    await ExerciseTable.dropTable();
-    await GoalsTable.dropTable();
-    await GoalReports.dropTable();
-    await ExercisePlan.dropTable();
-    await PlanIncludes.dropTable();
-    await ContentTable.dropTable();
+    // await ProgressTable.dropTable();
+    // await NotificationsTable.dropTable();
+    // await NutritionTable.dropTable();
+    // await ExerciseTable.dropTable();
+    // await GoalsTable.dropTable();
+    // await GoalReports.dropTable();
+    // await ExercisePlan.dropTable();
+    // await PlanIncludes.dropTable();
+    // await ContentTable.dropTable();
 
 
-    await FUserTable.dropTable();
-    await TrainerTable.dropTable();
+    // await FUserTable.dropTable();
+    // await TrainerTable.dropTable();
     return true;
   } catch (e) {
     console.log("Couldnt drop tables");

@@ -9,7 +9,10 @@ const dropTable = async () => {
       await connection.execute(`DROP TRIGGER explan_insert_trigger`);
     } catch (e) {}
     try {
+      await connection.execute(`ALTER TABLE ExercisePlan DROP CONSTRAINT userid`);
+      await connection.execute(`ALTER TABLE ExercisePlan DROP CONSTRAINT tid`);
       await connection.execute(`DROP TABLE ExercisePlan`);
+      console.log('ExercisePlan Table dropped.')
     } catch (e) {}
     return true;
   }).catch(() => {
@@ -58,8 +61,8 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   await insert("Exercise 1: Cardio", 1, 1);
-  await insert("Exercise 2: Pilates", 2, 2);
-  await insert("Exercise 3: Yoga", 3, 3);
+  await insert("Exercise 2: Pilates", 2, 1);
+  await insert("Exercise 3: Yoga", 3, 1);
   await insert("Exercise 4: HIIT", 4, 4);
   await insert("Exercise 5: Cycling", 5, 5);
   await insert("Exercise 6: Strength training", 6, 6);
@@ -105,7 +108,7 @@ async function fetch() {
 async function fetchUserPlans(userid) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
-      `SELECT epid, plantype FROM ExercisePlan WHERE userid=${userid}`
+      `SELECT epid FROM ExercisePlan WHERE userid=${userid}`
     );
     return result.rows;
   }).catch(() => {

@@ -4,10 +4,14 @@
  * @param {string} path
  * @returns json data send from backend or null if an error occurs
  */
-export const serverFetch = async (type, path) => {
+export const serverFetch = async (type, path, body=null) => {
   try {
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${path}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
       method: type,
+      body: JSON.stringify(body)
     }).catch((reason) => {
       console.warn(reason);
       return null;

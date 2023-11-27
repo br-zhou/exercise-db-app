@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { serverFetch } from "../../utils/api";
+import { serverPost } from "../../utils/api";
 import NutritionCard from "./NutritionCard";
-const NutritionPlan = () => { 
+const NutritionPlan = (token) => { 
+  let dummyData = [];
   const onLoad = async () => {
-    const dummyData = await serverFetch("GET", "nutrition-table");
+    dummyData = await serverPost("POST", "nutrition-table", token);
+    console.log(dummyData);
     setData(dummyData);
-    console.log(dummyData)
-  };
+    };
+
+  const [data, setData] = useState();
 
   useEffect(() => {
     onLoad();
+
   }, []);
 
-  const [data, setData] = useState([]);
+if (data === undefined) {
+  return <div>Still Loading ...</div>
+}
 
 return (
     <div>
-      {data.map(row => 
-        <NutritionCard key={row[0]} carbs={row[1]} fats={row[2]} protein={row[3]} calories={row[4]}/>)}
+        <NutritionCard key={data[0][0]} carbs={data[0][1]} fats={data[0][2]} protein={data[0][3]} calories={data[0][4]}/>
     </div>
 )
 }

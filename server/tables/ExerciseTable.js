@@ -10,6 +10,7 @@ const dropTable = async () => {
    } catch (e) {}
     try { 
     await connection.execute(`DROP TABLE Exercise`);
+    console.log('Exercise Table dropped.')
    } catch (e) {}
     return true;
   }).catch(() => {
