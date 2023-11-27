@@ -106,7 +106,7 @@ async function fetch() {
 
 async function fetchUserNutrition(userid) {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM Nutrition WHERE userid= 4")
+    const result = await connection.execute(`SELECT * FROM Nutrition WHERE userid= ${userid}`)
     return result.rows;
   })
 }
