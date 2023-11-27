@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import GoalCard from "../../components/GoalCard/GoalCard";
 import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
-import { serverPost, insert} from "../../utils/api";
+import { serverPost} from "../../utils/api";
 
 const HomePage = () => {
   const token = JSON.parse(localStorage.getItem("token") || "{}");
@@ -126,7 +126,7 @@ const HomePage = () => {
           }}
         >
           {/* Assuming ContentCard should be used here as well */}
-          <GoalCard key={row[0]} category={row[1]} date={row[2]} weight={row[3]}to={null} />
+          <GoalCard key={row[0]} gid={row[0]}category={row[1]} date={row[2]} weight={row[3]}to={null} />
         </div>
       ))}
     </div>
