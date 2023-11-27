@@ -10,7 +10,9 @@ const dropTable = async () => {
     try {
       await connection.execute(`DROP TRIGGER fuser_insert_trigger`);
    } catch (e) {} 
+    await connection.execute(`ALTER TABLE FUser DROP PRIMARY KEY`)
     await connection.execute(`DROP TABLE FUser`);
+    console.log('FUser Table dropped.')
     return true;
   }).catch(() => {
     return false;

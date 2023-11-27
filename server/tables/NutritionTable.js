@@ -10,7 +10,9 @@ const dropTable = async () => {
       await connection.execute(`DROP TRIGGER nutrition_insert_trigger`);
    } catch (e) {}
     try { 
+    await connection.execute(`ALTER TABLE Nutrition DROP CONSTRAINT userid`);
     await connection.execute(`DROP TABLE Nutrition`);
+    console.log('Nutrition Table dropped.')
    } catch (e) {}
     return true;
   }).catch(() => {

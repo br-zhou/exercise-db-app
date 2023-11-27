@@ -1,9 +1,10 @@
 const exercisePlanTable = require("../tables/ExercisePlanTable");
-
+const planIncludes = require("./../tables/PlanIncludes");
 const createRoutes = (router) => {
-  router.get("/exerciseplan-table", async (req, res) => {
-    const exContent = await exercisePlanTable.fetchUserPlans(req.body.userid);
-    res.json(exContent);
+  router.post("/exerciseplan-table", async (req, res) => {
+    const epid_list = await exercisePlanTable.fetchUserPlans(req.body.token.userid);
+    console.log(epid_list)
+    res.json(epid_list);
   });
 }
 

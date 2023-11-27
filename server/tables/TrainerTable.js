@@ -87,7 +87,6 @@ const loadDummyData = async () => {
 };
 
 async function insert(name, email, country, city, password="cucumber") {
-  const id = Date.now();
   return await withOracleDB(async (connection) => {
     
     const result = await connection.execute(

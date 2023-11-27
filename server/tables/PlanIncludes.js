@@ -4,6 +4,7 @@ const dropTable = async () => {
     return await withOracleDB(async (connection) => {
         try {
             await connection.execute(`DROP TABLE PlanIncludes`);
+            console.log('PlanIncludes Table dropped.')
             return true; 
         } catch(e) {}
     }).catch(() => {return false;});
@@ -60,6 +61,12 @@ const intializeTable = async () => {
       }).catch(() => {
           return [];
       });
+  }
+
+  async function fetchPlans(epid) {
+    return await withOracleDB(async (connection) => {
+
+    })
   }
   
   async function fetchKeys() {
