@@ -21,3 +21,25 @@ export const serverFetch = async (type, path) => {
   }
 
 };
+
+export const serverPost = async (type, path, body=null) => {
+  try {
+    console.log(body);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${path}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: type,
+      body: JSON.stringify(body)
+    }).catch((reason) => {
+      console.warn(reason);
+      return null;
+    });
+  
+    const data = await response.json();
+  
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
