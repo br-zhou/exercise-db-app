@@ -1,8 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import NavBtn from "../NavBtn/NavBtn";
+import { useEffect } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    } 
+  }, []);
 
   const logoutHandler = () => {
     console.log("logout");

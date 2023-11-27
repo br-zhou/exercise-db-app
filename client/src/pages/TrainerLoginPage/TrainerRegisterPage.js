@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import RegisterCard from "../../components/RegisterCard/RegisterCard";
 import { serverPost } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-const RegisterPage = () => {
+const TrainerRegisterPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,11 +27,11 @@ const RegisterPage = () => {
   return (
     <div>
       <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        REGISTER
+        TRAINER REGISTER
       </h1>
-      <RegisterCard registerHref="/login" handleSubmit={handleSubmit} />
+      <RegisterCard registerHref="/trainer-login" handleSubmit={handleSubmit} />
     </div>
   );
 };
 
-export default RegisterPage;
+export default TrainerRegisterPage;

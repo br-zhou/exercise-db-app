@@ -11,6 +11,8 @@ import PlansPage from "./pages/PlansPage/PlansPage";
 import TrainerViewPage from "./pages/TrainerPage/View/ViewPage";
 import NewPlanPage from "./pages/TrainerPage/View/NewPlanPage/NewPlanPage";
 import ProgressPage from "./pages/ProgressPage/ProgressPage";
+import TrainerLoginPage from "./pages/TrainerLoginPage/TrainerLoginPage";
+import TrainerRegisterPage from "./pages/TrainerLoginPage/TrainerRegisterPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,16 @@ const router = createBrowserRouter([
   {
     path: "trainer-dashboard",
     element: <TrainerPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-login",
+    element: <TrainerLoginPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-register",
+    element: <TrainerRegisterPage />,
     errorElement: <ErrorPage />,
   },
   {
