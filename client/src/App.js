@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       { path: "content", element: <ContentPage /> },
       { path: "notifications", element: <NotificationsPage /> },
       { path: "plans", element: <PlansPage /> },
+      { path: "progress", element: <ProgressPage />},
       { path: "progress", element: <ProgressPage />}
     ],
     errorElement: <ErrorPage />,

@@ -46,7 +46,18 @@ async function countDemotable() {
 
 async function initalizeAllTables() {
   try {
+     await FUserTable.intializeTable();
+     await FUserTable.loadDummyData();
+
+    await ExerciseTable.intializeTable();
+    await ExerciseTable.loadDummyData();
+
+    await NutritionTable.intializeTable();
+    await NutritionTable.loadDummyData();
     
+    await GoalsTable.intializeTable();
+    await GoalsTable.loadDummyData();
+
     await TrainerTable.intializeTable();
     await TrainerTable.loadDummyData();
     console.log("trainer Table added!");
