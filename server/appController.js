@@ -8,6 +8,7 @@ const createExercisePlanRoutes = require("./routes/ExercisePlan");
 const createContentRoutes = require("./routes/Content");
 const createloginAuthRoutes = require("./routes/LoginAuth");
 const createNotificationsRoutes = require("./routes/Notifications");
+const createGoalsRoutes = require("./routes/Goals");
 const router = express.Router();
 
 // !! CUSTOM ROUTES
@@ -17,6 +18,7 @@ createNutritionRoutes(router);
 createProgressRoutes(router);
 createExercisePlanRoutes(router);
 createNotificationsRoutes(router);
+createGoalsRoutes(router);
 
 createContentRoutes(router);
 

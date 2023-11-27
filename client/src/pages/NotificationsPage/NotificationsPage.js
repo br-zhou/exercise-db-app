@@ -3,8 +3,6 @@ import React, { useState , useEffect} from "react";
 import NotificationCard from "../../components/NotificationCard/NotificationCard";
 import { serverPost } from "../../utils/api";
 
-const isVisibleDefault = false;
-const timeoutDefault = 3000;
 
 const NotificationsPage = () => {
   const token = JSON.parse(localStorage.getItem("token")) || {};
@@ -42,7 +40,7 @@ const NotificationsPage = () => {
         return (
         
           <NotificationCard
-            key={card[0]} // Use rid as the key
+            key={card[0]} 
             title={card[2]}
             key1={card[1]}
           />

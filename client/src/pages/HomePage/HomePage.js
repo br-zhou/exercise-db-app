@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import GoalCard from "../../components/GoalCard/GoalCard";
 import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
-import { serverFetch } from "../../utils/api";
+import { serverPost, insert} from "../../utils/api";
 
 const HomePage = () => {
   const token = JSON.parse(localStorage.getItem("token") || "{}");
@@ -41,14 +41,16 @@ const HomePage = () => {
     }
   ]);
 
+  
   const onLoad = async () => {
-    const dummyData = await serverFetch("GET", "goals-table");
+    const dummyData = await serverPost("POST", "goals-table", token);
     if (dummyData){
      setData(dummyData);
     console.log(dummyData)
+    } else {
+      console.log("else");
     }
   };
-
 
 
   useEffect(() => {
@@ -59,10 +61,16 @@ const HomePage = () => {
 
 
 
-  const addGoal = (newGoal) => {
+  const addGoal = async (newGoal) => {
     // Check if the newGoal is already in the goals array
     if (!data.some((goal) => goal.gid === newGoal.gid)) {
-    //  setGoals([...goals, newGoal]);
+    const value = await serverPost("POST", "addGoal", {token, newGoal});
+
+    if (value.success){
+      setData((prevData) => [...prevData, newGoal]);
+      } else {
+        console.log("error in adding goal");
+      }
     }
   };
   const closeForm = () => {

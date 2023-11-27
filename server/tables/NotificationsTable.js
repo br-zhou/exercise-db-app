@@ -238,9 +238,6 @@ const loadDummyDataForUser = async (userid) => {
 };
 
 
-// Example usage:
-// await loadDummyDataForUser(1); // Replace 1 with the desired userid
-
 async function insert(userid, msg) {
   const id = Date.now();
   return await withOracleDB(async (connection) => {

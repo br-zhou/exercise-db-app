@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import NewPlanCard from "../../../../components/NewPlanCard/NewPlanCard";
+import { serverFetch } from "../../../../utils/api";
 
 const NewPlanPage = () => {
+  const [data, setData] = useState([]);
+
+  const onLoad = async () => {
+    const newData = await serverFetch("GET", "exercise-table");
+    if (newData) setData(newData);
+    console.log(newData);
+  };
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
   const handleSubmit = (event) => {
     console.log(event);
   };
