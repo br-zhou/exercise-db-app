@@ -105,7 +105,7 @@ async function fetch() {
 async function fetchUserPlans(userid) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
-      `SELECT epid, plantype FROM ExercisePlan WHERE userid=${userid}`
+      `SELECT epid FROM ExercisePlan WHERE userid=${userid}`
     );
     return result.rows;
   }).catch(() => {

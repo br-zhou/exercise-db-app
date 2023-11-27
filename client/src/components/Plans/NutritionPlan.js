@@ -2,17 +2,23 @@ import React, { useState, useEffect } from "react";
 import { serverPost } from "../../utils/api";
 import NutritionCard from "./NutritionCard";
 const NutritionPlan = (token) => { 
+  let dummyData = [];
   const onLoad = async () => {
-    const dummyData = await serverPost("POST", "nutrition-table", token);
+    dummyData = await serverPost("POST", "nutrition-table", token);
+    console.log(dummyData);
     setData(dummyData);
-    console.log(dummyData)
-  };
+    };
+
+  const [data, setData] = useState();
 
   useEffect(() => {
     onLoad();
+
   }, []);
 
-  const [data, setData] = useState([]);
+if (data === undefined) {
+  return <div>Still Loading ...</div>
+}
 
 return (
     <div>

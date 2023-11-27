@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { serverFetch } from "../../utils/api";
+import { serverPost } from "../../utils/api";
 import ExerciseCard from "./ExerciseCard";
 const ExercisePlan = (token) => {
     const onLoad = async () => {
