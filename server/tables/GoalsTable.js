@@ -63,7 +63,7 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   try {
-    await insert('Weight Loss', 100, '2023-dec-31', 1);
+    await insert('Weight Loss', 100, '2023-12-31', 1);
     await insert('Fitness', 45, '2023-1-21', 2);
     await insert('Weight Loss', 80, '2023-2-2', 3);
     await insert('Muscle Gain', 50, '2023-3-18', 4);
@@ -111,6 +111,14 @@ async function fetch() {
   });
 }
 
+async function fetchUserGoals(id) {
+  return await withOracleDB(async (connection) => {
+      const result = await connection.execute("SELECT * FROM Goals WHERE userid = :1", [id]);
+      return result.rows;
+  });
+}
+
+
 async function fetchKeys() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT (gid) FROM Goals");
@@ -124,8 +132,10 @@ module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
+  fetchUserGoals,
   fetchKeys,
   dropTable,
+  insert
 };
 
 
