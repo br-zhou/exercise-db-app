@@ -39,10 +39,15 @@ const ContentPage = () => {
 
   const onLoad = async () => {
     const dummyData = await serverFetch("GET", "content-table");
-     setData(dummyData);
-    console.log(dummyData)
-    // todo: get client data
+    if (dummyData){
+      setData(dummyData);
+     console.log(dummyData)
+     } else {
+       console.log("else");
+     }
   };
+
+
 
   useEffect(() => {
     onLoad();
