@@ -5,7 +5,6 @@ const ExercisePlan = (token) => {
   const onLoad = async() => {
     const result = await serverPost("POST", "exerciseplan-table", token);
         setData(result);
-        console.log(result)
     }
 
     const [data, setData] = useState();
@@ -21,8 +20,12 @@ const ExercisePlan = (token) => {
     return (
         <div>
         {data.map(row => {
-          <h3>Exercise Plan: {row[0][0]}</h3>
-            return <ExerciseCard key={row[0][1]} name={row[0][2]} />
+            return (
+            <div className="card-body max-w-xs mx-auto mt-2 p-4 bg-white rounded-lg shadow-lg border-0">
+              <h3 className="font-semibold  text-center mb-2">Exercise Plan {row[0][0]}</h3>
+              <ExerciseCard exercise={row} />
+              </div>
+            )
           })}
           </div>
     )

@@ -1,14 +1,14 @@
 import React from "react";
 
-const ExerciseCard = (exercise) => {
+const ExerciseCard = (props) => {
     return (
         <div>
-            <div className="max-w-sm mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
-        <div className="card-body">
-          <h6 className="text-sm text-gray-600 mb-2">{exercise.name}</h6>
-          
-        </div>
-      </div>
+          {props.exercise.map(row => {
+            console.log(row);
+            return (
+                <p className="text-s mb-2 text-gray-700">{row[2]}</p>
+            )
+          })}
         </div>
     )
 }
