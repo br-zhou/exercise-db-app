@@ -4,7 +4,7 @@ import FormGoalButton from "../../components/FormGoalButton/FormGoalButton";
 import { serverFetch } from "../../utils/api";
 
 const HomePage = () => {
-  const token = JSON.parse(localStorage.getItem("token")) || {};
+  const token = JSON.parse(localStorage.getItem("token") || "{}");
 
   console.log(token);
 
