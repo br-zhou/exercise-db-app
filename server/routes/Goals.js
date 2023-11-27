@@ -18,6 +18,16 @@ const createRoutes = (router) => {
         res.json({status: false});
 
     });
+
+    router.post("/deleteGoal", async (req, res) => {
+        if (!req) {
+            console.log("in goals.js be");
+        }
+        console.log(req.body.gid);
+        const result = goalsTable.deleteGoal(req.body.gid);
+        res.json({status: false});
+
+    });
 }
 
 module.exports = createRoutes;
