@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { serverFetch } from "../../utils/api";
+import { serverFetch, serverPost } from "../../utils/api";
 import ClientCard from "../../components/ClientCard/ClientCard";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const TrainerPage = () => {
   console.log("token", token);
 
   const onLoad = async () => {
-    const dummyData = await serverFetch("GET", "fuser-table");
+    const dummyData = await serverPost("POST", "get-clients", token);
     if (dummyData) {
       setData(dummyData);
       console.log(dummyData);
