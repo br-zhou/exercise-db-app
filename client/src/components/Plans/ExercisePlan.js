@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { serverFetch } from "../../utils/api";
 import ExerciseCard from "./ExerciseCard";
-const ExercisePlan = () => {
+const ExercisePlan = (token) => {
     const onLoad = async () => {
-        const dummyData = await serverFetch("GET", "exercise-table");
+        const dummyData = await serverPost("POST", "exerciseplan-table", token);
         setData(dummyData);
         console.log(dummyData)
       };
