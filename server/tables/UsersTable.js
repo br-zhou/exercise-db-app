@@ -27,8 +27,10 @@ const intializeTable = async () => {
             name VARCHAR(50),
             email VARCHAR(50),
             password VARCHAR(72),
+            tid INTEGER,
             PRIMARY KEY (userid),
-            CONSTRAINT email_unique UNIQUE (email)
+            CONSTRAINT email_unique UNIQUE (email),
+            FOREIGN KEY (tid) REFERENCES Trainer(tid) ON DELETE CASCADE
         )
     `);
 
@@ -76,6 +78,7 @@ const loadDummyData = async () => {
     await insert("Javier Castillo", "javier.castillo@gmail.com", "eazyPassword");
     await insert("Naomi Okafor", "naomi.okafor@outlook.com", "eazyPassword");
     await insert("Elijah Thompson", "elijah.thompson@gmail.com", "eazyPassword");
+    await insert("Test User", "test", "test");
     return true;
   } catch (e) {
     console.log(e);
@@ -88,8 +91,8 @@ async function insert(name, email, password) {
   // console.log(`Plain password ${password} hashes to: ${hashedPass}`);
   return await withOracleDB(async (connection) => {
       const result = await connection.execute(
-        `INSERT INTO FUser (name, email, password) VALUES (:name, :email, :password)`,
-        [name, email, password],
+        `INSERT INTO FUser (name, email, password, tid) VALUES (:name, :email, :password, :tid)`,
+        [name, email, password, 1],
         { autoCommit: true }
       );
       // console.log(true)
@@ -103,6 +106,16 @@ async function insert(name, email, password) {
 async function fetch() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT * FROM FUser");
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
+async function fetchUsersWithTrainer(tid) {
+  return await withOracleDB(async (connection) => {
+    // !! TODO
+    const result = await connection.execute(`SELECT * FROM FUser WHERE userid=${tid}`);
     return result.rows;
   }).catch(() => {
     return [];
@@ -145,4 +158,5 @@ module.exports = {
   fetchKeys,
   fetchPassword,
   dropTable,
+  fetchUsersWithTrainer
 };
