@@ -26,6 +26,7 @@ const intializeTable = async () => {
             tid INTEGER,
             name VARCHAR(50),
             email VARCHAR(50),
+            password VARCHAR(72),
             city VARCHAR(60),
             country VARCHAR(50),
             PRIMARY KEY (tid),
@@ -85,13 +86,13 @@ const loadDummyData = async () => {
   }
 };
 
-async function insert(name, email, country, city) {
+async function insert(name, email, country, city, password="cucumber") {
   const id = Date.now();
   return await withOracleDB(async (connection) => {
     
     const result = await connection.execute(
-      `INSERT INTO Trainer (name, email, country, city) VALUES (:name, :email, :country, :city)`,
-      [name, email, country, city],
+      `INSERT INTO Trainer (name, email, country, city, password) VALUES (:name, :email, :country, :city, :password)`,
+      [name, email, country, city, password],
       { autoCommit: true }
     );
 
