@@ -27,7 +27,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM FUser");
+    const result = await connection.execute("SELECT * FROM PaidUser1");
     return result.rows;
   }).catch(() => {
     return [];
@@ -55,7 +55,16 @@ async function initalizeAllTables() {
     await FUserTable.loadDummyData();
     console.log("fuser Table added!");
 
-    
+    await PaidUser2Table.intializeTable();
+    await PaidUser2Table.loadDummyData();
+    console.log("paiduser2 Table added!");
+
+    await PaidUser1Table.intializeTable();
+    const FUserKeys = await FUserTable.fetchKeys();
+    const Tids = await TrainerTable.fetchTids();
+    PaidUser1Table.loadDummyData(FUserKeys, Tids);
+    console.log("paiduser1 Table added!");
+
     await ExerciseTable.intializeTable();
     await ExerciseTable.loadDummyData();
     console.log("exercise Table added!");
@@ -71,10 +80,6 @@ async function initalizeAllTables() {
     // await AdTable.intializeTable();
     // await AdTable.loadDummyData();
     // console.log("ad Table added!");
-
-    // await PaidUser2Table.intializeTable();
-    // await PaidUser2Table.loadDummyData();
-    // console.log("paiduser2 Table added!");
 
     // await ContentTable.intializeTable();
     // await ContentTable.loadDummyData();
@@ -92,10 +97,6 @@ async function initalizeAllTables() {
     // await PlanIncludes.loadDummyData();
     // console.log("planincludes Table added!");
 
-    // await PaidUser1Table.intializeTable();
-    // const FUserKeys = await FUserTable.fetchKeys();
-    // PaidUser1Table.loadDummyData(FUserKeys);
-    // console.log("paiduser1 Table added!");
 
     await ProgressTable.intializeTable();
     await ProgressTable.loadDummyData();

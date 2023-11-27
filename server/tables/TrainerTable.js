@@ -58,27 +58,27 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   try {
-    await insert('NAME', 'EMAIL', 'COUNTRY', 'CITY');
+    await insert('Test Trainer', 'trainer', 'trainer', 'random city');
     await insert('Carlos Silva', 'carlos.silva@gmail.com', 'Brazil', 'BR-Rio de Janeiro');
     await insert('Yuki Tanaka', 'yuki.tanaka@yahoo.com', 'Japan', 'JP-Tokyo');
     await insert('Emma Smith', 'emma.smith@hotmail.com', 'Australia', 'AU-Sydney');
     await insert('Kgosi Ndlovu', 'kgosi.ndlovu@aol.com', 'South Africa', 'ZA-Johannesburg');
-    await insert('Aarav Patel', 'aarav.patel@outlook.com', 'India', 'IN-New Delhi');
-    await insert('Juan Garcia', 'juan.garcia@icloud.com', 'Mexico', 'MX-Mexico City');
-    await insert('Ivan Petrov', 'ivan.petrov@protonmail.com', 'Russia', 'RU-Moscow');
-    await insert('Ahmed Al-Abdul', 'ahmed.al-abdul@zoho.com', 'Saudi Arabia', 'SA-Riyadh');
-    await insert('Mateo Fernandez', 'mateo.fernandez@yandex.com', 'Argentina', 'AR-Buenos Aires');
-    await insert('Wei Zhang', 'wei.zhang@mail.com', 'China', 'CN-Beijing');
-    await insert('Luca Rossi', 'luca.rossi@inbox.com', 'Italy', 'IT-Rome');
-    await insert('Chinedu Okoro', 'chinedu.okoro@fastmail.com', 'Nigeria', 'NG-Lagos');
-    await insert('Eriksson Andersson', 'eriksson.andersson@protonmail.com', 'Sweden', 'SE-Stockholm');
-    await insert('Minho Kim', 'minho.kim@tutanota.com', 'South Korea', 'KR-Seoul');
-    await insert('Pierre Dubois', 'pierre.dubois@rediffmail.com', 'France', 'FR-Paris');
-    await insert('Ethan Smith', 'ethan.smith@yandex.com', 'Canada', 'CA-Toronto');
-    await insert('Amir Mahmoud', 'amir.mahmoud@icloud.com', 'Egypt', 'EG-Cairo');
-    await insert('Emir Yılmaz', 'emir.yilmaz@outlook.com', 'Turkey', 'TR-Istanbul');
-    await insert('Somsak Wong', 'somsak.wong@mail.com', 'Thailand', 'TH-Bangkok');
-    await insert('Khalid Al-Mansoori', 'khalid.al-mansoori@yahoo.com', 'United Arab Emirates', 'AE-Dubai');
+    // await insert('Aarav Patel', 'aarav.patel@outlook.com', 'India', 'IN-New Delhi');
+    // await insert('Juan Garcia', 'juan.garcia@icloud.com', 'Mexico', 'MX-Mexico City');
+    // await insert('Ivan Petrov', 'ivan.petrov@protonmail.com', 'Russia', 'RU-Moscow');
+    // await insert('Ahmed Al-Abdul', 'ahmed.al-abdul@zoho.com', 'Saudi Arabia', 'SA-Riyadh');
+    // await insert('Mateo Fernandez', 'mateo.fernandez@yandex.com', 'Argentina', 'AR-Buenos Aires');
+    // await insert('Wei Zhang', 'wei.zhang@mail.com', 'China', 'CN-Beijing');
+    // await insert('Luca Rossi', 'luca.rossi@inbox.com', 'Italy', 'IT-Rome');
+    // await insert('Chinedu Okoro', 'chinedu.okoro@fastmail.com', 'Nigeria', 'NG-Lagos');
+    // await insert('Eriksson Andersson', 'eriksson.andersson@protonmail.com', 'Sweden', 'SE-Stockholm');
+    // await insert('Minho Kim', 'minho.kim@tutanota.com', 'South Korea', 'KR-Seoul');
+    // await insert('Pierre Dubois', 'pierre.dubois@rediffmail.com', 'France', 'FR-Paris');
+    // await insert('Ethan Smith', 'ethan.smith@yandex.com', 'Canada', 'CA-Toronto');
+    // await insert('Amir Mahmoud', 'amir.mahmoud@icloud.com', 'Egypt', 'EG-Cairo');
+    // await insert('Emir Yılmaz', 'emir.yilmaz@outlook.com', 'Turkey', 'TR-Istanbul');
+    // await insert('Somsak Wong', 'somsak.wong@mail.com', 'Thailand', 'TH-Bangkok');
+    // await insert('Khalid Al-Mansoori', 'khalid.al-mansoori@yahoo.com', 'United Arab Emirates', 'AE-Dubai');
     return true;
   } catch (e) {
     console.log(e);
@@ -111,7 +111,7 @@ async function fetch() {
   });
 }
 
-async function fetchKeys() {
+async function fetchTids() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT (tid) FROM Trainer");
     return result.rows;
@@ -124,6 +124,6 @@ module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
-  fetchKeys,
+  fetchTids,
   dropTable,
 };

@@ -18,9 +18,11 @@ const intializeTable = async () => {
             userid INTEGER,
             postalCode VARCHAR(10),
             country VARCHAR(50),
+            tid INTEGER,
             PRIMARY KEY (userid, postalCode, country),
             FOREIGN KEY (postalCode, country) REFERENCES PaidUser2(postalCode, country),
-            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE
+            FOREIGN KEY (userid) REFERENCES FUser(userid) ON DELETE CASCADE,
+            FOREIGN KEY (tid) REFERENCES Trainer(tid) ON DELETE CASCADE
         )
     `);
     return true;
@@ -29,7 +31,7 @@ const intializeTable = async () => {
   });
 };
 
-const loadDummyData = async (userids) => {
+const loadDummyData = async (userids, tids) => {
   const DUMMY_DATA = [
     ["20040-010", "Brazil"],
     ["100-0001", "Japan"],
@@ -56,19 +58,21 @@ const loadDummyData = async (userids) => {
   
   for (let i = 0; i < userids.length; i++) {
     const userid = userids[i][0];
+    const tid = tids[i % tids.length][0];
     await insert(
       userid,
       DUMMY_DATA[i % DATA_SIZE][0],
-      DUMMY_DATA[i % DATA_SIZE][1]
+      DUMMY_DATA[i % DATA_SIZE][1],
+      tid
     );
   }
 };
 
-async function insert(userId, postalCode, country) {
+async function insert(userId, postalCode, country, tid=1) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
-      `INSERT INTO PaidUser1 (userid, postalCode, country) VALUES (:userId, :postalCode, :country)`,
-      [userId, postalCode, country],
+      `INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (:userId, :postalCode, :country, :tid)`,
+      [userId, postalCode, country, tid],
       { autoCommit: true }
     );
 
