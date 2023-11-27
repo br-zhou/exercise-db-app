@@ -41,18 +41,48 @@ const HomePage = () => {
     }
   ]);
 
+  const onLoad = async () => {
+    const dummyData = await serverFetch("GET", "goals-table");
+    if (dummyData){
+     setData(dummyData);
+    console.log(dummyData)
+    }
+  };
+
+
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  const [data, setData] = useState([]);
+
+
+
   const addGoal = (newGoal) => {
     // Check if the newGoal is already in the goals array
     if (!data.some((goal) => goal.gid === newGoal.gid)) {
-      // Update the backend
-      const success = await insert(newGoal.category, newGoal.weight, newGoal.din, 1); // Assuming userid is 1 for now
-
-      // If the backend update is successful, update the frontend
-      if (success) {
-        setData((prevData) => [...prevData, newGoal]);
-      }
+    //  setGoals([...goals, newGoal]);
     }
   };
+  const closeForm = () => {
+    // Define your logic for closing the form here
+    console.log("Closing form");
+  };
+
+
+  // const addGoal = async (newGoal) => {
+  //   // Check if the newGoal is already in the goals array
+  //   if (!data.some((goal) => goal.gid === newGoal.gid)) {
+  //     // Update the backend
+  //     const success = await insert(newGoal.category, newGoal.weight, newGoal.din, 1); // Assuming userid is 1 for now
+
+  //     // If the backend update is successful, update the frontend
+  //     if (success) {
+  //       setData((prevData) => [...prevData, newGoal]);
+  //     }
+  //   }
+  // };
 
   return (
     <div>
