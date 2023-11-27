@@ -1,0 +1,10 @@
+const contentTable = require("./../tables/ContentTable");
+
+const createRoutes = (router) => {
+  router.get("/content-table", async (req, res) => {
+    const conContent = await contentTable.fetch();
+    res.json(conContent);
+  });
+}
+
+module.exports = createRoutes;
