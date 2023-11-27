@@ -118,6 +118,20 @@ async function fetchUser(email) {
   });
 }
 
+async function fetchUsersWithTrainer(tid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`
+    SELECT f.userid, f.name, f.email FROM FUser f
+    INNER JOIN PaidUser1 p ON f.userid = p.userid
+    INNER JOIN Trainer t ON t.tid = p.tid AND t.tid = ${tid}
+    `);
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
+
 async function fetchPassword(email) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(`SELECT password FROM FUser WHERE email = '${email}'`,);
@@ -145,4 +159,5 @@ module.exports = {
   fetchKeys,
   fetchPassword,
   dropTable,
+  fetchUsersWithTrainer
 };
