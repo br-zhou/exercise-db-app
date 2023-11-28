@@ -27,11 +27,8 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-<<<<<<< HEAD
     const result = await connection.execute("SELECT * FROM Exercise");
-=======
-    const result = await connection.execute("SELECT * FROM Trainer");
->>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
+
     return result.rows;
   }).catch(() => {
     return [];
@@ -109,6 +106,9 @@ async function initalizeAllTables() {
     console.log("content Table added!");
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 03434d9314fb52f91fa627566aa972fdcf2256c2
     await NotificationsTable.intializeTable();
     await NotificationsTable.loadDummyData();
     console.log("notifications Table added!");

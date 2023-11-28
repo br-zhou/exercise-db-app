@@ -162,8 +162,6 @@ async function removeUsingId(epid) {
 }
 
 async function getPlanName(userid) {
-<<<<<<< HEAD
-=======
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
       `SELECT epid, plantype FROM ExercisePlan WHERE userid=${userid}`
@@ -194,7 +192,6 @@ async function fetchKeys() {
 }
 
 async function fetchUserPlans(userid) {
->>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
       `SELECT epid, plantype FROM ExercisePlan WHERE userid=${userid}`
@@ -205,7 +202,6 @@ async function fetchUserPlans(userid) {
   });
 }
 
-<<<<<<< HEAD
 async function getPlanName(epid) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(
@@ -236,8 +232,6 @@ async function fetchUserPlans(userid) {
   });
 }
 
-=======
->>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
 module.exports = {
   intializeTable,
   dropTable,

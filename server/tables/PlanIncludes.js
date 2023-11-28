@@ -64,7 +64,6 @@ const intializeTable = async () => {
   }
 
   async function clearEpid(epid) {
-<<<<<<< HEAD
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM PlanIncludes WHERE epid=:epid`,
@@ -88,8 +87,29 @@ const intializeTable = async () => {
 }
 
   async function fetchExerciseForPlan(epid) {
-=======
->>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `DELETE FROM PlanIncludes WHERE epid=:epid`,
+            [epid],
+            { autoCommit: true }
+        );
+
+        return true;
+    }).catch(() => {
+        return false;
+    });
+}
+
+  async function fetchWithEpid(epid) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(`SELECT (eid) FROM PlanIncludes WHERE epid=${epid}`);
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
+  async function fetchExerciseForPlan(epid) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM PlanIncludes WHERE epid=:epid`,
