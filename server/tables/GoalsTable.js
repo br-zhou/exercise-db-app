@@ -128,6 +128,16 @@ async function fetchKeys() {
   });
 }
 
+async function deleteGoal(gidInput) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute("DELETE FROM Goals WHERE gid = :18", [gidInput]);
+
+    return result.rows;
+  }).catch(() => {
+    return false;
+  });
+}
+
 module.exports = {
   intializeTable,
   loadDummyData,
@@ -135,7 +145,8 @@ module.exports = {
   fetchUserGoals,
   fetchKeys,
   dropTable,
-  insert
+  insert,
+  deleteGoal
 };
 
 
