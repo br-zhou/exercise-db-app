@@ -13,16 +13,9 @@ const TrainerLoginPage = () => {
   }, []);
 
   const handleSubmit = async (event) => {
-    let result = await serverPost('POST', 'login-auth',event);
+    console.log(event);
+    let result = await serverPost('POST', 'trainer-login',event);
     console.log(result);
-
-    // !! REMOVE NEXT LINE OF CODE BEFORE PRODUCTION
-    
-    result = {
-      tid: 1,
-      name: "Carlos Silva",
-      email: "carlos.silva@gmail.com"
-  }
 
     if (result) {
       localStorage.setItem("trainer-token", JSON.stringify(result));

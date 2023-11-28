@@ -6,7 +6,11 @@ import ExercisePlanCard from "../../../components/ExercisePlanCard/ExercisePlanC
 
 const TrainerViewPage = () => {
   const params = useParams();
+  console.log(localStorage.getItem("trainer-token"));
+  const token = JSON.parse(localStorage.getItem("trainer-token") || "{}");
   const id = params.clientId;
+
+  console.log(token);
   const [planData, setPlanData] = useState([]);
   const [userData, setUserData] = useState([]);
 
@@ -57,7 +61,7 @@ const TrainerViewPage = () => {
         Client Exercise Plans:
       </h1>
       <div className="flex justify-center items-center">
-        <Link to="./new-plan">
+        <Link to={`./new-plan/`}>
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 mt-8 px-4 rounded inline-block text-center mx-auto">
             NEW EXERCISE
           </button>

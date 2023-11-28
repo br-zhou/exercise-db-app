@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import NewPlanCard from "../../../../components/NewPlanCard/NewPlanCard";
 import { serverFetch, serverPost } from "../../../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import EditPlanCard from "../../../../components/EditPlanCard/EditPlanCard";
 
-const NewPlanPage = () => {
+const EditPlanPage = () => {
   const params = useParams();
   const token = JSON.parse(localStorage.getItem("trainer-token") || "{}");
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
-
+  const [editData, setEditData] = useState({});
   const onLoad = async () => {
     const newData = await serverFetch("GET", "exercise-table");
     if (newData) setData(newData);
-    console.log(newData);
+    const newEditData = await serverPost("POST", "get-exercise-plan-info", {epid: params.epid});
+    if (newEditData) setEditData(newEditData);
   };
 
   useEffect(() => {
@@ -23,18 +25,19 @@ const NewPlanPage = () => {
     data.userid = params.clientId;
     data.tid = token.tid;
 
-    const newData = await serverPost("POST", "create-exercise-plan", data);
-
+    console.log(data);
+    const newData = await serverPost("POST", "edit-exercise-plan", data);
+    navigate("./../..");
   };
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        New Plan
+        Edit Plan
       </h1>
-      <NewPlanCard data={data} handleSubmit={handleSubmit} />
+      {editData.eids && <EditPlanCard data={data} editData={editData} handleSubmit={handleSubmit} />}
     </div>
   );
 };
 
-export default NewPlanPage;
+export default EditPlanPage;

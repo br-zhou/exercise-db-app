@@ -28,7 +28,6 @@ export const serverFetch = async (type, path, body=null) => {
 
 export const serverPost = async (type, path, body=null) => {
   try {
-    console.log(body);
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${path}`, {
       headers: {
         "Content-Type": "application/json",

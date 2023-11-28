@@ -13,6 +13,7 @@ import NewPlanPage from "./pages/TrainerPage/View/NewPlanPage/NewPlanPage";
 import ProgressPage from "./pages/ProgressPage/ProgressPage";
 import TrainerLoginPage from "./pages/TrainerLoginPage/TrainerLoginPage";
 import TrainerRegisterPage from "./pages/TrainerLoginPage/TrainerRegisterPage";
+import EditPlanPage from "./pages/TrainerPage/View/EditPlanPage/EditPlanPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,8 +51,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "trainer-dashboard/view/:clientId/new-plan",
+    path: "trainer-dashboard/view/:clientId/new-plan/",
     element: <NewPlanPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "trainer-dashboard/view/:clientId/edit-plan/:epid",
+    element: <EditPlanPage />,
     errorElement: <ErrorPage />,
   },
 ]);

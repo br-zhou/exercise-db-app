@@ -1,12 +1,16 @@
 import React, { createRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ExerciseCheckBox from "../ExerciseCheckBox/ExerciseCheckBox";
 
-const NewPlanCard = (props) => {
+const EditPlanCard = (props) => {
   const categoryRef = createRef();
   const [errorText, setErrorText] = useState("");
-  const navigate = useNavigate();
   const exerciseMap = {};
+  const params = useParams();
+
+  console.log(props.editData.eids);
+
+  for (const eid of props.editData.eids) exerciseMap[eid] = true;
 
   const exerciseListCB = (id, value) => {
     if (value) {
@@ -30,10 +34,10 @@ const NewPlanCard = (props) => {
     }
 
     props.handleSubmit({
+      epid: params.epid,
       category: categoryRef.current.value,
       eids: Object.keys(exerciseMap),
     });
-    navigate("./..");
   };
 
   return (
@@ -43,6 +47,7 @@ const NewPlanCard = (props) => {
           type="text"
           placeholder="category"
           ref={categoryRef}
+          defaultValue={props.editData.category}
           className="focus:outline-none bg-gray-200 w-full border-0 m-2 p-2 box-border text-sm"
         />
         <h5>Select Exercises:</h5>
@@ -51,6 +56,7 @@ const NewPlanCard = (props) => {
             data={element}
             key={element[0]}
             cb={exerciseListCB}
+            defaultValue={exerciseMap[element[0]] || false}
           />
         ))}
         {errorText}
@@ -58,10 +64,10 @@ const NewPlanCard = (props) => {
           onClick={handleSubmit}
           className="font-roboto uppercase focus:outline-none bg-green-500 w-full border-0  m-2 p-2 text-white text-sm cursor-pointer"
         >
-          CREATE
+          EDIT
         </button>
         Click{" "}
-        <Link to="./.." className="text-green-500">
+        <Link to="./../.." className="text-green-500">
           Here
         </Link>{" "}
         To Cancel!
@@ -70,4 +76,4 @@ const NewPlanCard = (props) => {
   );
 };
 
-export default NewPlanCard;
+export default EditPlanCard;
