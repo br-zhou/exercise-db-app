@@ -13,6 +13,7 @@ const createRoutes = (router) => {
 
   router.get("/exercise-table", async (req, res) => {
     const tableContent = await exerciseTable.fetch();
+    console.log(tableContent);
     res.json(tableContent);
   });
 
@@ -91,6 +92,11 @@ const createRoutes = (router) => {
 
     const selectedExercises = await PlanIncludesTable.fetchWithEpid(args.epid);
 
+<<<<<<< HEAD
+    console.log(args.epid, ": ", selectedExercises);
+
+=======
+>>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
     const planName = await exercisePlanTable.getPlanName(args.epid);
 
     res.json({

@@ -9,6 +9,7 @@ const createContentRoutes = require("./routes/Content");
 const createloginAuthRoutes = require("./routes/LoginAuth");
 const createNotificationsRoutes = require("./routes/Notifications");
 const createGoalsRoutes = require("./routes/Goals");
+const createAdRoutes = require("./routes/Ad")
 const router = express.Router();
 
 // !! CUSTOM ROUTES
@@ -19,7 +20,7 @@ createProgressRoutes(router);
 createExercisePlanRoutes(router);
 createNotificationsRoutes(router);
 createGoalsRoutes(router);
-
+createAdRoutes(router);
 createContentRoutes(router);
 
 createloginAuthRoutes(router);

@@ -27,7 +27,11 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
+<<<<<<< HEAD
+    const result = await connection.execute("SELECT * FROM Exercise");
+=======
     const result = await connection.execute("SELECT * FROM Trainer");
+>>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
     return result.rows;
   }).catch(() => {
     return [];
@@ -46,24 +50,20 @@ async function countDemotable() {
 
 async function initalizeAllTables() {
   try {
-
-    // await ExerciseTable.intializeTable();
-    // await ExerciseTable.loadDummyData();
-
     // await NutritionTable.intializeTable();
     // await NutritionTable.loadDummyData();
 
-    // await TrainerTable.intializeTable();
-    // await TrainerTable.loadDummyData();
-    // console.log("trainer Table added!");
+    await TrainerTable.intializeTable();
+    await TrainerTable.loadDummyData();
+    console.log("trainer Table added!");
 
     await FUserTable.intializeTable();
     await FUserTable.loadDummyData();
     console.log("fuser Table added!");
 
-    // await PaidUser2Table.intializeTable();
-    // await PaidUser2Table.loadDummyData();
-    // console.log("paiduser2 Table added!");
+    await PaidUser2Table.intializeTable();
+    await PaidUser2Table.loadDummyData();
+    console.log("paiduser2 Table added!");
 
     await PaidUser1Table.intializeTable();
     const FUserKeys = await FUserTable.fetchKeys();
@@ -73,6 +73,17 @@ async function initalizeAllTables() {
 
     console.log("taking 5 second break (so server doesn't overload)")
     await new Promise(resolve => setTimeout(resolve, 5000));
+<<<<<<< HEAD
+=======
+
+    await ExerciseTable.intializeTable();
+    await ExerciseTable.loadDummyData();
+    console.log("exercise Table added!");
+    
+    await ExercisePlan.intializeTable();
+    await ExercisePlan.loadDummyData(Tids.length);
+    console.log("experciseplan Table added!");
+>>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
 
     await ExerciseTable.intializeTable();
     await ExerciseTable.loadDummyData();
@@ -82,25 +93,28 @@ async function initalizeAllTables() {
     await ExercisePlan.loadDummyData(Tids.length);
     console.log("experciseplan Table added!");
 
-    // await NutritionTable.intializeTable();
-    // await NutritionTable.loadDummyData();
+    await NutritionTable.intializeTable();
+    await NutritionTable.loadDummyData();
     
-    // await GoalsTable.intializeTable();
-    // await GoalsTable.loadDummyData();
-    // console.log("goals Table added!");
+    await GoalsTable.intializeTable();
+    await GoalsTable.loadDummyData();
+    console.log("goals Table added!");
 
-    // await AdTable.intializeTable();
-    // await AdTable.loadDummyData();
-    // console.log("ad Table added!");
+    await AdTable.intializeTable();
+    await AdTable.loadDummyData();
+    console.log("ad Table added!");
 
-    // await ContentTable.intializeTable();
-    // await ContentTable.loadDummyData();
-    // console.log("content Table added!");
+    await ContentTable.intializeTable();
+    await ContentTable.loadDummyData();
+    console.log("content Table added!");
 
-    // await NotificationsTable.intializeTable();
-    // await NotificationsTable.loadDummyData();
-    // console.log("notifications Table added!");
+<<<<<<< HEAD
+    await NotificationsTable.intializeTable();
+    await NotificationsTable.loadDummyData();
+    console.log("notifications Table added!");
 
+=======
+>>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
     await PlanIncludes.intializeTable();
     await PlanIncludes.loadDummyData();
     console.log("planincludes Table added!");
@@ -110,9 +124,9 @@ async function initalizeAllTables() {
     // await ProgressTable.loadDummyData();
     // console.log("progress Table added!");
 
-    // await GoalReports.intializeTable();
-    // await GoalReports.loadDummyData();
-    // console.log("goalsreports Table added!");
+    await GoalReports.intializeTable();
+    await GoalReports.loadDummyData();
+    console.log("goalsreports Table added!");
     
     return true;
   } catch (e) {

@@ -50,6 +50,8 @@ const intializeTable = async () => {
   });
 };
 
+
+
 const loadDummyData = async () => {
   try {
     await insert("Google", "https://www.google.com");
