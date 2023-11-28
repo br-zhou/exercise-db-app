@@ -94,7 +94,7 @@ async function fetch() {
 
 async function fetchUserProgress(userid) {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM ProgressReport WHERE userid = 1");
+    const result = await connection.execute(`SELECT * FROM ProgressReport WHERE userid = ${userid}`);
     return result.rows;
   });
 }

@@ -1,19 +1,24 @@
 import React, {useState, useEffect} from "react";
-import { serverFetch } from "../../utils/api";
+import { serverPost } from "../../utils/api";
 import ProgressReportCard from "../../components/Progress/ProgressReportCard";
 
-const ProgressPage = (progress) => {
-    const onLoad = async () => {
-        const dummyData = await serverFetch("GET", "progress-table");
-        setData(dummyData);
-        console.log(dummyData)
-      };
+const ProgressPage = () => {
+  const token = JSON.parse(localStorage.getItem("token")) || {};
+  const onLoad = async () => {
+    const dummyData = await serverPost("POST", "progress-table", token);
+    setData(dummyData);
+    console.log(dummyData)
+  };
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    onLoad();
+  }, []);
     
-      useEffect(() => {
-        onLoad();
-      }, []);
-    
-      const [data, setData] = useState([]);
+
+    if (data === undefined) {
+      return <div>Still Loading...</div>
+    }
+
     return (
         <div>
       {data.map(row => 
