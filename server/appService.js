@@ -70,17 +70,6 @@ async function initalizeAllTables() {
 
     console.log("taking 5 second break (so server doesn't overload)")
     await new Promise(resolve => setTimeout(resolve, 5000));
-<<<<<<< HEAD
-=======
-
-    await ExerciseTable.intializeTable();
-    await ExerciseTable.loadDummyData();
-    console.log("exercise Table added!");
-    
-    await ExercisePlan.intializeTable();
-    await ExercisePlan.loadDummyData(Tids.length);
-    console.log("experciseplan Table added!");
->>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
 
     await ExerciseTable.intializeTable();
     await ExerciseTable.loadDummyData();
@@ -105,16 +94,10 @@ async function initalizeAllTables() {
     await ContentTable.loadDummyData();
     console.log("content Table added!");
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 03434d9314fb52f91fa627566aa972fdcf2256c2
     await NotificationsTable.intializeTable();
     await NotificationsTable.loadDummyData();
     console.log("notifications Table added!");
 
-=======
->>>>>>> 4e03e7bbfe0be3b4ed8d64f63b0ed79490873cb6
     await PlanIncludes.intializeTable();
     await PlanIncludes.loadDummyData();
     console.log("planincludes Table added!");
