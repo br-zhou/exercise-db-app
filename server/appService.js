@@ -46,10 +46,16 @@ async function countDemotable() {
 
 async function initalizeAllTables() {
   try {
-    
-    await TrainerTable.intializeTable();
-    await TrainerTable.loadDummyData();
-    console.log("trainer Table added!");
+
+    // await ExerciseTable.intializeTable();
+    // await ExerciseTable.loadDummyData();
+
+    // await NutritionTable.intializeTable();
+    // await NutritionTable.loadDummyData();
+
+    // await TrainerTable.intializeTable();
+    // await TrainerTable.loadDummyData();
+    // console.log("trainer Table added!");
 
     await FUserTable.intializeTable();
     await FUserTable.loadDummyData();
@@ -69,8 +75,8 @@ async function initalizeAllTables() {
     // await ExerciseTable.loadDummyData();
     // console.log("exercise Table added!");
 
-    await NutritionTable.intializeTable();
-    await NutritionTable.loadDummyData();
+    // await NutritionTable.intializeTable();
+    // await NutritionTable.loadDummyData();
     
     // await GoalsTable.intializeTable();
     // await GoalsTable.loadDummyData();
@@ -80,13 +86,13 @@ async function initalizeAllTables() {
     // await AdTable.loadDummyData();
     // console.log("ad Table added!");
 
-    await ContentTable.intializeTable();
-    await ContentTable.loadDummyData();
-    console.log("content Table added!");
+    // await ContentTable.intializeTable();
+    // await ContentTable.loadDummyData();
+    // console.log("content Table added!");
 
-    await NotificationsTable.intializeTable();
-    await NotificationsTable.loadDummyData();
-    console.log("notifications Table added!");
+    // await NotificationsTable.intializeTable();
+    // await NotificationsTable.loadDummyData();
+    // console.log("notifications Table added!");
 
     // await ExercisePlan.intializeTable();
     // await ExercisePlan.loadDummyData();
@@ -97,9 +103,9 @@ async function initalizeAllTables() {
     // console.log("planincludes Table added!");
 
 
-    // await ProgressTable.intializeTable();
-    // await ProgressTable.loadDummyData();
-    // console.log("progress Table added!");
+    await ProgressTable.intializeTable();
+    await ProgressTable.loadDummyData();
+    console.log("progress Table added!");
 
     // await GoalReports.intializeTable();
     // await GoalReports.loadDummyData();

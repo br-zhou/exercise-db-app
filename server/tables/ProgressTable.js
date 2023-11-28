@@ -92,6 +92,13 @@ async function fetch() {
   });
 }
 
+async function fetchUserProgress(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`SELECT * FROM ProgressReport WHERE userid = ${userid}`);
+    return result.rows;
+  });
+}
+
 async function fetchKeys() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT (pid) FROM ProgressReport");
@@ -105,6 +112,7 @@ module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
+  fetchUserProgress,
   fetchKeys,
   dropTable,
 };
