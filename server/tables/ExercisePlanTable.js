@@ -59,27 +59,56 @@ const intializeTable = async () => {
   });
 };
 
-const loadDummyData = async () => {
-  await insert("Exercise 1: Cardio", 1, 1);
-  await insert("Exercise 2: Pilates", 2, 1);
-  await insert("Exercise 3: Yoga", 3, 1);
-  await insert("Exercise 4: HIIT", 4, 4);
-  await insert("Exercise 5: Cycling", 5, 5);
-  await insert("Exercise 6: Strength training", 6, 6);
-  await insert("Exercise 7: Swimming", 7, 7);
-  await insert("Exercise 8: CrossFit", 8, 8);
-  await insert("Exercise 9: Yoga", 9, 9);
-  await insert("Exercise 10: Cardio", 10, 10);
-  await insert("Exercise 11: Pilates", 11, 11);
-  await insert("Exercise 12: Strength training", 12, 12);
-  await insert("Exercise 13: HIIT", 13, 13);
-  await insert("Exercise 14: CrossFit", 14, 14);
-  await insert("Exercise 15: Yoga", 15, 15);
-  await insert("Exercise 16: Swimming", 16, 16);
-  await insert("Exercise 17: Cardio", 17, 17);
-  await insert("Exercise 18: Cycling", 18, 18);
-  await insert("Exercise 19: Pilates", 19, 19);
-  await insert("Exercise 20: Strength training", 20, 20);
+const loadDummyData = async (maxTrainers) => {
+  await insert("Exercise Plan 1: Cardio", (1 % maxTrainers) + 1, 1);
+  await insert("Exercise Plan 2: Pilates", (2 % maxTrainers) + 1, 2);
+  await insert("Exercise Plan 3: Yoga", (3 % maxTrainers) + 1, 3);
+  await insert("Exercise Plan 4: HIIT", (4 % maxTrainers) + 1, 4);
+  await insert("Exercise Plan 5: Cycling", (5 % maxTrainers) + 1, 5);
+  await insert("Exercise Plan 6: Strength training", (6 % maxTrainers) + 1, 6);
+  await insert("Exercise Plan 7: Swimming", (7 % maxTrainers) + 1, 7);
+  await insert("Exercise Plan 8: CrossFit", (8 % maxTrainers) + 1, 8);
+  await insert("Exercise Plan 9: Yoga", (9 % maxTrainers) + 1, 9);
+  await insert("Exercise Plan 10: Cardio", (10 % maxTrainers) + 1, 10);
+  await insert("Exercise Plan 11: Pilates", (11 % maxTrainers) + 1, 11);
+  await insert(
+    "Exercise Plan 12: Strength training",
+    (12 % maxTrainers) + 1,
+    12
+  );
+  await insert("Exercise Plan 13: HIIT", (13 % maxTrainers) + 1, 13);
+  await insert("Exercise Plan 14: CrossFit", (14 % maxTrainers) + 1, 14);
+  await insert("Exercise Plan 15: Yoga", (15 % maxTrainers) + 1, 15);
+  await insert("Exercise Plan 16: Swimming", (16 % maxTrainers) + 1, 16);
+  await insert("Exercise Plan 17: Cardio", (17 % maxTrainers) + 1, 17);
+  await insert("Exercise Plan 18: Cycling", (18 % maxTrainers) + 1, 18);
+  await insert("Exercise Plan 19: Pilates", (19 % maxTrainers) + 1, 19);
+  await insert(
+    "Exercise Plan 20: Strength training",
+    (20 % maxTrainers) + 1,
+    20
+  );
+
+  await insert("Cardio", 2, 2);
+  await insert("Pilates", 3, 3);
+  await insert("Yoga", 4, 4);
+  await insert("HIIT", 5, 5);
+  await insert("Cycling", 1, 1);
+  await insert("Strength training", 2, 2);
+  await insert("Swimming", 3, 3);
+  await insert("CrossFit", 4, 4);
+  await insert("Yoga", 5, 5);
+  await insert("Cardio (Extreme Edition)", 1, 1);
+  await insert("Pilates", 2, 2);
+  await insert("Strength training", 3, 3);
+  await insert("HIIT", 4, 4);
+  await insert("CrossFit", 5, 5);
+  await insert("Yoga", 1, 1);
+  await insert("Swimming", 2, 2);
+  await insert("Cardio", 3, 3);
+  await insert("Cycling", 4, 4);
+  await insert("Pilates", 5, 5);
+  await insert("Strength training", 1, 1);
 };
 
 async function insert(plantype, tid, userid) {
@@ -96,9 +125,66 @@ async function insert(plantype, tid, userid) {
   });
 }
 
+async function updatePlanType(epid, newPlanType) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `UPDATE ExercisePlan SET plantype = :plantype WHERE epid = :epid`,
+      [newPlanType, epid],
+      { autoCommit: true }
+    );
+
+    return true;
+  }).catch(() => {
+    return false;
+  });
+}
+
 async function fetch() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT * FROM ExercisePlan");
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
+async function removeUsingId(epid) {
+  return await withOracleDB(async (connection) => {
+    await connection.execute(
+      `DELETE FROM ExercisePlan WHERE epid=:epid`,
+      [epid],
+      { autoCommit: true }
+    );
+    return true;
+  }).catch(() => {
+    return false;
+  });
+}
+
+async function getPlanName(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `SELECT epid, plantype FROM ExercisePlan WHERE userid=${userid}`
+    );
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
+async function getPlanName(epid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `SELECT plantype FROM ExercisePlan WHERE epid=${epid}`
+    );
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+async function fetchKeys() {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute("SELECT (epid) FROM ExercisePlan");
     return result.rows;
   }).catch(() => {
     return [];
@@ -116,21 +202,15 @@ async function fetchUserPlans(userid) {
   });
 }
 
-async function fetchKeys() {
-  return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT (epid) FROM ExercisePlan");
-    return result.rows;
-  }).catch(() => {
-    return [];
-  });
-}
-
 module.exports = {
   intializeTable,
   dropTable,
   fetch,
   fetchKeys,
   loadDummyData,
-  fetch,
+  insert,
+  getPlanName,
+  removeUsingId,
   fetchUserPlans,
+  updatePlanType,
 };

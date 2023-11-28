@@ -2,7 +2,7 @@ const { withOracleDB } = require("../utils/envUtil");
 
 const dropTable = async () => {
   return await withOracleDB(async (connection) => {
-    try{
+    try {
       await connection.execute(`DROP SEQUENCE tid_sequence`);
     } catch (e) {}
     try {
@@ -58,11 +58,26 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   try {
-    await insert('Test Trainer', 'trainer', 'trainer', 'random city');
-    await insert('Carlos Silva', 'carlos.silva@gmail.com', 'Brazil', 'BR-Rio de Janeiro');
-    await insert('Yuki Tanaka', 'yuki.tanaka@yahoo.com', 'Japan', 'JP-Tokyo');
-    await insert('Emma Smith', 'emma.smith@hotmail.com', 'Australia', 'AU-Sydney');
-    await insert('Kgosi Ndlovu', 'kgosi.ndlovu@aol.com', 'South Africa', 'ZA-Johannesburg');
+    await insert("Test Trainer", "trainer", "trainer", "random city");
+    await insert(
+      "Carlos Silva",
+      "carlos.silva@gmail.com",
+      "Brazil",
+      "BR-Rio de Janeiro"
+    );
+    await insert("Yuki Tanaka", "yuki.tanaka@yahoo.com", "Japan", "JP-Tokyo");
+    await insert(
+      "Emma Smith",
+      "emma.smith@hotmail.com",
+      "Australia",
+      "AU-Sydney"
+    );
+    await insert(
+      "Kgosi Ndlovu",
+      "kgosi.ndlovu@aol.com",
+      "South Africa",
+      "ZA-Johannesburg"
+    );
     // await insert('Aarav Patel', 'aarav.patel@outlook.com', 'India', 'IN-New Delhi');
     // await insert('Juan Garcia', 'juan.garcia@icloud.com', 'Mexico', 'MX-Mexico City');
     // await insert('Ivan Petrov', 'ivan.petrov@protonmail.com', 'Russia', 'RU-Moscow');
@@ -86,9 +101,9 @@ const loadDummyData = async () => {
   }
 };
 
-async function insert(name, email, country, city, password="cucumber") {
+async function insert(name, email, country, city, password = "cucumber") {
+  const id = Date.now();
   return await withOracleDB(async (connection) => {
-    
     const result = await connection.execute(
       `INSERT INTO Trainer (name, email, country, city, password) VALUES (:name, :email, :country, :city, :password)`,
       [name, email, country, city, password],
@@ -110,6 +125,40 @@ async function fetch() {
   });
 }
 
+async function accountExists(email) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `SELECT * FROM Trainer WHERE email=:email`,
+      [email],
+      { autoCommit: true }
+    );
+    if (result.rows.length == 0) return false;
+    else return true;
+  }).catch(() => {
+    return { error: "unable to determine if account exitsts." };
+  });
+}
+
+async function validateCredentials({ email, password }) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `SELECT * FROM Trainer WHERE email=:email`,
+      [email],
+      { autoCommit: true }
+    );
+    if (result.rows.length == 0) return false;
+    const storedPw = result.rows[0][3];
+    if (storedPw != password) return false;
+    return {
+      email: result.rows[0][2],
+      name: result.rows[0][1],
+      tid: result.rows[0][0],
+    };
+  }).catch(() => {
+    return false;
+  });
+}
+
 async function fetchTids() {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute("SELECT (tid) FROM Trainer");
@@ -124,5 +173,8 @@ module.exports = {
   loadDummyData,
   fetch,
   fetchTids,
+  insert,
   dropTable,
+  validateCredentials,
+  accountExists,
 };

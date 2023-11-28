@@ -27,7 +27,7 @@ async function testOracleConnection() {
 
 async function fetchDemotableFromDb() {
   return await withOracleDB(async (connection) => {
-    const result = await connection.execute("SELECT * FROM Goals");
+    const result = await connection.execute("SELECT * FROM Trainer");
     return result.rows;
   }).catch(() => {
     return [];
@@ -65,15 +65,22 @@ async function initalizeAllTables() {
     // await PaidUser2Table.loadDummyData();
     // console.log("paiduser2 Table added!");
 
-    // await PaidUser1Table.intializeTable();
-    // const FUserKeys = await FUserTable.fetchKeys();
-    // const Tids = await TrainerTable.fetchTids();
-    // PaidUser1Table.loadDummyData(FUserKeys, Tids);
-    // console.log("paiduser1 Table added!");
+    await PaidUser1Table.intializeTable();
+    const FUserKeys = await FUserTable.fetchKeys();
+    const Tids = await TrainerTable.fetchTids();
+    PaidUser1Table.loadDummyData(FUserKeys, Tids);
+    console.log("paiduser1 Table added!");
 
-    // await ExerciseTable.intializeTable();
-    // await ExerciseTable.loadDummyData();
-    // console.log("exercise Table added!");
+    console.log("taking 5 second break (so server doesn't overload)")
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    await ExerciseTable.intializeTable();
+    await ExerciseTable.loadDummyData();
+    console.log("exercise Table added!");
+    
+    await ExercisePlan.intializeTable();
+    await ExercisePlan.loadDummyData(Tids.length);
+    console.log("experciseplan Table added!");
 
     // await NutritionTable.intializeTable();
     // await NutritionTable.loadDummyData();
@@ -94,18 +101,14 @@ async function initalizeAllTables() {
     // await NotificationsTable.loadDummyData();
     // console.log("notifications Table added!");
 
-    // await ExercisePlan.intializeTable();
-    // await ExercisePlan.loadDummyData();
-    // console.log("experciseplan Table added!");
-
-    // await PlanIncludes.intializeTable();
-    // await PlanIncludes.loadDummyData();
-    // console.log("planincludes Table added!");
+    await PlanIncludes.intializeTable();
+    await PlanIncludes.loadDummyData();
+    console.log("planincludes Table added!");
 
 
-    await ProgressTable.intializeTable();
-    await ProgressTable.loadDummyData();
-    console.log("progress Table added!");
+    // await ProgressTable.intializeTable();
+    // await ProgressTable.loadDummyData();
+    // console.log("progress Table added!");
 
     // await GoalReports.intializeTable();
     // await GoalReports.loadDummyData();

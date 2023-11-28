@@ -103,5 +103,4 @@ module.exports = {
   fetch,
   fetchKeys,
   loadDummyData,
-  fetch
 }

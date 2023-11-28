@@ -63,13 +63,29 @@ const intializeTable = async () => {
       });
   }
 
-  async function fetchExerciseForPlan(epid) {
+  async function clearEpid(epid) {
     return await withOracleDB(async (connection) => {
-        const temp = `SELECT PlanIncludes.epid, PlanIncludes.eid, Exercise.name FROM PlanIncludes FULL OUTER JOIN Exercise ON PlanIncludes.eid = Exercise.eid WHERE epid = ${epid}`;
-        const result = await connection.execute(temp);
+        const result = await connection.execute(
+            `DELETE FROM PlanIncludes WHERE epid=:epid`,
+            [epid],
+            { autoCommit: true }
+        );
+
+        return true;
+    }).catch(() => {
+        return false;
+    });
+}
+
+  async function fetchWithEpid(epid) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(`SELECT (eid) FROM PlanIncludes WHERE epid=${epid}`);
         return result.rows;
-    })
-  }
+    }).catch(() => {
+        return [];
+    });
+}
+
   
   async function fetchKeys() {
       return await withOracleDB(async (connection) => {
@@ -87,5 +103,7 @@ const intializeTable = async () => {
     fetchKeys,
     fetchExerciseForPlan,
     loadDummyData,
-    fetch
+    insert,
+    fetchWithEpid,
+    clearEpid
   }

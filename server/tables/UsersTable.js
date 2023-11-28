@@ -120,6 +120,15 @@ async function fetchUser(email) {
   });
 }
 
+async function fetchUserInfoUsingId(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`SELECT f.userid, f.name, f.email, p.postalCode, p.country FROM FUser f JOIN PaidUser1 p ON p.userid= f.userid AND f.userid = '${userid}'`);
+    return result.rows;
+  }).catch(() => {
+    return [];
+  });
+}
+
 async function fetchUsersWithTrainer(tid) {
   return await withOracleDB(async (connection) => {
     const result = await connection.execute(`
@@ -161,5 +170,6 @@ module.exports = {
   fetchKeys,
   fetchPassword,
   dropTable,
+  fetchUserInfoUsingId,
   fetchUsersWithTrainer
 };
