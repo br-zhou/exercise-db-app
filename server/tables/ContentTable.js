@@ -55,26 +55,26 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   try {
-    await insert("Ahmed Khan", "https://www.youtube.com");
-    await insert("Maria Rodriguez", "https://www.youtube.com");
-    await insert("Yuki Takahashi", "https://www.youtube.com");
-    await insert("Carlos Silva", "https://www.youtube.com");
-    await insert("Priya Patel", "https://www.youtube.com");
-    await insert("Miguel Rodriguez", "https://www.youtube.com");
-    await insert("Ananya Gupta", "https://www.youtube.com");
-    await insert("Kenji Suzuki", "https://www.youtube.com");
-    await insert("Fatima Al-Mansoori", "https://www.youtube.com");
-    await insert("Darnell Washington", "https://www.youtube.com");
-    await insert("Aisha Nkosi", "https://www.youtube.com");
-    await insert("Ravi Menon", "https://www.youtube.com");
-    await insert("Sofia Morales", "https://www.youtube.com");
-    await insert("Khaled Abadi", "https://www.youtube.com");
-    await insert("Aaliyah Rahman", "https://www.youtube.com");
-    await insert("Juan Carlos Hernandez", "https://www.youtube.com");
-    await insert("Zara Ali", "https://www.youtube.com");
-    await insert("Javier Castillo", "https://www.youtube.com");
-    await insert("Naomi Okafor", "https://www.youtube.com");
-    await insert("Elijah Thompson", "https://www.youtube.com");
+    await insert("British Heart Foundation", "https://www.youtube.com/watch?v=wWGulLAa0O0");
+    await insert("Science Animated", "https://www.youtube.com/watch?v=Mot-8b8szJI");
+    await insert("The Mike Hansen Show", "https://www.youtube.com/watch?v=4WV7kAUGrgI");
+    await insert("Braive", "https://www.youtube.com/watch?v=Wto7zISB2d0");
+    await insert("NationwideChildrens", "https://www.youtube.com/watch?v=tWYFndopVl8");
+    await insert("Meghan Livingstone", "https://www.youtube.com/watch?v=5znuV7Iyrzs");
+    await insert("Pick Up Limes", "https://www.youtube.com/watch?v=XulBKrrRC3k");
+    await insert("Johns Hopkins Medicine", "https://www.youtube.com/watch?v=zJgHbifIx-Q");
+    await insert("Med Today", "https://www.youtube.com/watch?v=zdjWnvbaUZo");
+    await insert("Liezl Jayne Strydom", "https://www.youtube.com/watch?v=j4iQkKYFH1E");
+    await insert("Body Project", "https://www.youtube.com/watch?v=gC_L9qAHVJ8");
+    await insert("Body Project", "https://www.youtube.com/watch?v=3SpPraOLJl4");
+    await insert("National Institute on Aging", "https://www.youtube.com/watch?v=MjMkBaqimFo");
+    await insert("Oasis Mental Health Applications", "https://www.youtube.com/watch?v=fRDccGSLE9k");
+    await insert("TEDx Talks", "https://www.youtube.com/watch?v=37UhELFvPec");
+    await insert("Doctor Mike Hansen", "https://www.youtube.com/watch?v=XqTcye_acTI");
+    await insert("TED", "https://www.youtube.com/watch?v=BHY0FxzoKZE");
+    await insert("Bestie", "https://www.youtube.com/watch?v=inEPlZZ_SfA");
+    await insert("Dr. Eric Berg DC", "https://www.youtube.com/watch?v=VhVqz4KuEgI");
+    await insert("Coach Viva", "https://www.youtube.com/watch?v=GIqW2qds3qI");
     return true;
   } catch (e) {
     console.log(e);
