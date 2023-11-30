@@ -19,7 +19,7 @@ const NotificationCard = (props) => {
             X
           </button>
           <h5 className="text-xl font-semibold mb-2">{props.title}</h5>
-          <p className="text-sm text-gray-700 mb-4">{props.key1}</p>
+          <p className="text-sm text-gray-700 mb-4">Notification for: {props.key1}</p>
         </div>
       </div>
     )

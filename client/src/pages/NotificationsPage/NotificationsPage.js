@@ -42,7 +42,7 @@ const NotificationsPage = () => {
           <NotificationCard
             key={card[0]} 
             title={card[2]}
-            key1={card[1]}
+            key1={token.name}
           />
         
       )})}
