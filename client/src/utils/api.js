@@ -10,8 +10,7 @@ export const serverFetch = async (type, path, body=null) => {
       headers: {
         "Content-Type": "application/json",
       },
-      method: type,
-      body: JSON.stringify(body)
+      method: type
     }).catch((reason) => {
       console.warn(reason);
       return null;
