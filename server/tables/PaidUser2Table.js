@@ -15,7 +15,7 @@ const intializeTable = async () => {
 
     const result = await connection.execute(`
         CREATE TABLE PaidUser2(
-            postalCode VARCHAR(10),
+            postalCode VARCHAR(20),
             country VARCHAR(50),
             city VARCHAR(60),
             PRIMARY KEY (postalCode, country)
@@ -49,15 +49,11 @@ const loadDummyData = async () => {
     ["11511", "Egypt", "EG-Cairo"],
     ["34000", "Turkey", "TR-Istanbul"],
     ["10100", "Thailand", "TH-Bangkok"],
-    ["12345", "United Arab Emirates", "AE-Dubai"]
+    ["12345", "United Arab Emirates", "AE-Dubai"],
   ];
-  
+
   for (let city of DUMMY_DATA) {
-    await insert(
-      city[0],
-      city[1],
-      city[2]
-    );
+    await insert(city[0], city[1], city[2]);
   }
 };
 
@@ -84,9 +80,28 @@ async function fetch() {
   });
 }
 
+async function fetchCity(postalCode, country) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(
+      `SELECT city FROM PaidUser2 WHERE postalCode=:postalCode AND country=:country`,
+      [postalCode, country],
+      { autoCommit: true }
+    );
+    try {
+      return result.rows[0][0];
+    } catch (e) {
+      return null;
+    }
+  }).catch(() => {
+    return null;
+  });
+}
+
 module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
   dropTable,
+  fetchCity,
+  insert
 };
