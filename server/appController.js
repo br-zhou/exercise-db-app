@@ -78,4 +78,11 @@ router.post("/drop-all-tables", async (req, res) => {
   }
 });
 
+router.post("/custom-query", async (req, res) => {
+  const data = req.body;
+  const result = await appService.fetchTableFromDB(data.table);
+  res.json({ data: result.rows, head: result.metaData });
+});
+
+
 module.exports = router;

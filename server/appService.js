@@ -44,6 +44,15 @@ async function countDemotable() {
   });
 }
 
+async function fetchTableFromDB(table) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`SELECT * FROM ${table}`);
+
+    return result;
+  }).catch(() => {
+    return [];
+  });
+}
 
 async function initalizeAllTables() {
   try {
@@ -68,20 +77,20 @@ async function initalizeAllTables() {
     PaidUser1Table.loadDummyData(FUserKeys, Tids);
     console.log("paiduser1 Table added!");
 
-    console.log("taking 5 second break (so server doesn't overload)")
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    console.log("taking 5 second break (so server doesn't overload)");
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     await ExerciseTable.intializeTable();
     await ExerciseTable.loadDummyData();
     console.log("exercise Table added!");
-    
+
     await ExercisePlan.intializeTable();
     await ExercisePlan.loadDummyData(Tids.length);
     console.log("experciseplan Table added!");
 
     await NutritionTable.intializeTable();
     await NutritionTable.loadDummyData();
-    
+
     await GoalsTable.intializeTable();
     await GoalsTable.loadDummyData();
     console.log("goals Table added!");
@@ -102,7 +111,6 @@ async function initalizeAllTables() {
     await PlanIncludes.loadDummyData();
     console.log("planincludes Table added!");
 
-
     await ProgressTable.intializeTable();
     await ProgressTable.loadDummyData();
     console.log("progress Table added!");
@@ -110,7 +118,7 @@ async function initalizeAllTables() {
     await GoalReports.intializeTable();
     await GoalReports.loadDummyData();
     console.log("goalsreports Table added!");
-    
+
     return true;
   } catch (e) {
     console.log(e);
@@ -119,7 +127,7 @@ async function initalizeAllTables() {
 }
 
 async function dropDatabase() {
-  await withOracleDB (async (connection)=> {
+  await withOracleDB(async (connection) => {
     connection.execute(`
     BEGIN
        FOR cur_rec IN (SELECT object_name, object_type
@@ -172,12 +180,11 @@ async function dropDatabase() {
        END LOOP;
     END;
     `);
-  })
+  });
 }
 
 async function dropAllTables() {
   try {
-
     await dropDatabase();
     // await PaidUser1Table.dropTable();
     // await PaidUser2Table.dropTable();
@@ -191,7 +198,6 @@ async function dropAllTables() {
     // await ExercisePlan.dropTable();
     // await PlanIncludes.dropTable();
     // await ContentTable.dropTable();
-
 
     // await FUserTable.dropTable();
     // await TrainerTable.dropTable();
@@ -208,4 +214,5 @@ module.exports = {
   countDemotable,
   initalizeAllTables,
   dropAllTables,
+  fetchTableFromDB,
 };
