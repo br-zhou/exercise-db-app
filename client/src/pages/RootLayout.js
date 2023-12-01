@@ -9,12 +9,15 @@ const RootLayout = () => {
   const [adData, setAddata] = useState(null);
   const token = JSON.parse(localStorage.getItem("token") || "{}");
 
-  // Scroll to top on page change
+  console.log(token.freeUser);
+
   useEffect(() => {
     window.scroll(0, 0);
   }, [pathname]);
 
   const loadAd = async () => {
+    if (!token.freeUser) return;
+    
     const data = await serverPost("POST", "get-ad", token);
     if (data) {
       setAddata({title: data[1], href: data[2]});
@@ -31,7 +34,7 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
-      {adData && <AdBanner {...adData} />}
+      {token.freeUser && adData && <AdBanner {...adData} />}
     </div>
   );
 };

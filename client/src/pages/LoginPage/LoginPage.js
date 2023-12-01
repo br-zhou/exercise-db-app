@@ -13,6 +13,7 @@ const LoginPage = () => {
   }, []);
 
   const handleSubmit = async (event) => {
+    console.log("CLICK")
     const result = await serverPost('POST', 'login-auth',event);
     console.log(result);
     if (result) {
