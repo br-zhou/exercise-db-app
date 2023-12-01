@@ -13,37 +13,42 @@ const RegisterCard = (props) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-   
+
     if (!nameRef.current.value) {
       setError("Name cannot be empty");
       return;
     }
-    
+
     if (!emailRef.current.value) {
       setError("Email cannot be empty");
       return;
     }
-    
+
     if (!passwordRef.current.value) {
       setError("Password cannot be empty");
       return;
     }
-    
+
     if (!cityRef.current.value) {
       setError("City cannot be empty");
       return;
     }
-    
+
     if (!countryRef.current.value) {
       setError("Country cannot be empty");
       return;
     }
-    
+
     if (!postalRef.current.value) {
       setError("Postal code cannot be empty");
       return;
     }
-    
+
+    if (postalRef.current.value.length > 10) {
+      setError("invalid postal code!");
+      return;
+    }
+
     setError("");
 
     props.handleSubmit({
@@ -105,7 +110,7 @@ const RegisterCard = (props) => {
               <span>Free User?</span>
             </>
           )}
-          {error}
+          <div className="text-red-300">{error}</div>
           <button className="font-roboto uppercase focus:outline-none bg-green-500 w-full border-0  m-2 p-2 text-white text-sm cursor-pointer">
             REGISTER
           </button>
