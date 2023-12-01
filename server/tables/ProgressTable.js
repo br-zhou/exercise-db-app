@@ -60,6 +60,14 @@ const loadDummyData = async () => {
     await insert("Perfect", 4);
     await insert("No Progress", 5);
     await insert("Regression", 6);
+    await insert("Moderately Happy", 1);
+    await insert("Ok", 1);
+    await insert("Perfect", 2);
+    await insert("No Progress", 3);
+    await insert("Regression", 5);
+    for (let i = 7; i < 20; i++) {
+      await insert("No progress", i);
+    }
 
     return true;
   } catch (e) {

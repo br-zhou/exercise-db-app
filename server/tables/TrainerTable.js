@@ -58,13 +58,6 @@ const intializeTable = async () => {
 
 const loadDummyData = async () => {
   try {
-    await insert("Test Trainer", "trainer", "trainer", "random city");
-    await insert(
-      "Carlos Silva",
-      "carlos.silva@gmail.com",
-      "Brazil",
-      "BR-Rio de Janeiro"
-    );
     await insert("Yuki Tanaka", "yuki.tanaka@yahoo.com", "Japan", "JP-Tokyo");
     await insert(
       "Emma Smith",
@@ -78,7 +71,7 @@ const loadDummyData = async () => {
       "South Africa",
       "ZA-Johannesburg"
     );
-    // await insert('Aarav Patel', 'aarav.patel@outlook.com', 'India', 'IN-New Delhi');
+    await insert('Aarav Patel', 'aarav.patel@outlook.com', 'India', 'IN-New Delhi');
     // await insert('Juan Garcia', 'juan.garcia@icloud.com', 'Mexico', 'MX-Mexico City');
     // await insert('Ivan Petrov', 'ivan.petrov@protonmail.com', 'Russia', 'RU-Moscow');
     // await insert('Ahmed Al-Abdul', 'ahmed.al-abdul@zoho.com', 'Saudi Arabia', 'SA-Riyadh');

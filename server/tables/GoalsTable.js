@@ -79,7 +79,7 @@ const loadDummyData = async () => {
     await insert('Speed Training', 56, '2023-Jul-3', 14);
     await insert('Functional Fitness', 63, '2023-Feb-15', 15);
     await insert('Powerlifting', 82, '2023-Mar-17', 16);
-    await insert('Circuit Training', 68, '2023-Apr-21', 17);  
+    await insert('Circuit Training', 68, '2023-Apr-21', 17);
     return true;
   } catch (e) {
     console.log(e);

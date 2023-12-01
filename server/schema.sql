@@ -323,3 +323,208 @@ FOREIGN KEY(pid) REFERENCES ProgressReport(pid) ON DELETE CASCADE
 );
 
 -- Dummy variable inserts
+INSERT INTO Fuser (name, email, password) VALUES ('Ahmed Khan', 'ahmed.khan@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Maria Rodriguez', 'maria.rodriguez@hotmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Yuki Takahashi', 'yuki.takahashi@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Carlos Silva', 'carlos.silva@outlook.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Priya Patel', 'priya.patel@hotmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Miguel Rodriguez', 'miguel.rodriguez@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Ananya Gupta', 'ananya.gupta@outlook.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Kenji Suzuki', 'kenji.suzuki@hotmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Fatima Al-Mansoori', 'fatima.almansoori@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Darnell Washington', 'darnell.washington@outlook.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Aisha Nkosi', 'aisha.nkosi@hotmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Ravi Menon', 'ravi.menon@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Sofia Morales', 'sofia.morales@outlook.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Khaled Abadi', 'khaled.abadi@hotmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Aaliyah Rahman', 'aaliyah.rahman@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Juan Carlos Hernandez', 'juan.hernandez@outlook.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Zara Ali', 'zara.ali@hotmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Javier Castillo', 'javier.castillo@gmail.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Naomi Okafor', 'naomi.okafor@outlook.com', 'eazyPassword');
+INSERT INTO Fuser (name, email, password) VALUES ('Elijah Thompson', 'elijah.thompson@gmail.com', 'eazyPassword');
+
+INSERT INTO Trainer (name, email, country, city, password) VALUES ('Yuki Tanaka', 'yuki.tanaka@yahoo.com', 'Japan', 'JP-Tokyo');
+INSERT INTO Trainer (name, email, country, city, password) VALUES ('Emma Smith', 'emma.smith@hotmail.com', 'Australia', 'AU-Sydney');
+INSERT INTO Trainer (name, email, country, city, password) VALUES ('Kgosi Ndlovu', 'kgosi.ndlovu@aol.com', 'South Africa', 'ZA-Johannesburg');
+INSERT INTO Trainer (name, email, country, city, password) VALUES ('Aarav Patel', 'aarav.patel@outlook.com', 'India', 'IN-New Delhi');
+
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('20040-010', 'Brazil', 'BR-Rio de Janeiro');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('100-0001', 'Japan', 'JP-Tokyo');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('2000', 'Australia', 'AU-Sydney');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('2196', 'South Africa', 'ZA-Johannesburg');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('110001', 'India', 'IN-New Delhi');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('06010', 'Mexico', 'MX-Mexico City');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('101000', 'Russia', 'RU-Moscow');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('11564', 'Saudi Arabia', 'SA-Riyadh');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('C1002AAP', 'Argentina', 'AR-Buenos Aires');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('100010', 'China', 'CN-Beijing');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('00100', 'Italy', 'IT-Rome');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('900001', 'Nigeria', 'NG-Lagos');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('111 20', 'Sweden', 'SE-Stockholm');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('03187', 'South Korea', 'KR-Seoul');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('75001', 'France', 'FR-Paris');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('M5A 1A1', 'Canada', 'CA-Toronto');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('11511', 'Egypt', 'EG-Cairo');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('34000', 'Turkey', 'TR-Istanbul');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('10100', 'Thailand', 'TH-Bangkok');
+INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('12345', 'United Arab Emirates', 'AE-Dubai');
+
+-- Add PaidUser1 HERE
+
+INSERT INTO Exercise (name, etype) VALUES ('Barbell Front Squat', 'Resistance/Conditioning');
+INSERT INTO Exercise (name, etype) VALUES ('Barbell Back Squat', 'Resistance/Conditioning');
+INSERT INTO Exercise (name, etype) VALUES ('Barbell Bench Press', 'Resistance/Conditioning');
+INSERT INTO Exercise (name, etype) VALUES ('Deadlifts', 'Resistance/Conditioning');
+INSERT INTO Exercise (name, etype) VALUES ('Lat pulldowns', 'Resistance/Conditioning');
+INSERT INTO Exercise (name, etype) VALUES ('Suicides', 'Cardio');
+INSERT INTO Exercise (name, etype) VALUES ('100m dash', 'Cardio');
+INSERT INTO Exercise (name, etype) VALUES ('5k run', 'Cardio');
+INSERT INTO Exercise (name, etype) VALUES ('1 mile run', 'Cardio');
+INSERT INTO Exercise (name, etype) VALUES ('jumping ropes', 'Cardio');
+INSERT INTO Exercise (name, etype) VALUES ('30 min swim', 'Cardio');
+INSERT INTO Exercise (name, etype) VALUES ('freestyle strokes', 'Swimming');
+INSERT INTO Exercise (name, etype) VALUES ('Backstrokes', 'Swimming');
+INSERT INTO Exercise (name, etype) VALUES ('Butterfly strokes', 'Swimming');
+INSERT INTO Exercise (name, etype) VALUES ('Breaststrokes', 'Swimming');
+INSERT INTO Exercise (name, etype) VALUES ('Downward Dog', 'Yoga');
+INSERT INTO Exercise (name, etype) VALUES ('Cat', 'Yoga');
+INSERT INTO Exercise (name, etype) VALUES ('Cow', 'Yoga');
+INSERT INTO Exercise (name, etype) VALUES ('Warrior 1', 'Yoga');
+INSERT INTO Exercise (name, etype) VALUES ('Warrior 2', 'Yoga');
+INSERT INTO Exercise (name, etype) VALUES ('Brazilian Jui Jitsu (No Gi)', 'Martial Arts');
+INSERT INTO Exercise (name, etype) VALUES ('Wrestling', 'Martial Arts');
+INSERT INTO Exercise (name, etype) VALUES ('Muay Thai', 'Martial Arts');
+INSERT INTO Exercise (name, etype) VALUES ('Boxing', 'Martial Arts');
+INSERT INTO Exercise (name, etype) VALUES ('Transition work', 'Martial Arts');
+INSERT INTO Exercise (name, etype) VALUES ('Takedown defence', 'Martial Arts');
+
+-- Add ExercisePlan Here
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (100, 100, 100, 2200, 1);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (150, 100, 80, 2400, 2);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (220, 60, 120, 2300, 3);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (280, 50, 90, 2400, 4);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (120, 80, 120, 2800, 5);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (180, 100, 100, 3200, 6);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (10, 12, 18, 200, 7);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (15, 8, 14, 180, 8);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (9, 16, 20, 220, 9);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (13, 10, 15, 190, 10);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (18, 7, 12, 170, 11);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (14, 9, 16, 210, 12);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (12, 14, 17, 195, 13);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (20, 11, 13, 185, 14);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (8, 18, 19, 230, 15);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (16, 15, 10, 160, 16);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (19, 13, 11, 175, 17);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (7, 20, 14, 205, 18);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (19, 13, 11, 175, 19);
+INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (7, 20, 14, 205, 20);
+
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Weight Loss', 100, '2023-Dec-31', 1);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Fitness', 45, '2023-Jan-21', 2);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Weight Loss', 80, '2023-Feb-2', 3);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Muscle Gain', 50, '2023-Mar-18', 4);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Endurance', 66, '2023-Apr-3', 5);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Maintain Weight', 60, '2023-May-28', 6);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Toning', 65, '2023-Jun-20', 7);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Agility', 49, '2023-Jan-11', 8);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Bodybuilding', 70, '2023-Jul-21', 9);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Posture Improvement', 58, '2023-Mar-30', 10);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('CrossFit', 78, '2023-Apr-12', 11);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Balance Training', 67, '2023-May-25', 12);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Rehabilitation', 85, '2023-Jan-13', 13);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Speed Training', 56, '2023-Jul-3', 14);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Functional Fitness', 63, '2023-Feb-15', 15);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Powerlifting', 82, '2023-Mar-17', 16);
+INSERT INTO Goals (category, weight, din, userid) VALUES ('Circuit Training', 68, '2023-Apr-21', 17);
+
+INSERT INTO Ad (company, url) VALUES ('Google', 'https://www.google.com');
+INSERT INTO Ad (company, url) VALUES ('Apple', 'https://www.apple.com');
+INSERT INTO Ad (company, url) VALUES ('Microsoft', 'https://www.microsoft.com');
+INSERT INTO Ad (company, url) VALUES ('Amazon', 'https://www.amazon.com');
+INSERT INTO Ad (company, url) VALUES ('Facebook', 'https://www.facebook.com');
+INSERT INTO Ad (company, url) VALUES ('Tesla', 'https://www.tesla.com');
+INSERT INTO Ad (company, url) VALUES ('Netflix', 'https://www.netflix.com');
+INSERT INTO Ad (company, url) VALUES ('Twitter', 'https://www.twitter.com');
+INSERT INTO Ad (company, url) VALUES ('IBM', 'https://www.ibm.com');
+INSERT INTO Ad (company, url) VALUES ('Salesforce', 'https://www.salesforce.com');
+INSERT INTO Ad (company, url) VALUES ('Adobe', 'https://www.adobe.com');
+INSERT INTO Ad (company, url) VALUES ('Intel', 'https://www.intel.com');
+INSERT INTO Ad (company, url) VALUES ('Cisco', 'https://www.cisco.com');
+INSERT INTO Ad (company, url) VALUES ('HP', 'https://www.hp.com');
+INSERT INTO Ad (company, url) VALUES ('Oracle', 'https://www.oracle.com');
+INSERT INTO Ad (company, url) VALUES ('Uber', 'https://www.uber.com');
+INSERT INTO Ad (company, url) VALUES ('Airbnb', 'https://www.airbnb.com');
+INSERT INTO Ad (company, url) VALUES ('Spotify', 'https://www.spotify.com');
+INSERT INTO Ad (company, url) VALUES ('Dropbox', 'https://www.dropbox.com');
+INSERT INTO Ad (company, url) VALUES ('Slack', 'https://www.slack.com');
+
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=wWGulLAa0O0', 'British Heart Foundation');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=Mot-8b8szJI', 'Science Animated');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=4WV7kAUGrgI', 'The Mike Hansen Show');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=Wto7zISB2d0', 'Braive');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=tWYFndopVl8', 'NationwideChildrens');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=5znuV7Iyrzs', 'Meghan Livingstone');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=XulBKrrRC3k', 'Pick Up Limes');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=zJgHbifIx-Q', 'Johns Hopkins Medicine');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=zdjWnvbaUZo', 'Med Today');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=j4iQkKYFH1E', 'Liezl Jayne Strydom');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=gC_L9qAHVJ8', 'Body Project');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=3SpPraOLJl4', 'Body Project');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=MjMkBaqimFo', 'National Institute on Aging');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=fRDccGSLE9k', 'Oasis Mental Health Applications');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=37UhELFvPec', 'TEDx Talks');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=XqTcye_acTI', 'Doctor Mike Hansen');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=BHY0FxzoKZE', 'TED');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=inEPlZZ_SfA', 'Bestie');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=VhVqz4KuEgI', 'Dr. Eric Berg DC');
+INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=GIqW2qds3qI', 'Coach Viva');
+
+-- Add Notifications
+
+INSERT INTO PlanIncludes (epid, eid) VALUES (1, 1);
+INSERT INTO PlanIncludes (epid, eid) VALUES (1, 2);
+INSERT INTO PlanIncludes (epid, eid) VALUES (1, 3);
+INSERT INTO PlanIncludes (epid, eid) VALUES (1, 4);
+INSERT INTO PlanIncludes (epid, eid) VALUES (2, 2);
+INSERT INTO PlanIncludes (epid, eid) VALUES (3, 2);
+INSERT INTO PlanIncludes (epid, eid) VALUES (4, 1);
+INSERT INTO PlanIncludes (epid, eid) VALUES (5, 6);
+INSERT INTO PlanIncludes (epid, eid) VALUES (6, 3);
+INSERT INTO PlanIncludes (epid, eid) VALUES (7, 10);
+INSERT INTO PlanIncludes (epid, eid) VALUES (8, 15);
+INSERT INTO PlanIncludes (epid, eid) VALUES (9, 14);
+INSERT INTO PlanIncludes (epid, eid) VALUES (10, 10);
+INSERT INTO PlanIncludes (epid, eid) VALUES (11, 1);
+INSERT INTO PlanIncludes (epid, eid) VALUES (12, 12);
+INSERT INTO PlanIncludes (epid, eid) VALUES (13, 22);
+INSERT INTO PlanIncludes (epid, eid) VALUES (14, 23);
+INSERT INTO PlanIncludes (epid, eid) VALUES (15, 12);
+INSERT INTO PlanIncludes (epid, eid) VALUES (16, 12);
+INSERT INTO PlanIncludes (epid, eid) VALUES (17, 12);
+INSERT INTO PlanIncludes (epid, eid) VALUES (18, 5);
+INSERT INTO PlanIncludes (epid, eid) VALUES (19, 7);
+INSERT INTO PlanIncludes (epid, eid) VALUES (20, 9);
+
+INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES ('Successful', 1);
+INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES ('Moderately Happy', 2);
+INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES ('Ok', 3);
+INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES ('Perfect', 4);
+INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES ('No Progress', 5);
+INSERT INTO ProgressReport (satisfaction, reportDate, userid) VALUES ('Regression', 6);
+
+INSERT INTO GoalReports (gid, pid) VALUES (1, 1);
+INSERT INTO GoalReports (gid, pid) VALUES (1, 2);
+INSERT INTO GoalReports (gid, pid) VALUES (1, 3);
+INSERT INTO GoalReports (gid, pid) VALUES (2, 1);
+INSERT INTO GoalReports (gid, pid) VALUES (2, 3);
+INSERT INTO GoalReports (gid, pid) VALUES (3, 2);
+INSERT INTO GoalReports (gid, pid) VALUES (1, 1);
+INSERT INTO GoalReports (gid, pid) VALUES (1, 2);
+INSERT INTO GoalReports (gid, pid) VALUES (1, 3);
+INSERT INTO GoalReports (gid, pid) VALUES (2, 1);
+INSERT INTO GoalReports (gid, pid) VALUES (2, 3);
+INSERT INTO GoalReports (gid, pid) VALUES (3, 2);
+
+

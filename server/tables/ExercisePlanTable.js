@@ -88,27 +88,6 @@ const loadDummyData = async (maxTrainers) => {
     (20 % maxTrainers) + 1,
     20
   );
-
-  await insert("Cardio", 2, 2);
-  await insert("Martial Arts", 3, 3);
-  await insert("Yoga", 4, 4);
-  await insert("HIIT", 5, 5);
-  await insert("Cycling", 1, 1);
-  await insert("Strength training", 2, 2);
-  await insert("Swimming", 3, 3);
-  await insert("CrossFit", 4, 4);
-  await insert("Yoga", 5, 5);
-  await insert("Cardio (Extreme Edition)", 1, 1);
-  await insert("Martial Arts", 2, 2);
-  await insert("Strength training", 3, 3);
-  await insert("HIIT", 4, 4);
-  await insert("CrossFit", 5, 5);
-  await insert("Yoga", 1, 1);
-  await insert("Swimming", 2, 2);
-  await insert("Cardio", 3, 3);
-  await insert("Cycling", 4, 4);
-  await insert("Martial Arts", 5, 5);
-  await insert("Strength training", 1, 1);
 };
 
 async function insert(plantype, tid, userid) {
