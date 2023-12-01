@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
-    <!-- <link rel="stylesheet" href="styles.css">   -->
+    <link rel="stylesheet" href="styles.css">  
 
     <title>Database Application</title>
 </head>
@@ -49,8 +49,6 @@
         <thead>
             <tr>
                 <!--Table head, need to be adjusted accordingly to align with your own.-->
-                <th>ID</th>
-                <th>Name</th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +56,25 @@
     </table>
 
     <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Show 'Demotable'. 
+        Data will be fetched and inserted here dynamically using JavaScript. -->
+        <h2>Custom Table</h2>
+        <input type="text" id="custom-table-name" placeholder="Enter Table Name">
+        
+        <table id="custom-table" border="1">
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    
+        <button id="custom-query"> CLICK </button> <br>
+
+
+        <br><hr><br> <!-- ========================================================================= -->
 
     <h2>Reset Demotable</h2>
     <p>If you wish to reset the table press on the reset button. If this is the first time you're running this page, you MUST use reset</p>
