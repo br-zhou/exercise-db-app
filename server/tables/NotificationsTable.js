@@ -279,6 +279,19 @@ async function fetchKeys() {
   });
 }
 
+async function deleteNotification(rid) {
+  return await withOracleDB(async (connection) => {
+    await connection.execute(
+      `DELETE FROM Notifications WHERE rid=:rid`,
+      [rid],
+      { autoCommit: true }
+    );
+    return true;
+  }).catch(() => {
+    return false;
+  });
+}
+
 module.exports = {
   intializeTable,
   loadDummyData,
@@ -287,4 +300,5 @@ module.exports = {
   fetchUserNotifications,
   fetchKeys,
   dropTable,
+  deleteNotification
 };
