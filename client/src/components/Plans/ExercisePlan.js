@@ -18,17 +18,16 @@ const ExercisePlan = (token) => {
     return <div>Still Loading ...</div>;
   }
 
+  if (data)
   return (
     <div>
       {data.map((row) => {
-        return (
           <div className="card-body max-w-xs mx-auto mt-2 p-4 bg-white rounded-lg shadow-lg border-0">
             <h3 className="font-semibold  text-center mb-2">
               Exercise Plan {row && row[0] && row[0][0]}
             </h3>
             <ExerciseCard exercise={row} />
           </div>
-        );
       })}
     </div>
   );
