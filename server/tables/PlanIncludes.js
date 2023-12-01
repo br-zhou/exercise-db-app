@@ -147,7 +147,7 @@ const intializeTable = async () => {
     dropTable,
     fetch,
     fetchKeys,
-    fetchExerciseForPlan,
+    fetchExerciseForPlan: fetchWithEpid,
     loadDummyData,
     insert,
     fetchWithEpid,

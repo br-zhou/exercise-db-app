@@ -171,5 +171,5 @@ module.exports = {
   fetchPassword,
   dropTable,
   fetchUserInfoUsingId,
-  fetchUsersWithTrainer
+  fetchUsersWithTrainer,
 };
