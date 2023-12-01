@@ -65,6 +65,7 @@ const HomePage = () => {
     // Check if the newGoal is already in the goals array
     if (!data.some((goal) => goal.gid === newGoal.gid)) {
     const value = await serverPost("POST", "addGoal", {token, newGoal});
+    window.location.reload(false);
 
     if (value.success){
       setData((prevData) => [...prevData, newGoal]);

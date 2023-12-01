@@ -9,6 +9,7 @@ const GoalCard = (props) => {
     console.log(props.gid);
     const result = await serverPost("POST", "deleteGoal", {gid: props.gid});
     console.log("delete!", {});
+    window.location.reload(false);
   }
 
   return (
