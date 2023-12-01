@@ -6,8 +6,9 @@ const createRoutes = (router) => {
     const eid_list = []
     for (let i = 0; i < epid_list.length; i++) {
       eid_list.push(await planIncludes.fetchExerciseForPlan(epid_list[i][0]));
+      console.log(eid_list);
+
     }
-    console.log(eid_list);
     res.send(eid_list);
   });
 }

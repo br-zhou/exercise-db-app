@@ -59,10 +59,32 @@ const intializeTable = async () => {
 const loadDummyData = async () => {
     await insert("Barbell Front Squat", "Resistance/Conditioning");
     await insert("Barbell Back Squat", "Resistance/Conditioning");
-    await insert("Running", "Cardio");
-    await insert("Swimming", "Cardio");
-    await insert("Grappling", "Martial Arts");
+    await insert("Barbell Bench Press", "Resistance/Conditioning");
+    await insert("Bulgarian Split Squats", "Resistance/Conditioning");
+    await insert("Deadlifts", "Resistance/Conditioning");
+    await insert("Lat pulldowns", "Resistance/Conditioning");
     await insert("Suicides", "Cardio");
+    await insert("100m dash", "Cardio");
+    await insert("5k run", "Cardio");
+    await insert("1 mile run", "Cardio");
+    await insert("jumping ropes", "Cardio");
+    await insert("30 min swim", "Cardio");
+    await insert("freestyle strokes", "Swimming");
+    await insert("Backstrokes", "Swimming");
+    await insert("Butterfly strokes", "Swimming");
+    await insert("Breaststrokes", "Swimming");
+    await insert("Downward Dog","Yoga");
+    await insert("Cat","Yoga");
+    await insert("Cow","Yoga");
+    await insert("Warrior 1","Yoga");
+    await insert("Warrior 2","Yoga");
+    await insert("Brazilian Jui Jitsu (No Gi)", "Martial Arts");
+    await insert("Wrestling", "Martial Arts");
+    await insert("Muay Thai", "Martial Arts");
+    await insert("Boxing", "Martial Arts");
+    await insert("Transition work", "Martial Arts");
+    await insert("Takedown defence", "Martial Arts");
+
 }
 
 async function insert(name, etype) {

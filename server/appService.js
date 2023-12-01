@@ -56,8 +56,8 @@ async function fetchTableFromDB(table) {
 
 async function initalizeAllTables() {
   try {
-    // await NutritionTable.intializeTable();
-    // await NutritionTable.loadDummyData();
+    await NutritionTable.intializeTable();
+    await NutritionTable.loadDummyData();
 
     await TrainerTable.intializeTable();
     await TrainerTable.loadDummyData();
@@ -111,9 +111,9 @@ async function initalizeAllTables() {
     await PlanIncludes.loadDummyData();
     console.log("planincludes Table added!");
 
-    // await ProgressTable.intializeTable();
-    // await ProgressTable.loadDummyData();
-    // console.log("progress Table added!");
+    await ProgressTable.intializeTable();
+    await ProgressTable.loadDummyData();
+    console.log("progress Table added!");
 
     await GoalReports.intializeTable();
     await GoalReports.loadDummyData();
