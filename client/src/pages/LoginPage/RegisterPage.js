@@ -9,20 +9,19 @@ const RegisterPage = () => {
     if (token) {
       console.log("token", token);
       navigate("/");
-    } 
+    }
   }, []);
-  
+
   const handleSubmit = async (event) => {
-    const result = await serverPost('POST', 'register',event);
-    if (result.status) {
-      await serverPost('POST', 'login-auth', event);
-      localStorage.setItem("token", result);
+    const result = await serverPost("POST", "register", event);
+    if (!result.error) {
+      console.log("success: ", result);
+      localStorage.setItem("token", JSON.stringify(result));
       navigate("/");
+    } else {
+      console.log(result.error);
     }
-    else {
-      console.log("An error occured.");
-    }
-  }
+  };
 
   return (
     <div>
