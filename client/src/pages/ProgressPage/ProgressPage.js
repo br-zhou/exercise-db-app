@@ -3,7 +3,8 @@ import { serverPost } from "../../utils/api";
 import ProgressReportCard from "../../components/Progress/ProgressReportCard";
 
 const ProgressPage = () => {
-  const token = JSON.parse(localStorage.getItem("token")) || {};
+  const token = JSON.parse(localStorage.getItem("token") || "{}");
+  console.log(token);
   const onLoad = async () => {
     const dummyData = await serverPost("POST", "progress-table", token);
     setData(dummyData);

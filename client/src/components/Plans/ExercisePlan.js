@@ -4,6 +4,7 @@ import ExerciseCard from "./ExerciseCard";
 const ExercisePlan = (token) => {
   const onLoad = async () => {
     const result = await serverPost("POST", "exerciseplan-table", token);
+    console.log(result);
     setData(result);
   };
 

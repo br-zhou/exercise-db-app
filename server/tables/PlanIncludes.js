@@ -88,51 +88,20 @@ const intializeTable = async () => {
 
   async function fetchExerciseForPlan(epid) {
     return await withOracleDB(async (connection) => {
+        console.log(epid);
         const result = await connection.execute(
-            `DELETE FROM PlanIncludes WHERE epid=:epid`,
-            [epid],
-            { autoCommit: true }
+            `SELECT epid, PlanIncludes.eid, name
+            FROM PlanIncludes 
+            FULL OUTER JOIN Exercise 
+            ON PlanIncludes.eid = Exercise.eid
+            WHERE epid = ${epid}`
         );
 
-        return true;
+        return result.rows;
     }).catch(() => {
         return false;
     });
 }
-
-  async function fetchWithEpid(epid) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(`SELECT (eid) FROM PlanIncludes WHERE epid=${epid}`);
-        return result.rows;
-    }).catch(() => {
-        return [];
-    });
-}
-
-  async function fetchExerciseForPlan(epid) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `DELETE FROM PlanIncludes WHERE epid=:epid`,
-            [epid],
-            { autoCommit: true }
-        );
-
-        return true;
-    }).catch(() => {
-        return false;
-    });
-}
-
-  async function fetchWithEpid(epid) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(`SELECT (eid) FROM PlanIncludes WHERE epid=${epid}`);
-        return result.rows;
-    }).catch(() => {
-        return [];
-    });
-}
-
-  
   async function fetchKeys() {
       return await withOracleDB(async (connection) => {
         const result = await connection.execute("SELECT (epid) FROM PlanIncludes");
@@ -147,7 +116,7 @@ const intializeTable = async () => {
     dropTable,
     fetch,
     fetchKeys,
-    fetchExerciseForPlan: fetchWithEpid,
+    fetchExerciseForPlan,
     loadDummyData,
     insert,
     fetchWithEpid,
