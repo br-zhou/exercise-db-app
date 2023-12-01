@@ -31,6 +31,35 @@ const intializeTable = async () => {
   });
 };
 
+async function getBestTrainer() {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`
+    SELECT tid, COUNT(*) AS c
+        FROM PaidUser1
+        GROUP BY tid
+        HAVING COUNT(*) = (
+            SELECT MIN(c2)
+            FROM (
+                SELECT COUNT(*) AS c2
+                FROM PaidUser1
+                GROUP BY tid
+            )
+        )
+    `);
+    try {
+      if(result.rows.length != 0) {
+        return result.rows[0][0];
+      } else {
+        return 1;
+      }
+    } catch (e) {
+      return -1;
+    }
+  }).catch(() => {
+    return -1;
+  });
+}
+
 const loadDummyData = async (userids, tids) => {
   const DUMMY_DATA = [
     ["20040-010", "Brazil"],
@@ -55,7 +84,7 @@ const loadDummyData = async (userids, tids) => {
     ["12345", "United Arab Emirates"],
   ];
   const DATA_SIZE = DUMMY_DATA.length;
-  
+
   for (let i = 0; i < userids.length; i++) {
     const userid = userids[i][0];
     const tid = tids[i % tids.length][0];
@@ -68,8 +97,11 @@ const loadDummyData = async (userids, tids) => {
   }
 };
 
-async function insert(userId, postalCode, country, tid=1) {
+async function insert(userId, postalCode, country, tid = -1) {
   return await withOracleDB(async (connection) => {
+    const trainer = await getBestTrainer();
+    if (tid == -1) tid = trainer;
+
     const result = await connection.execute(
       `INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (:userId, :postalCode, :country, :tid)`,
       [userId, postalCode, country, tid],
@@ -91,9 +123,21 @@ async function fetch() {
   });
 }
 
+async function isPaidUser(userid) {
+  return await withOracleDB(async (connection) => {
+    const result = await connection.execute(`SELECT * FROM PaidUser1 WHERE userid=${userid}`);
+    return result.rows.length > 0;
+  }).catch(() => {
+    return [];
+  });
+}
+
 module.exports = {
   intializeTable,
   loadDummyData,
   fetch,
   dropTable,
+  getBestTrainer,
+  insert,
+  isPaidUser
 };

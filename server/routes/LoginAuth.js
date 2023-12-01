@@ -4,6 +4,8 @@ const {
 } = require("./../utils/authenticate.js");
 const { createToken, validateToken } = require("./../utils/webToken.js");
 const userTable = require("./../tables/UsersTable");
+const paidUser2Table = require("./../tables/PaidUser2Table.js");
+const paidUser1Table = require("./../tables/PaidUser1Table.js");
 
 const createRoutes = (router) => {
   router.post("/login-auth", async (req, res) => {
@@ -14,9 +16,10 @@ const createRoutes = (router) => {
       res.send(false);
       return false;
     }
-    // const resData = { token: result && createToken(req.email, req.id) };
-    // res.status(result ? 200 : 403).send(resData);
-    res.json({ userid: result[0][0], name: result[0][1], email: result[0][2] });
+
+    const isPaidUser = await paidUser1Table.isPaidUser(result[0][0]);
+
+    res.json({ userid: result[0][0], name: result[0][1], email: result[0][2], freeUser: !isPaidUser });
   });
 
   router.post("/register", async (req, res) => {
@@ -30,11 +33,27 @@ const createRoutes = (router) => {
 
     const result = await userTable.insert(data.name, data.email, data.password);
 
-    // !! HERE create other tables if paid user
-
     const userdata = await userTable.fetchUser(data.email);
 
-    res.json({ name: data.name, email: data.email, userid: userdata[0][0] });
+    // create paidusers entry if not free user
+    if (data.freeUser == false) {
+      const city = await paidUser2Table.fetchCity(data.postal, data.country);
+
+      // if paiduser2 does not exist, create it.
+      if (city == null) {
+        await paidUser2Table.insert(data.postal, data.country, data.city);
+      }
+
+      // create paiduser1 entry
+      await paidUser1Table.insert(userdata[0][0], data.postal, data.country);
+    }
+
+    res.json({
+      name: data.name,
+      email: data.email,
+      userid: userdata[0][0],
+      freeUser: data.freeUser,
+    });
   });
 };
 
