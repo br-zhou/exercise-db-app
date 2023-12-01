@@ -9,14 +9,14 @@ const Header = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login");
-    } 
+    }
   }, []);
 
   const logoutHandler = () => {
     console.log("logout");
     localStorage.setItem("token", "");
     navigate("/login");
-  }
+  };
 
   return (
     <>
@@ -37,12 +37,6 @@ const Header = () => {
             </li>
             <li className="inline-block">
               <NavBtn to="/plans" text="Plans" />
-            </li>
-            <li className="inline-block">
-              <NavBtn to="/login" text="Login" />
-            </li>
-            <li className="inline-block">
-              <NavBtn to="/trainer-dashboard" text="Trainer Dashboard" />
             </li>
           </ul>
         </nav>
