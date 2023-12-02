@@ -5,3 +5,6 @@ and articles related to fitness.
 
 ## Tech Stack
 React, Node.js, TailwindCSS, Oracle SQLPlus
+
+## Extra Information
+This program used Generative AI to generate names, addresses, and other filler information for our dummy data.
