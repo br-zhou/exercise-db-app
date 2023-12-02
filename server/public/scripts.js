@@ -92,6 +92,9 @@ async function fetchAndDisplayCustomTable() {
   if (tableBody) {
     tableBody.innerHTML = "";
   }
+  if (tableElement) {
+    tableElement.querySelector("tr").innerHTML = "";
+  }
 
   demotableContent.forEach((user) => {
     const row = tableBody.insertRow();
