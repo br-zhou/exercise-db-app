@@ -20,8 +20,7 @@ const ExercisePlan = (token) => {
   return (
     <div>
       {data.map((row) => {
-        console.log(row);
-          <div className="card-body max-w-xs mx-auto mt-2 p-4 bg-white rounded-lg shadow-lg border-0">
+          return <div className="card-body max-w-xs mx-auto mt-2 p-4 bg-white rounded-lg shadow-lg border-0">
             <h3 className="font-semibold  text-center mb-2">
               Exercise Plan {row[0][0]}
             </h3>
