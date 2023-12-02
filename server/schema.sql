@@ -1,13 +1,4 @@
 -- All Drop table statements
-DROP SEQUENCE uid_sequence;
-DROP TRIGGER fuser_insert_trigger;
-ALTER TABLE FUser DROP PRIMARY KEY;
-DROP TABLE FUser;
-
-DROP SEQUENCE tid_sequence;
-DROP TRIGGER trainer_insert_trigger;
-DROP TABLE Trainer;
-
 DROP TABLE PaidUser2;
 DROP TABLE PaidUser1;
 
@@ -49,6 +40,16 @@ DROP TABLE GoalReports;
 DROP SEQUENCE rid_sequence;
 DROP TRIGGER notifications_insert_trigger;
 DROP TABLE Notifications;
+
+DROP SEQUENCE tid_sequence;
+DROP TRIGGER trainer_insert_trigger;
+DROP TABLE Trainer;
+
+DROP SEQUENCE uid_sequence;
+DROP TRIGGER fuser_insert_trigger;
+ALTER TABLE FUser DROP PRIMARY KEY;
+DROP TABLE FUser;
+
 
 -- FUser
 CREATE TABLE FUser(
@@ -323,26 +324,26 @@ FOREIGN KEY(pid) REFERENCES ProgressReport(pid) ON DELETE CASCADE
 );
 
 -- Dummy variable inserts
-INSERT INTO Fuser (name, email, password) VALUES ('Ahmed Khan', 'ahmed.khan@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Maria Rodriguez', 'maria.rodriguez@hotmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Yuki Takahashi', 'yuki.takahashi@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Carlos Silva', 'carlos.silva@outlook.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Priya Patel', 'priya.patel@hotmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Miguel Rodriguez', 'miguel.rodriguez@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Ananya Gupta', 'ananya.gupta@outlook.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Kenji Suzuki', 'kenji.suzuki@hotmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Fatima Al-Mansoori', 'fatima.almansoori@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Darnell Washington', 'darnell.washington@outlook.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Aisha Nkosi', 'aisha.nkosi@hotmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Ravi Menon', 'ravi.menon@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Sofia Morales', 'sofia.morales@outlook.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Khaled Abadi', 'khaled.abadi@hotmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Aaliyah Rahman', 'aaliyah.rahman@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Juan Carlos Hernandez', 'juan.hernandez@outlook.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Zara Ali', 'zara.ali@hotmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Javier Castillo', 'javier.castillo@gmail.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Naomi Okafor', 'naomi.okafor@outlook.com', 'eazyPassword');
-INSERT INTO Fuser (name, email, password) VALUES ('Elijah Thompson', 'elijah.thompson@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Ahmed Khan', 'ahmed.khan@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Maria Rodriguez', 'maria.rodriguez@hotmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Yuki Takahashi', 'yuki.takahashi@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Carlos Silva', 'carlos.silva@outlook.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Priya Patel', 'priya.patel@hotmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Miguel Rodriguez', 'miguel.rodriguez@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Ananya Gupta', 'ananya.gupta@outlook.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Kenji Suzuki', 'kenji.suzuki@hotmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Fatima Al-Mansoori', 'fatima.almansoori@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Darnell Washington', 'darnell.washington@outlook.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Aisha Nkosi', 'aisha.nkosi@hotmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Ravi Menon', 'ravi.menon@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Sofia Morales', 'sofia.morales@outlook.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Khaled Abadi', 'khaled.abadi@hotmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Aaliyah Rahman', 'aaliyah.rahman@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Juan Carlos Hernandez', 'juan.hernandez@outlook.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Zara Ali', 'zara.ali@hotmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Javier Castillo', 'javier.castillo@gmail.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Naomi Okafor', 'naomi.okafor@outlook.com', 'eazyPassword');
+INSERT INTO FUser (name, email, password) VALUES ('Elijah Thompson', 'elijah.thompson@gmail.com', 'eazyPassword');
 
 INSERT INTO Trainer (name, email, country, city, password) VALUES ('Yuki Tanaka', 'yuki.tanaka@yahoo.com', 'Japan', 'JP-Tokyo');
 INSERT INTO Trainer (name, email, country, city, password) VALUES ('Emma Smith', 'emma.smith@hotmail.com', 'Australia', 'AU-Sydney');
@@ -372,6 +373,27 @@ INSERT INTO PaidUser2 (postalCode, country, city) VALUES ('12345', 'United Arab 
 
 -- Add PaidUser1 HERE
 
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (1, '20040-010', 'Brazil', 1);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (2, '100-0001', 'Japan', 2);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (3, '2000', 'Australia', 3);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (4, '2196', 'South Africa', 4);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (5, '110001', 'India', 5);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (6, '06010', 'Mexico', 1);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (7, '101000', 'Russia', 2);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (8, '11564', 'Saudi Arabia', 3);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (9, 'C1002AAP', 'Argentina', 4);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (10, '100010', 'China', 5);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (11, '00100', 'Italy', 1);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (12, '900001', 'Nigeria', 2);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (13, '111 20', 'Sweden', 3);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (14, '03187', 'South Korea', 4);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (15, '75001', 'France', 5);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (16, 'M5A 1A1', 'Canada', 1);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (17, '11511', 'Egypt', 2);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (18, '34000', 'Turkey', 3);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (19, '10100', 'Thailand', 4);
+INSERT INTO PaidUser1 (userid, postalCode, country, tid) VALUES (20, '12345', 'United Arab Emirates', 5);
+
 INSERT INTO Exercise (name, etype) VALUES ('Barbell Front Squat', 'Resistance/Conditioning');
 INSERT INTO Exercise (name, etype) VALUES ('Barbell Back Squat', 'Resistance/Conditioning');
 INSERT INTO Exercise (name, etype) VALUES ('Barbell Bench Press', 'Resistance/Conditioning');
@@ -400,6 +422,26 @@ INSERT INTO Exercise (name, etype) VALUES ('Transition work', 'Martial Arts');
 INSERT INTO Exercise (name, etype) VALUES ('Takedown defence', 'Martial Arts');
 
 -- Add ExercisePlan Here
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 1: Cardio', 2, 1);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 2: Martial Arts', 3, 2);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 3: Yoga', 4, 3);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 4: HIIT', 5, 4);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 5: Cycling', 1, 5);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 6: Strength training', 2, 6);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 7: Swimming', 3, 7);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 8: CrossFit', 4, 8);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 9: Yoga', 5, 9);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 10: Cardio', 1, 10);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 11: Martial Arts', 2, 11);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 12: Strength training', 3, 12);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 13: HIIT', 4, 13);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 14: CrossFit', 5, 14);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 15: Yoga', 1, 15);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 16: Swimming', 2, 16);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 17: Cardio', 3, 17);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 18: Cycling', 4, 18);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 19: Martial Arts', 5, 19);
+INSERT INTO ExercisePlan (plantype, tid, userid) VALUES ('Exercise Plan 20: Strength training', 1, 20);
 
 INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (100, 100, 100, 2200, 1);
 INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (150, 100, 80, 2400, 2);
