@@ -71,7 +71,7 @@ ON FUser
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT uid_sequence.nextval INTO :NEW.userid FROM dual;
+SELECT uid_sequence.nextval INTO :NEW.userid FROM dual
 END;
 
 -- Trainer
@@ -97,7 +97,7 @@ ON Trainer
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT tid_sequence.nextval INTO :NEW.tid FROM dual;
+SELECT tid_sequence.nextval INTO :NEW.tid FROM dual
 END;
 
 -- Paid User 2
@@ -138,7 +138,7 @@ ON Exercise
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT eid_sequence.nextval INTO :NEW.eid FROM dual;
+SELECT eid_sequence.nextval INTO :NEW.eid FROM dual
 END;
 
 -- Exercise Plan Table
@@ -162,7 +162,7 @@ ON ExercisePlan
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT epid_sequence.nextval INTO :NEW.epid FROM dual;
+SELECT epid_sequence.nextval INTO :NEW.epid FROM dual
 END;
 
 -- Nutrition Plan
@@ -187,7 +187,7 @@ ON Nutrition
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT nid_sequence.nextval INTO :NEW.nid FROM dual;
+SELECT nid_sequence.nextval INTO :NEW.nid FROM dual
 END;
 
 -- Goals Table
@@ -211,7 +211,7 @@ ON Goals
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT gid_sequence.nextval INTO :NEW.gid FROM dual;
+SELECT gid_sequence.nextval INTO :NEW.gid FROM dual
 END;
 
 -- Ads Table
@@ -233,7 +233,7 @@ ON Ad
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT aid_sequence.nextval INTO :NEW.aid FROM dual;
+SELECT aid_sequence.nextval INTO :NEW.aid FROM dual
 END;
 
 -- Content Table
@@ -255,7 +255,7 @@ ON Content
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT cid_sequence.nextval INTO :NEW.cid FROM dual;
+SELECT cid_sequence.nextval INTO :NEW.cid FROM dual
 END;
 
 -- Notifications Table
@@ -277,7 +277,7 @@ ON Notifications
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT rid_sequence.nextval INTO :NEW.rid FROM dual;
+SELECT rid_sequence.nextval INTO :NEW.rid FROM dual
 END;
 
 -- Plan Includes Table
@@ -311,7 +311,7 @@ ON ProgressReport
 REFERENCING NEW AS NEW
 FOR EACH ROW
 BEGIN
-SELECT pid_sequence.nextval INTO :NEW.pid FROM dual;
+SELECT pid_sequence.nextval INTO :NEW.pid FROM dual
 END;
 
 -- Goal Reports Table
