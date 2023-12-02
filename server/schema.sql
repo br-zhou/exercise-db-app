@@ -400,6 +400,7 @@ INSERT INTO Exercise (name, etype) VALUES ('Transition work', 'Martial Arts');
 INSERT INTO Exercise (name, etype) VALUES ('Takedown defence', 'Martial Arts');
 
 -- Add ExercisePlan Here
+
 INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (100, 100, 100, 2200, 1);
 INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (150, 100, 80, 2400, 2);
 INSERT INTO Nutrition (carbs, fats, protein, calories, userid) VALUES (220, 60, 120, 2300, 3);
@@ -481,7 +482,20 @@ INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=inEPl
 INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=VhVqz4KuEgI', 'Dr. Eric Berg DC');
 INSERT INTO Content (url, author) VALUES ('https://www.youtube.com/watch?v=GIqW2qds3qI', 'Coach Viva');
 
--- Add Notifications
+INSERT INTO Notifications (userid, msg) VALUES (1, 'Celebrate victories. Every step is a step toward health!');
+INSERT INTO Notifications (userid, msg) VALUES (2, 'Sunshine boosts mood. Get outside for fresh air.');
+INSERT INTO Notifications (userid, msg) VALUES (3, 'Listen to your body. Rest when feeling fatigued.');
+INSERT INTO Notifications (userid, msg) VALUES (4, 'Laugh often! Laughter has health benefits.');
+INSERT INTO Notifications (userid, msg) VALUES (5, 'Prioritize self-care. Take time to recharge daily.');
+INSERT INTO Notifications (userid, msg) VALUES (6, 'Build support. Workout buddies keep you accountable.');
+INSERT INTO Notifications (userid, msg) VALUES (7, 'Stay consistent. Small habits lead to big results.');
+INSERT INTO Notifications (userid, msg) VALUES (8, 'Hydrate with herbal teas for added flavor and benefits.');
+INSERT INTO Notifications (userid, msg) VALUES (9, 'Quality sleep fuels recovery. Aim for 7-9 hours nightly.');
+INSERT INTO Notifications (userid, msg) VALUES (10, 'Posture matters. Sit up straight, stand tall, support your spine.');
+INSERT INTO Notifications (userid, msg) VALUES (11, 'New goals, new challenges. Push your limits, see progress.');
+INSERT INTO Notifications (userid, msg) VALUES (12, 'Outdoor workouts boost mood. Find joy in movement.');
+INSERT INTO Notifications (userid, msg) VALUES (13, 'Cardio and strength for diversity. Keep workouts effective.');
+INSERT INTO Notifications (userid, msg) VALUES (14, 'Stay hydrated with infused water. Delicious and healthy.');
 
 INSERT INTO PlanIncludes (epid, eid) VALUES (1, 1);
 INSERT INTO PlanIncludes (epid, eid) VALUES (1, 2);
